@@ -53,4 +53,9 @@ public class FlowtkServiceImpl extends GatherDayService implements FlowtkService
         OkHttpClientUtil.post(baseurl+"/single/",urlMap, SingleReqVo.class);
         return null;
     }
+
+    @Override
+    public void test(SearchResVo searchResVo) {
+        super.saveOrUpdateBatch(searchResVo.getData());
+    }
 }

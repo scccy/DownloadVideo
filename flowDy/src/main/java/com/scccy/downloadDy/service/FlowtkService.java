@@ -14,4 +14,6 @@ public interface FlowtkService {
     SettingsResVo setting(SettingsReqVo settings) throws IOException;
 
     SingleReqVo single(Map<String, String> urlMap) throws IOException;
+
+    void test(SearchResVo searchResVo);
 }

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class UrlTest {
     private String  urlTest;
 }

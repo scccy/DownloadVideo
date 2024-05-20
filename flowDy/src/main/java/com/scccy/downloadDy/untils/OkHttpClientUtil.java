@@ -1,6 +1,7 @@
 package com.scccy.downloadDy.untils;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONReader;
 import com.scccy.downloadDy.domain.vo.DownloadReqVo;
 import okhttp3.*;
 
@@ -77,7 +78,10 @@ public class OkHttpClientUtil {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
             }
-            return JSON.parseObject(response.body().string(), responseClass);
+            return JSON.parseObject(response.body().string(), responseClass, JSONReader.Feature.FieldBased,
+                    JSONReader.Feature.SupportArrayToBean,
+                    JSONReader.Feature.SupportSmartMatch
+                     );
         }
     }
 
@@ -87,7 +91,10 @@ public class OkHttpClientUtil {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
             }
-            return JSON.parseObject(response.body().string(), responseClass);
+            return JSON.parseObject(response.body().string(), responseClass, JSONReader.Feature.FieldBased,
+                    JSONReader.Feature.SupportArrayToBean,
+                    JSONReader.Feature.SupportSmartMatch
+            );
         }
     }
 }
