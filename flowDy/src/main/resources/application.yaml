@@ -27,9 +27,6 @@ spring:
 #    开启aop
   aop:
     auto: true
-  mvc:
-    converters:
-      preferred-json-mapper: fastjson2
 
 #  jackson:
 #    property-naming-strategy: SNAKE_CASE

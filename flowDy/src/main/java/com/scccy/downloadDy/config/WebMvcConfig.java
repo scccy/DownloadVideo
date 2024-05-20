@@ -1,5 +1,8 @@
 package com.scccy.downloadDy.config;
 
+import com.alibaba.fastjson2.JSONReader;
+import com.alibaba.fastjson2.JSONWriter;
+import com.alibaba.fastjson2.filter.NameFilter;
 import com.alibaba.fastjson2.support.config.FastJsonConfig;
 import com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter;
 import com.scccy.downloadDy.handlerInterceptor.TokenInterceptor;
@@ -15,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig  implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -41,19 +44,30 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+        //自定义配置...
 
         FastJsonConfig config = new FastJsonConfig();
+
         config.setDateFormat("yyyy-MM-dd HH:mm:ss");
-//        // 开启驼峰转换
-//        config.setSerializeConfig(SerializeConfig.globalInstance);
-//        config.setParserFeatures(Feature.AllowUnQuotedFieldNames, Feature.AllowSingleQuotes);
-//        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat, SerializerFeature.WriteDateUseDateFormat);
+
+        config.setJSONB(true);
+        config.setReaderFeatures(JSONReader.Feature.FieldBased,
+                JSONReader.Feature.SupportArrayToBean,
+//                驼峰转换
+                JSONReader.Feature.SupportSmartMatch
+        );
+        config.setWriterFeatures(
+                JSONWriter.Feature.PrettyFormat,
+                JSONWriter.Feature.BrowserCompatible,
+                JSONWriter.Feature.WriteMapNullValue
+
+        );
 
         converter.setFastJsonConfig(config);
         converter.setDefaultCharset(StandardCharsets.UTF_8);
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
-
         converters.add(0, converter);
     }
-
 }
+
+
