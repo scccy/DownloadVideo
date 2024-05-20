@@ -14,7 +14,7 @@
         </Console>
 
         <!-- 打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
-        <RollingFile name="infoLog" fileName="${logDir}/${App}-info-%d{yyyy-MM-dd}.log"
+        <RollingFile name="infoLog" fileName="${logDir}/${App}-info.log"
                      filePattern="${logDir}/${App}-info-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS z} [%thread] %-5level %logger{36} %L %M - %msg%xEx%n"/>
             <Policies>
@@ -32,7 +32,7 @@
         </RollingFile>
 
         <!-- 存储所有error信息 -->
-        <RollingFile name="errorLog" fileName="${logDir}/${App}-error-%d{yyyy-MM-dd}.log"
+        <RollingFile name="errorLog" fileName="${logDir}/${App}-error.log"
                      filePattern="${logDir}/${App}-error-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS z} [%thread] %-5level %logger{36} %L %M - %msg%xEx%n"/>
             <Policies>
@@ -50,7 +50,7 @@
         </RollingFile>
 
         <!-- 单独的 MyBatis-Plus 日志文件 -->
-        <RollingFile name="mybatisPlusLog" fileName="${logDir}/${App}-mybatisPlus-%d{yyyy-MM-dd}.log"
+        <RollingFile name="mybatisPlusLog" fileName="${logDir}/${App}-mybatisPlus.log"
                      filePattern="${logDir}/${App}-mybatisPlus-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS z} [%thread] %-5level %logger{36} %L %M - %msg%xEx%n"/>
             <Policies>

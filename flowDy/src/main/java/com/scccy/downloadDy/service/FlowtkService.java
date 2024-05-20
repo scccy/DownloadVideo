@@ -1,5 +1,6 @@
 package com.scccy.downloadDy.service;
 
+import com.scccy.downloadDy.domain.GatherDay;
 import com.scccy.downloadDy.domain.vo.*;
 
 import java.io.IOException;
@@ -18,4 +19,8 @@ public interface FlowtkService {
     void test(SearchResVo searchResVo);
 
     void test03(SingleReqVo singleReqVo);
+
+    List<GatherDay> getData(GetDataReqVo getDataReqVo);
+
+
 }

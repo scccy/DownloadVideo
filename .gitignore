@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+!/service-logs/*
 
 ### STS ###
 .apt_generated
@@ -31,4 +32,6 @@ build/
 
 ### VS Code ###
 .vscode/
+!/service-logs/
+!/service-logs/
 !/service-logs/

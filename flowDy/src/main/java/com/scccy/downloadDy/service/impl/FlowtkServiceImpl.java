@@ -1,5 +1,10 @@
 package com.scccy.downloadDy.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scccy.downloadDy.domain.GatherDay;
 import com.scccy.downloadDy.domain.vo.*;
 import com.scccy.downloadDy.mapper.GatherDayMapper;
@@ -18,10 +23,9 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-public class FlowtkServiceImpl extends GatherDayService implements FlowtkService {
+public class FlowtkServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> implements FlowtkService, IService<GatherDay> {
 
     String baseurl = "http://192.168.32.166:11002";
-
 
     @Resource
     private GatherDayMapper gatherDayMapper;
@@ -55,12 +59,37 @@ public class FlowtkServiceImpl extends GatherDayService implements FlowtkService
 
     @Override
     public void test(SearchResVo searchResVo) {
-
         super.saveOrUpdateBatch(searchResVo.getData());
     }
 
     @Override
     public void test03(SingleReqVo singleReqVo) {
         super.saveOrUpdate(singleReqVo.toGatherDay());
+    }
+
+    @Override
+    public List<GatherDay> getData(GetDataReqVo reqVo) {
+        QueryWrapper<GatherDay> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotBlank(reqVo.getUid())) {
+            queryWrapper.eq("uid", reqVo.getUid());
+        }
+        if (StringUtils.isNotBlank(reqVo.getNickName())) {
+            queryWrapper.like("nickname", reqVo.getNickName());
+        }
+        if (StringUtils.isNotBlank(reqVo.getDesc())) {
+            queryWrapper.like("`desc`", reqVo.getDesc());
+        }
+        if (StringUtils.isNotBlank(reqVo.getCollectTimeStart())) {
+            queryWrapper.ge("collection_time", reqVo.getCollectTimeStart());
+        }
+        if (StringUtils.isNotBlank(reqVo.getCollectTimeEnd())) {
+            queryWrapper.le("collection_time", reqVo.getCollectTimeEnd());
+        }
+        if (StringUtils.isNotBlank(reqVo.getType())) {
+            queryWrapper.eq("type", reqVo.getType());
+        }
+
+        Page<GatherDay> page = new Page<>(reqVo.getPageNum(), reqVo.getPageSize());
+        return gatherDayMapper.selectPage(page, queryWrapper).getRecords();
     }
 }

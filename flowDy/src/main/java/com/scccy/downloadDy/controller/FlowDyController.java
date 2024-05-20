@@ -1,6 +1,7 @@
 package com.scccy.downloadDy.controller;
 
 import com.scccy.downloadDy.common.ResultData;
+import com.scccy.downloadDy.domain.GatherDay;
 import com.scccy.downloadDy.domain.vo.*;
 import com.scccy.downloadDy.service.FlowtkService;
 import jakarta.annotation.Resource;
@@ -45,6 +46,12 @@ public class FlowDyController {
     public ResultData single(@RequestBody Map<String,String> urlMap) throws IOException {
         SingleReqVo singleReqVo = flowtkService.single(urlMap);
         return ResultData.ok().setData(singleReqVo);
+    }
+//    根据条件所有分页查询
+    @PostMapping("/getData")
+    public ResultData getData(@RequestBody GetDataReqVo getDataReqVo){
+       List<GatherDay> gatherDay =  flowtkService.getData(getDataReqVo);
+       return ResultData.ok().setData(gatherDay);
     }
 
 }
