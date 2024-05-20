@@ -50,12 +50,17 @@ public class FlowtkServiceImpl extends GatherDayService implements FlowtkService
 
     @Override
     public SingleReqVo single(Map<String, String> urlMap) throws IOException {
-        OkHttpClientUtil.post(baseurl+"/single/",urlMap, SingleReqVo.class);
-        return null;
+        return OkHttpClientUtil.post(baseurl + "/single/", urlMap, SingleReqVo.class);
     }
 
     @Override
     public void test(SearchResVo searchResVo) {
+
         super.saveOrUpdateBatch(searchResVo.getData());
+    }
+
+    @Override
+    public void test03(SingleReqVo singleReqVo) {
+        super.saveOrUpdate(singleReqVo.toGatherDay());
     }
 }

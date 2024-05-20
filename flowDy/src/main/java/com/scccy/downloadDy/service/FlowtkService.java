@@ -16,4 +16,6 @@ public interface FlowtkService {
     SingleReqVo single(Map<String, String> urlMap) throws IOException;
 
     void test(SearchResVo searchResVo);
+
+    void test03(SingleReqVo singleReqVo);
 }

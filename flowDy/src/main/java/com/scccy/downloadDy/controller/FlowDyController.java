@@ -26,20 +26,22 @@ public class FlowDyController {
         flowtkService.search(searchReqVo);
         return ResultData.ok();
     }
-
+//返回下载连接
     @PostMapping("/download")
     public ResultData download(@RequestBody List<Long> idList){
         List<DownloadReqVo> download = flowtkService.download(idList);
         return ResultData.ok().setData(download);
     }
 
+//    修改原始配置
     @PostMapping("/settings")
     public ResultData setting(@RequestBody SettingsReqVo settings) throws IOException {
         SettingsResVo setting = flowtkService.setting(settings);
         return ResultData.ok().setData(setting);
     }
 
-    @PostMapping("/single/")
+//    提供分享的url直接返回解析结果
+    @PostMapping("/single")
     public ResultData single(@RequestBody Map<String,String> urlMap) throws IOException {
         SingleReqVo singleReqVo = flowtkService.single(urlMap);
         return ResultData.ok().setData(singleReqVo);
