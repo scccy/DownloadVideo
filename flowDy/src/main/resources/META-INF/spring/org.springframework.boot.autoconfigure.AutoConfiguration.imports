@@ -1,5 +1,0 @@
-# 自动导包
-# 写入class 类
-# 替换fastjson2
-#com.alibaba.fastjson2.support.config.FastJsonConfig
-#com.alibaba.fastjson2.support.spring.http.converter.FastJsonHttpMessageConverter

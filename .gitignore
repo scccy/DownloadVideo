@@ -32,6 +32,9 @@ build/
 
 ### VS Code ###
 .vscode/
-!/service-logs/
-!/service-logs/
-!/service-logs/
+!./service-logs/
+!./service-logs/downLoadVideo-error.log
+!./service-logs/downLoadVideo-info.log
+!./service-logs/downLoadVideo-mybatisPlus.log!/mvnw
+!/mvnw.cmd
+!/.gitignore
