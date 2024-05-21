@@ -13,7 +13,6 @@ spring:
   application:
     name: downloadVideo
   datasource:
-    druid:
       password: asdsc88Q12
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://192.168.32.166:3306/flow_tk?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
