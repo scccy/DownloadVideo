@@ -5,10 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- 父项目，使用 Spring Boot 的父项目 -->
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
-        <relativePath/> <!-- 从仓库中查找父项目 -->
+     <groupId>com.scccy</groupId>
+        <artifactId>DownLoadVideo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.scccy</groupId>
     <artifactId>videoBase</artifactId>
