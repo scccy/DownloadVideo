@@ -2,6 +2,7 @@ package com.scccy.untils;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;
+import com.scccy.pojo.DownloadFather;
 import okhttp3.*;
 
 import java.io.File;
@@ -16,45 +17,49 @@ public class OkHttpClientUtil {
 
     private static final OkHttpClient client = new OkHttpClient();
 
-//    public static void downloadFiles(List<DownloadReqVo> dataList, String destinationFolder) {
-//        ExecutorService executorService = Executors.newCachedThreadPool();
-//        try {
-//            for (DownloadReqVo data : dataList) {
-//                executorService.submit(() -> {
-//                    String dynamicCoverUrl = data.getDynamicCover();
-//                    String originCoverUrl = data.getOriginCover();
-//                    String downloadsUrl = data.getDownloads();
-//
-//                    String dynamicCoverFileName = getFileNameFromUrl(dynamicCoverUrl);
-//                    String originCoverFileName = getFileNameFromUrl(originCoverUrl);
-//                    String downloadsFileName = getFileNameFromUrl(downloadsUrl);
-//
-//                    String destinationFolderForData = destinationFolder + File.separator + dynamicCoverFileName.split("\\.")[0];
-//                    File dataFolder = new File(destinationFolderForData);
-//                    if (!dataFolder.exists()) {
-//                        dataFolder.mkdirs();
-//                    }
-//
-//                    try {
-//                        downloadFile(dynamicCoverUrl, destinationFolderForData + File.separator + dynamicCoverFileName);
-//                        downloadFile(originCoverUrl, destinationFolderForData + File.separator + originCoverFileName);
-//                        downloadFile(downloadsUrl, destinationFolderForData + File.separator + downloadsFileName);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                });
-//            }
-//        } finally {
-//            executorService.shutdown();
-//        }
-//    }
+    public static <T extends DownloadFather> void downloadFiles(List<T> dataList, String destinationFolder) {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        try {
+            for (DownloadFather data : dataList) {
+                executorService.submit(() -> {
+                    String dynamicCoverUrl = data.getDynamicCover();
+                    String originCoverUrl = data.getOriginCover();
+                    String downloadsUrl = data.getDownloads();
+                    String nickName = data.getNickname();
+
+                    String dynamicCoverFileName = getFileNameFromUrl(dynamicCoverUrl);
+                    String originCoverFileName = getFileNameFromUrl(originCoverUrl);
+                    String downloadsFileName = getFileNameFromUrl(downloadsUrl);
+
+                    String destinationFolderForData = destinationFolder + File.separator + nickName;
+                    File dataFolder = new File(destinationFolderForData);
+                    if (!dataFolder.exists()) {
+                        dataFolder.mkdirs();
+                    }
+                    try {
+                        downloadFile(dynamicCoverUrl, destinationFolderForData + File.separator + dynamicCoverFileName);
+                        downloadFile(originCoverUrl, destinationFolderForData + File.separator + originCoverFileName);
+                        downloadFile(downloadsUrl, destinationFolderForData + File.separator + downloadsFileName);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        } finally {
+            executorService.shutdown();
+        }
+    }
 
     private static String getFileNameFromUrl(String url) {
         return url.substring(url.lastIndexOf("/") + 1);
     }
 
     public static void downloadFile(String url, String destination) throws IOException {
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                .build();
+
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 throw new IOException("Failed to download file: " + response);

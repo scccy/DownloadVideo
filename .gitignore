@@ -38,3 +38,6 @@ build/
 !./service-logs/downLoadVideo-mybatisPlus.log!/mvnw
 !/mvnw.cmd
 !/.gitignore
+!/service-logs/downLoadVideo-error.log
+!/service-logs/downLoadVideo-info.log
+

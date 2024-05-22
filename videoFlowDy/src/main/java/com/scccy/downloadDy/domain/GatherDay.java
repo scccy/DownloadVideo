@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.scccy.downloadDy.domain.vo.DownloadReqVo;
+import com.scccy.pojo.DownloadFather;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "gather_day")
-public class GatherDay extends BaseEntity implements Serializable {
+public class GatherDay implements Serializable, DownloadFather {
     /**
      * 视频 ID
      */
@@ -233,7 +234,7 @@ public class GatherDay extends BaseEntity implements Serializable {
 
     public DownloadReqVo toDownloadReqVo() {
         DownloadReqVo downloadReqVo = new DownloadReqVo();
-        downloadReqVo.setNickName(this.getNickname());
+        downloadReqVo.setNickname(this.getNickname());
         downloadReqVo.setId(this.getId());
         downloadReqVo.setDesc(this.getDesc());
         downloadReqVo.setDynamicCover(this.getDynamicCover());
@@ -241,4 +242,6 @@ public class GatherDay extends BaseEntity implements Serializable {
         downloadReqVo.setDownloads(this.getDownloads());
         return downloadReqVo;
     }
+
+
 }

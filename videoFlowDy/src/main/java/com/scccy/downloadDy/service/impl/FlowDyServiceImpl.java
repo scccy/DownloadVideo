@@ -40,6 +40,8 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
 
     public  List<DownloadReqVo> download(List<Long> idList) {
         List<GatherDay> gatherDayList = gatherDayMapper.selectUsersByIdList(idList);
+        String destinationFolder = "/home/project/DownLoadVideo/video";
+        OkHttpClientUtil.downloadFiles(gatherDayList,destinationFolder);
         return gatherDayList.stream()
                 .map(GatherDay::toDownloadReqVo)
                 .collect(Collectors.toList());
