@@ -11,7 +11,7 @@ scccy:
     password: asdsc88Q12
 spring:
   application:
-    name: downloadVideo
+    name: videoFlowDy
   datasource:
       password: asdsc88Q12
       driver-class-name: com.mysql.cj.jdbc.Driver
