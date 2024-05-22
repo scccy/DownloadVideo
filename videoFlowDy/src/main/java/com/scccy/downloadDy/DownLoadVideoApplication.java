@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 @MapperScan("com.scccy.downloadDy.mapper")
+
 public class DownLoadVideoApplication {
 
     public static void main(String[] args) {

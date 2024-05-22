@@ -43,7 +43,7 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
         return gatherDayList.stream()
                 .map(GatherDay::toDownloadReqVo)
                 .collect(Collectors.toList());
-//        com.scccy.untils.OkHttpClientUtil.downloadFiles(downloadReqVoList,path);
+
 
     }
 
@@ -90,7 +90,8 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
             queryWrapper.eq("type", reqVo.getType());
         }
 
-        Page<GatherDay> page = new Page<>(reqVo.getPageNum(), reqVo.getPageSize());
+        Page<GatherDay> page = new Page<>(1,1);
+        Page<GatherDay> gatherDayPage = gatherDayMapper.selectPage(page, queryWrapper);
         return gatherDayMapper.selectPage(page, queryWrapper).getRecords();
     }
 }
