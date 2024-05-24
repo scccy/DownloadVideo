@@ -2824,3 +2824,11 @@ Caused by: java.net.BindException: 地址已在使用
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:288) ~[spring-context-6.1.6.jar!/:6.1.6]
 	... 20 more
 
+2024-05-22 21:21:23.849 CST [http-nio-0.0.0.0-11007-exec-7] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 21:21:45.296 CST [http-nio-0.0.0.0-11007-exec-8] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 21:25:16.046 CST [http-nio-0.0.0.0-11007-exec-9] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 21:25:31.437 CST [http-nio-0.0.0.0-11007-exec-10] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 21:28:27.326 CST [http-nio-0.0.0.0-11007-exec-1] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 21:28:28.126 CST [http-nio-0.0.0.0-11007-exec-2] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 21:28:28.308 CST [http-nio-0.0.0.0-11007-exec-3] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource tk/search.
+2024-05-22 22:50:19.142 CST [http-nio-0.0.0.0-11007-exec-4] ERROR com.scccy.downloadDy.handlerExption.GlobalExceptionHandler 29 handleGlobalException - No static resource .

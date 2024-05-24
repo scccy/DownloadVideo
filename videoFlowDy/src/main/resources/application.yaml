@@ -10,6 +10,8 @@ scccy:
     port: 11020
     password: asdsc88Q12
 spring:
+  config:
+    import: classpath:app.yaml
   application:
     name: videoFlowDy
   datasource:

@@ -2,7 +2,7 @@ HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
-!**/src/test/**/target/
+!**/src/com.scccy.videoDownloader.test/**/target/
 !/service-logs/*
 
 ### STS ###
@@ -28,7 +28,7 @@ target/
 /.nb-gradle/
 build/
 !**/src/main/**/build/
-!**/src/test/**/build/
+!**/src/com.scccy.videoDownloader.test/**/build/
 
 ### VS Code ###
 .vscode/
@@ -41,3 +41,4 @@ build/
 !/service-logs/downLoadVideo-error.log
 !/service-logs/downLoadVideo-info.log
 
+!/f2/

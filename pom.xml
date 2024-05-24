@@ -16,6 +16,7 @@
     <modules>
         <module>videoBase</module>
         <module>videoFlowDy</module>
+        <module>videoDownloadloader</module>
     </modules>
 
     <!-- 项目属性 -->

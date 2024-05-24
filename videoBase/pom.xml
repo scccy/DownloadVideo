@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- 父项目，使用 Spring Boot 的父项目 -->
     <parent>
-     <groupId>com.scccy</groupId>
+        <groupId>com.scccy</groupId>
         <artifactId>DownLoadVideo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -18,7 +18,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot.version>3.2.5</spring-boot.version>
+        <spring-boot.version>3.2.5</spring-boot.version> <!-- 使用合适的 Spring Boot 版本 -->
+        <mybatis-plus-spring-boot-starter.version>3.5.6</mybatis-plus-spring-boot-starter.version> <!-- MyBatis Plus Spring Boot Starter 版本 -->
+        <okhttp.version>5.0.0-alpha.3</okhttp.version> <!-- OkHttp 版本 -->
+        <fastjson.version>2.0.50</fastjson.version> <!-- Fastjson 版本 -->
     </properties>
 
     <dependencyManagement>
@@ -39,7 +42,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- Spring Boot Web Starter，用于构建 Web 应用 -->
+        <!-- 其他 Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -55,22 +58,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Spring Boot AOP Starter，用于实现面向切面编程 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- Spring Boot Actuator Starter，用于监控和管理 Spring Boot 应用 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- Spring Boot Log4j2 Starter，使用 Log4j2 作为日志记录框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-        <!-- Spring Boot DevTools，用于开发阶段自动重启应用 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -83,6 +82,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
             <version>3.5.6</version>
+<!--            <scope>provided</scope>-->
         </dependency>
         <!-- MySQL Connector/J，MySQL 数据库驱动 -->
         <dependency>
@@ -98,13 +98,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Lombok，减少样板代码的 Java 库 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-
         </dependency>
 
         <!-- SLF4J API，日志记录的 Java 接口 -->
@@ -120,6 +120,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
 
         </dependency>
+
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter-test</artifactId>
@@ -131,16 +132,14 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>5.0.0-alpha.3</version>
+            <version>${okhttp.version}</version>
         </dependency>
 
-        <!-- Fastjson，JSON 处理库 -->
+        <!-- Fastjson2集成spring6，JSON 处理库 -->
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2-extension-spring6</artifactId>
             <version>2.0.50</version>
         </dependency>
     </dependencies>
-
-
 </project>

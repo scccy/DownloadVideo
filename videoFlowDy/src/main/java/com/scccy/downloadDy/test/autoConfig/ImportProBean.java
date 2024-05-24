@@ -5,7 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
+
 @Data
 @ConfigurationProperties(prefix = "usershici")
 public class ImportProBean implements InitializingBean {

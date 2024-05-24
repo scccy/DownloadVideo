@@ -41,7 +41,8 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
     public  List<DownloadReqVo> download(List<Long> idList) {
         List<GatherDay> gatherDayList = gatherDayMapper.selectUsersByIdList(idList);
         String destinationFolder = "/home/project/DownLoadVideo/video";
-        OkHttpClientUtil.downloadFiles(gatherDayList,destinationFolder);
+//        根据url下载视频跟封面,并且保存在vide下一Dy_nickName/video_name 下
+//        OkHttpClientUtil.downloadFiles(gatherDayList,destinationFolder);
         return gatherDayList.stream()
                 .map(GatherDay::toDownloadReqVo)
                 .collect(Collectors.toList());
@@ -71,7 +72,7 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
     }
 
     @Override
-    public List<GatherDay> getData(GetDataReqVo reqVo) {
+    public Page<GatherDay> getData(GetDataReqVo reqVo) {
         QueryWrapper<GatherDay> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotBlank(reqVo.getUid())) {
             queryWrapper.eq("uid", reqVo.getUid());
@@ -93,7 +94,7 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
         }
 
         Page<GatherDay> page = new Page<>(1,1);
-        Page<GatherDay> gatherDayPage = gatherDayMapper.selectPage(page, queryWrapper);
-        return gatherDayMapper.selectPage(page, queryWrapper).getRecords();
+
+        return gatherDayMapper.selectPage(page, queryWrapper);
     }
 }

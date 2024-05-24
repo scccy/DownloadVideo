@@ -1,6 +1,7 @@
 package com.scccy.downloadDy.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scccy.common.ResultData;
 import com.scccy.downloadDy.domain.GatherDay;
 import com.scccy.downloadDy.domain.vo.*;
@@ -51,7 +52,7 @@ public class FlowDyController {
 //    根据条件所有分页查询
     @PostMapping("/getData")
     public ResultData getData(@RequestBody GetDataReqVo getDataReqVo){
-       List<GatherDay> gatherDay =  flowDyService.getData(getDataReqVo);
+        Page<GatherDay> gatherDay =  flowDyService.getData(getDataReqVo);
        return ResultData.ok().setData(gatherDay);
     }
 

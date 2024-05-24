@@ -1,5 +1,6 @@
 package com.scccy.downloadDy.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scccy.downloadDy.domain.GatherDay;
 import com.scccy.downloadDy.domain.vo.*;
 
@@ -20,7 +21,7 @@ public interface FlowDyService {
 
     void test03(SingleReqVo singleReqVo);
 
-    List<GatherDay> getData(GetDataReqVo getDataReqVo);
+    Page<GatherDay> getData(GetDataReqVo getDataReqVo);
 
 
 }
