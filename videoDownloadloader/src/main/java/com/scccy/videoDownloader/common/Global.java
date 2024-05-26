@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
 public enum Global {
+    DOUYING_URL("https://www.douyin.com/"),
     USER_SESSION_KEY("user_login_session"),
     AJAX_SUCCESS("000001"),
     AJAX_URI_ERROR("999998"),
@@ -33,14 +34,11 @@ public enum Global {
     YOUTUBE_COOKIES(""),
     TWITTER_COOKIES("");
 
-    private String value;
 
+    private String value;
     Global(String value) {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }
 

@@ -1,9 +1,0 @@
-package com.scccy.downloader.config;
-
-
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class BaseConfig {
-
-}

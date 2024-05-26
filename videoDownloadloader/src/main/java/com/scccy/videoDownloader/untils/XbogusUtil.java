@@ -1,5 +1,4 @@
-package com.scccy.downloader.six;
-
+package com.scccy.videoDownloader.untils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,12 +8,12 @@ import java.util.List;
 
 public class XbogusUtil {
     private static final Integer[] Array = {
-            null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null, null, null, null, null, null, 10, 11, 12, 13, 14, 15
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null, null, null, null, null, 10, 11, 12, 13, 14, 15
     };
     private static final String character = "Dkdpgh4ZKsQB80/Mfvw36XI1R25-WUAlEi7NLboqYTOPuzmFjJnryx9HVGcaStCe=";
 
@@ -70,7 +69,7 @@ public class XbogusUtil {
     }
 
     public static String encodingConversion(Integer a, Integer b, Integer c, Integer e, Integer d, Integer t, Integer f, Integer r, Integer n, Integer o, Integer i,Integer z, Integer x,
-                                            Integer u, Integer s, Integer l, Integer v, Integer h, Integer p) {
+    		Integer u, Integer s, Integer l, Integer v, Integer h, Integer p) {
         List<Integer> y = new ArrayList<>();
         y.add(a);
         y.add(i);
@@ -154,7 +153,7 @@ public class XbogusUtil {
         int xorResult = (int) Math.floor(Double.valueOf(newArrayStr));
         for (int i = 1; i < newArray.size(); i++) {
 //            double b = (double) newArray.get(i);
-            double b = Double.valueOf(String.valueOf(newArray.get(i)));
+        	double b = Double.valueOf(String.valueOf(newArray.get(i)));
             if (b % 1 == 0) {
                 xorResult ^= (int) b;
             } else {
@@ -178,25 +177,25 @@ public class XbogusUtil {
                 2, 255,
                 new String(rc4Encrypt("ÿ".getBytes(StandardCharsets.ISO_8859_1),
                         encodingConversion(array5[0],
-                                array5[1],
-                                array5[2],
-                                array5[3],
-                                array5[4],
-                                array5[5],
-                                array5[6],
-                                array5[7],
-                                array5[8],
-                                array5[9],
-                                array5[10],
-                                array5[11],
-                                array5[12],
-                                array5[13],
-                                array5[14],
-                                array5[15],
-                                array5[16],
-                                array5[17],
-                                array5[18]
-                        ).getBytes(StandardCharsets.ISO_8859_1)),
+                        				   array5[1],
+                        				   array5[2],
+                        				   array5[3],
+                        				   array5[4],
+                        				   array5[5],
+                        				   array5[6],
+                        				   array5[7],
+                        				   array5[8],
+                        				   array5[9],
+                        				   array5[10],
+                        				   array5[11],
+                        				   array5[12],
+                        				   array5[13],
+                        				   array5[14],
+                        				   array5[15],
+                        				   array5[16],
+                        				   array5[17],
+                        				   array5[18]
+                        				).getBytes(StandardCharsets.ISO_8859_1)),
                         StandardCharsets.ISO_8859_1)
         );
 
@@ -208,7 +207,7 @@ public class XbogusUtil {
     }
 
     @SuppressWarnings("static-access")
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+	public static void main(String[] args) throws NoSuchAlgorithmException {
         String urlPath = "aweme_id=7221047525594139944&aid=6383&cookie_enabled=true&platform=PC&downlink=10";
         XbogusUtil xb = new XbogusUtil();
         String xbogus = xb.getXBogus(urlPath);

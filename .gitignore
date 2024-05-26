@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/com.scccy.videoDownloader.test/**/target/
 !/service-logs/*
+!/videoDownloadloader/*
 
 ### STS ###
 .apt_generated
