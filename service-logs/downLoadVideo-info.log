@@ -7308,3 +7308,6 @@ Caused by: java.net.ConnectException: 连接被拒绝
 2024-05-24 20:17:39.860 CST [RMI TCP Connection(3)-127.0.0.1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] 173 log - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-05-24 20:17:39.862 CST [RMI TCP Connection(3)-127.0.0.1] INFO  org.springframework.web.servlet.DispatcherServlet 532 initServletBean - Initializing Servlet 'dispatcherServlet'
 2024-05-24 20:17:39.869 CST [RMI TCP Connection(3)-127.0.0.1] INFO  org.springframework.web.servlet.DispatcherServlet 554 initServletBean - Completed initialization in 5 ms
+2024-05-24 23:00:02.245 CST [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean 650 destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-24 23:00:02.248 CST [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource 350 close - HikariPool-1 - Shutdown initiated...
+2024-05-24 23:00:02.256 CST [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource 352 close - HikariPool-1 - Shutdown completed.
