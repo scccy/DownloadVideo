@@ -5,6 +5,7 @@ target/
 !**/src/com.scccy.videoDownloader.test/**/target/
 !/service-logs/*
 !/videoDownloadloader/*
+!/spirit/*
 
 ### STS ###
 .apt_generated
@@ -43,3 +44,4 @@ build/
 !/service-logs/downLoadVideo-info.log
 
 !/f2/
+!/spirit/
