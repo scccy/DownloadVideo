@@ -14,7 +14,6 @@ public class NetworkSettings {
 //    private Tiktok tiktok;
 
     @Data
-
     public  class Douyin {
         private Headers headers;
         private Proxies proxies;

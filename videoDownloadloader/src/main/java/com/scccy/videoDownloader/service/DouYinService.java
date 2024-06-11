@@ -8,10 +8,12 @@ import com.scccy.videoDownloader.untils.OkHttpClientFactory;
 import com.scccy.videoDownloader.untils.XbogusUtil;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
+@Service
 public class DouYinService {
 
     private static String domain = "https://www.douyin.com/";

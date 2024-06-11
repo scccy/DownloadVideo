@@ -5,6 +5,8 @@ import com.scccy.videoDownloader.common.HttpHeader;
 import okhttp3.*;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
@@ -203,7 +205,34 @@ public class HttpUtil {
             throw e;
         }
     }
+    public static void  downDouFromUrl(String urlStr,String fileName,String savePath,String cookie) {
+        try {
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setConnectTimeout(5*1000);
+            conn.setRequestProperty("User-Agent", DouUtil.ua);
+            if(cookie != null) {
+                conn.setRequestProperty("cookie", cookie);
+            }
+            InputStream input = conn.getInputStream();
+            byte[] getData = readInputStream(input);
+            File saveDir = new File(savePath);
+            if(!saveDir.exists()){
+                FileUtils.createDirectory(savePath);
+            }
+            File file = new File(saveDir+File.separator+fileName);
+            FileOutputStream output = new FileOutputStream(file);
+            output.write(getData);
+            if(output!=null){
+                output.close();
+            }
+            if(input!=null){
+                input.close();
+            }
+        } catch (Exception e) {
 
+        }
+    }
 
 
     public static void downLoadFromUrl(String urlStr, String fileName, String savePath) {

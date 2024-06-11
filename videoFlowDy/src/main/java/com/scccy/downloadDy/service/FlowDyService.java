@@ -1,6 +1,7 @@
 package com.scccy.downloadDy.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.scccy.downloadDy.domain.GatherDay;
 import com.scccy.downloadDy.domain.vo.*;
 
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public interface FlowDyService {
+public interface FlowDyService extends IService<GatherDay> {
     void search(SearchReqVo searchReqVo) throws IOException;
 
     List<DownloadReqVo> download(List<Long> idList);

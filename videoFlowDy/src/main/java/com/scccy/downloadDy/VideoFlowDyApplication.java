@@ -14,10 +14,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy
 @MapperScan("com.scccy.downloadDy.mapper")
 
-public class DownLoadVideoApplication {
+public class VideoFlowDyApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DownLoadVideoApplication.class, args);
+        SpringApplication.run(VideoFlowDyApplication.class, args);
     }
 //操你妈
 }

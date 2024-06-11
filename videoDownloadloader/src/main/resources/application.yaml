@@ -46,3 +46,8 @@ usershici:
   name: shici
   age: 18
 
+file:
+  save:
+   path: /home/db/spirit/resources/
+   staticAccessPath: /cos/**
+   file: /cos/

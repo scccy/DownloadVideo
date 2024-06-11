@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> implements FlowDyService, IService<GatherDay> {
+public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> implements FlowDyService {
 
     String baseurl = "http://192.168.32.166:11002";
 
@@ -94,7 +94,6 @@ public class FlowDyServiceImpl extends ServiceImpl<GatherDayMapper, GatherDay> i
         }
 
         Page<GatherDay> page = new Page<>(1,1);
-
         return gatherDayMapper.selectPage(page, queryWrapper);
     }
 }
