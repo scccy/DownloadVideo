@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoModel.mapper.GatherDayMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoModel.domain.GatherDay">
+    <!--@mbg.generated-->
+    <!--@Table gather_day-->
+    <id column="id" property="id" />
+    <id column="uid" property="uid" />
+    <result column="collect_count" property="collectCount" />
+    <result column="collection_time" property="collectionTime" />
+    <result column="comment_count" property="commentCount" />
+    <result column="create_time" property="createTime" />
+    <result column="create_timestamp" property="createTimestamp" />
+    <result column="desc" property="desc" />
+    <result column="digg_count" property="diggCount" />
+    <result column="downloads" property="downloads" />
+    <result column="duration" property="duration" />
+    <result column="dynamic_cover" property="dynamicCover" />
+    <result column="extra" property="extra" />
+    <result column="height" property="height" />
+    <result column="mark" property="mark" />
+    <result column="music_author" property="musicAuthor" />
+    <result column="music_title" property="musicTitle" />
+    <result column="music_url" property="musicUrl" />
+    <result column="nickname" property="nickname" />
+    <result column="origin_cover" property="originCover" />
+    <result column="ratio" property="ratio" />
+    <result column="sec_uid" property="secUid" />
+    <result column="share_count" property="shareCount" />
+    <result column="share_url" property="shareUrl" />
+    <result column="short_id" property="shortId" />
+    <result column="signature" property="signature" />
+    <result column="tag_1" property="tag1" />
+    <result column="tag_2" property="tag2" />
+    <result column="tag_3" property="tag3" />
+    <result column="text_extra" property="textExtra" />
+    <result column="type" property="type" />
+    <result column="unique_id" property="uniqueId" />
+    <result column="uri" property="uri" />
+    <result column="user_age" property="userAge" />
+    <result column="width" property="width" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `uid`, collect_count, collection_time, comment_count, create_time, create_timestamp, 
+    `desc`, digg_count, downloads, duration, dynamic_cover, extra, height, mark, music_author, 
+    music_title, music_url, nickname, origin_cover, ratio, sec_uid, share_count, share_url, 
+    short_id, signature, tag_1, tag_2, tag_3, text_extra, `type`, unique_id, uri, user_age, 
+    width
+  </sql>
+
+  <select id="selectUsersByIdList" parameterType="java.util.List" resultType="com.scccy.videoModel.domain.GatherDay">
+    SELECT * FROM gather_day WHERE id IN
+    <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </select>
+</mapper>

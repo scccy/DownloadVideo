@@ -12,7 +12,7 @@ target/
 .classpath
 .factorypath
 .project
-.settings
+.cookiesSettings
 .springBeans
 .sts4-cache
 

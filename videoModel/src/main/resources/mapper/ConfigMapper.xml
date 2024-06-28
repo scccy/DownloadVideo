@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoModel.mapper.ConfigMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoModel.domain.Config">
+    <!--@mbg.generated-->
+    <!--@Table config-->
+    <result column="id" property="id" />
+    <result column="apptoken" property="apptoken" />
+    <result column="ipauth" property="ipauth" />
+    <result column="openprocesshistory" property="openprocesshistory" />
+    <result column="taskcron" property="taskcron" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, apptoken, ipauth, openprocesshistory, taskcron
+  </sql>
+</mapper>

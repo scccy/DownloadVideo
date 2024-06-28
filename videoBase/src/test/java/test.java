@@ -1,5 +1,5 @@
 //import com.mysql.cj.x.protobuf.Mysqlx;
-//import com.scccy.untils.OkHttpClientUtil;
+//import com.scccy.videobase.untils.OkHttpClientUtil;
 //import org.junit.jupiter.api.Test;
 //
 //import java.io.IOException;

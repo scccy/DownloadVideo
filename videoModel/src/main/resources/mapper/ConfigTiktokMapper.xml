@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoModel.mapper.ConfigTiktokMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoModel.domain.ConfigTiktok">
+    <!--@mbg.generated-->
+    <!--@Table config_tiktok-->
+    <result column="id" property="id" />
+    <result column="analysisserver" property="analysisserver" />
+    <result column="cookies" property="cookies" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, analysisserver, cookies
+  </sql>
+</mapper>

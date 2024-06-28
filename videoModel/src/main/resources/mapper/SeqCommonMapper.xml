@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoModel.mapper.SeqCommonMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoModel.domain.SeqCommon">
+    <!--@mbg.generated-->
+    <!--@Table seq_common-->
+    <result column="seq_id" property="seqId" />
+    <result column="seq_count" property="seqCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    seq_id, seq_count
+  </sql>
+</mapper>

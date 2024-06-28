@@ -9,40 +9,38 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>videoFlowDy</artifactId>
-
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.scccy</groupId>
             <artifactId>videoBase</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.scccy</groupId>
-            <artifactId>videoDownloadloader</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
 
         <dependency>
             <groupId>com.scccy</groupId>
-            <artifactId>videoDownloadloader</artifactId>
+            <artifactId>videoModel</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.scccy</groupId>
-            <artifactId>videoDownloadloader</artifactId>
+            <artifactId>videoDownloader</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
 <build>
     <plugins>
         <plugin>

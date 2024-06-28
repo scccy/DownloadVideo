@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoModel.mapper.FfmpegQueueMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoModel.domain.FfmpegQueue">
+    <!--@mbg.generated-->
+    <!--@Table ffmpeg_queue-->
+    <result column="id" property="id" />
+    <result column="audiostatus" property="audiostatus" />
+    <result column="createtime" property="createtime" />
+    <result column="filepath" property="filepath" />
+    <result column="pendingfolder" property="pendingfolder" />
+    <result column="status" property="status" />
+    <result column="videoid" property="videoid" />
+    <result column="videoname" property="videoname" />
+    <result column="videostatus" property="videostatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, audiostatus, createtime, filepath, pendingfolder, `status`, videoid, videoname, 
+    videostatus
+  </sql>
+</mapper>

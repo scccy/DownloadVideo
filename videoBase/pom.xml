@@ -9,7 +9,6 @@
         <artifactId>DownLoadVideo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.scccy</groupId>
     <artifactId>videoBase</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -18,25 +17,16 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot.version>3.2.5</spring-boot.version> <!-- 使用合适的 Spring Boot 版本 -->
-        <mybatis-plus-spring-boot-starter.version>3.5.6</mybatis-plus-spring-boot-starter.version> <!-- MyBatis Plus Spring Boot Starter 版本 -->
-        <okhttp.version>5.0.0-alpha.3</okhttp.version> <!-- OkHttp 版本 -->
-        <fastjson.version>2.0.50</fastjson.version> <!-- Fastjson 版本 -->
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
 
     <dependencies>
+        <dependency>
+            <groupId>com.scccy</groupId>
+            <artifactId>videoModel</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,8 +71,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-            <version>3.5.6</version>
-<!--            <scope>provided</scope>-->
         </dependency>
         <!-- MySQL Connector/J，MySQL 数据库驱动 -->
         <dependency>
@@ -107,35 +95,26 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.13</version>
         </dependency>
 
         <!-- 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-
         </dependency>
 
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter-test</artifactId>
-            <version>3.0.3</version>
-            <scope>test</scope>
-        </dependency>
+
 
         <!-- OkHttp，HTTP 和 HTTP/2 客户端 -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>${okhttp.version}</version>
         </dependency>
 
         <!-- Fastjson2集成spring6，JSON 处理库 -->
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2-extension-spring6</artifactId>
-            <version>2.0.50</version>
         </dependency>
     </dependencies>
 </project>

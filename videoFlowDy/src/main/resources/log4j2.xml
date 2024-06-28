@@ -84,7 +84,7 @@
 <!--        <Logger name="org.mybatis" level="info"/>-->
 
         <!-- 配置 MyBatis SQL 日志级别 -->
-        <Logger name="com.scccy.downloadDy.mapper" level="debug" additivity="true">
+        <Logger name="com.scccy.videoflowDy.mapper" level="debug" additivity="true">
             <AppenderRef ref="mybatisPlusLog"/>
         </Logger>
 
