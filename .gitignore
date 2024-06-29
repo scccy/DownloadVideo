@@ -6,6 +6,7 @@ target/
 !/service-logs/*
 !/videoDownloadloader/*
 !/spirit/*
+!/video
 
 ### STS ###
 .apt_generated

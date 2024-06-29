@@ -1,7 +1,7 @@
 package com.scccy.videoDownloader.untils;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.scccy.videoDownloader.common.HttpHeader;
+import com.scccy.videoDownloader.config.HttpHeaderConfig;
 import okhttp3.*;
 
 import java.io.*;
@@ -43,7 +43,7 @@ public class HttpUtil {
     }
 
 
-    public static String httpGet(String url, String param, HttpHeader header) throws IOException {
+    public static String httpGet(String url, String param, HttpHeaderConfig header) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .header("User-Agent", header.getUserAgent())

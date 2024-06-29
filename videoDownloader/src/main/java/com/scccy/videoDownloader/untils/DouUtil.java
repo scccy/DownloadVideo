@@ -1,13 +1,9 @@
 package com.scccy.videoDownloader.untils;
 
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 
-import com.alibaba.fastjson2.JSONReader;
-import com.scccy.videoDownloader.common.Global;
-import com.scccy.videoDownloader.untils.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Request;
 import okhttp3.Response;

@@ -1,6 +1,6 @@
-package com.scccy.videoDownloader.common;
+package com.scccy.videoDownloader.config;
 
-public enum HttpHeader {
+public enum HttpHeaderConfig {
     PC_CHROME("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36", "https://www.example.com"),
     MOBILE_CHROME("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36", "https://m.example.com"),
     BILI_DROID("Mozilla/5.0 BiliDroid/7.25.0 (bbcallen@gmail.com)", "https://www.bilibili.com");
@@ -8,7 +8,7 @@ public enum HttpHeader {
     private final String userAgent;
     private final String referer;
 
-    HttpHeader(String userAgent, String referer) {
+    HttpHeaderConfig(String userAgent, String referer) {
         this.userAgent = userAgent;
         this.referer = referer;
     }
@@ -20,4 +20,5 @@ public enum HttpHeader {
     public String getReferer() {
         return referer;
     }
+}
 }
