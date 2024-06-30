@@ -1141,7 +1141,7 @@ Caused by: java.net.BindException: 地址已在使用
 2024-06-24 20:15:54.248 CST [http-nio-0.0.0.0-11007-exec-2] ERROR com.scccy.videobase.handlerExption.GlobalExceptionHandler 30 handleGlobalException - No static resource favicon.ico.
 2024-06-24 20:16:06.480 CST [http-nio-0.0.0.0-11007-exec-5] ERROR com.scccy.videobase.handlerExption.GlobalExceptionHandler 30 handleGlobalException - No static resource favicon.ico.
 2024-06-24 20:19:06.084 CST [http-nio-0.0.0.0-11007-exec-2] ERROR com.scccy.videobase.handlerExption.GlobalExceptionHandler 30 handleGlobalException - No static resource favicon.ico.
-2024-06-27 15:21:02.502 CST [main] ERROR org.springframework.boot.SpringApplication 851 reportFailure - Application run failed org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.scccy.videobase.config.InitValueConfig': Injection of autowired dependencies failed
+2024-06-27 15:21:02.502 CST [main] ERROR org.springframework.boot.SpringApplication 851 reportFailure - Application run failed org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.scccy.videobase.config.sp.InitValueConfig': Injection of autowired dependencies failed
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:514) ~[spring-beans-6.1.6.jar:6.1.6]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419) ~[spring-beans-6.1.6.jar:6.1.6]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.6.jar:6.1.6]

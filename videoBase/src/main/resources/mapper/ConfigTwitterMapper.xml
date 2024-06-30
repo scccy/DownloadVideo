@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoBase.mapper.ConfigTwitterMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoBase.domain.ConfigTwitter">
+    <!--@mbg.generated-->
+    <!--@Table config_twitter-->
+    <id column="config_twitter_id" property="configTwitterId" />
+    <result column="cookie" property="cookie" />
+    <result column="created_by" property="createdBy" />
+    <result column="updated_at" property="updatedAt" />
+    <result column="created_at" property="createdAt" />
+    <result column="updated_by" property="updatedBy" />
+    <result column="del_flag" property="delFlag" />
+    <result column="config_base_id" property="configBaseId" />
+    <result column="config_app_id" property="configAppId" />
+    <result column="folderize" property="folderize" />
+    <result column="mode" property="mode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    config_twitter_id, cookie, created_by, updated_at, created_at, updated_by, del_flag, 
+    config_base_id, config_app_id, folderize, `mode`
+  </sql>
+</mapper>

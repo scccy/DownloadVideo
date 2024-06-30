@@ -22,11 +22,6 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>com.scccy</groupId>
-            <artifactId>videoModel</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -47,6 +42,10 @@
                     <artifactId>spring-boot-starter-json</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

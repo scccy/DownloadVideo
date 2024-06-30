@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoBase.mapper.ConfigAppConfigMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoBase.domain.ConfigAppConfig">
+    <!--@mbg.generated-->
+    <!--@Table config_app_config-->
+    <id column="config_app_id" property="configAppId" />
+    <result column="config_app_name" property="configAppName" />
+    <result column="base_request_model_version_code" property="baseRequestModelVersionCode" />
+    <result column="base_request_model_version_name" property="baseRequestModelVersionName" />
+    <result column="base_request_model_browser_language" property="baseRequestModelBrowserLanguage" />
+    <result column="base_request_model_browser_platform" property="baseRequestModelBrowserPlatform" />
+    <result column="base_request_model_browser_name" property="baseRequestModelBrowserName" />
+    <result column="base_request_model_browser_version" property="baseRequestModelBrowserVersion" />
+    <result column="base_request_model_engine_name" property="baseRequestModelEngineName" />
+    <result column="base_request_model_engine_version" property="baseRequestModelEngineVersion" />
+    <result column="base_request_model_os_name" property="baseRequestModelOsName" />
+    <result column="base_request_model_os_version" property="baseRequestModelOsVersion" />
+    <result column="base_request_model_region" property="baseRequestModelRegion" />
+    <result column="base_request_model_priority_region" property="baseRequestModelPriorityRegion" />
+    <result column="base_request_model_webcast_language" property="baseRequestModelWebcastLanguage" />
+    <result column="base_request_model_tz_name" property="baseRequestModelTzName" />
+    <result column="base_request_model_device_id" property="baseRequestModelDeviceId" />
+    <result column="base_request_model_device_platform" property="baseRequestModelDevicePlatform" />
+    <result column="base_live_model_language" property="baseLiveModelLanguage" />
+    <result column="base_live_model_browser_language" property="baseLiveModelBrowserLanguage" />
+    <result column="base_live_model_browser_platform" property="baseLiveModelBrowserPlatform" />
+    <result column="base_live_model_browser_name" property="baseLiveModelBrowserName" />
+    <result column="base_live_model_browser_version" property="baseLiveModelBrowserVersion" />
+    <result column="headers_user_agent" property="headersUserAgent" />
+    <result column="headers_referer" property="headersReferer" />
+    <result column="ms_token_url" property="msTokenUrl" />
+    <result column="ms_token_url2" property="msTokenUrl2" />
+    <result column="ms_token_magic" property="msTokenMagic" />
+    <result column="ms_token_version" property="msTokenVersion" />
+    <result column="ms_token_data_type" property="msTokenDataType" />
+    <result column="ms_token_str_data" property="msTokenStrData" />
+    <result column="ttwid_url" property="ttwidUrl" />
+    <result column="ttwid_data" property="ttwidData" />
+    <result column="ttwid_cookie" property="ttwidCookie" />
+    <result column="webid_url" property="webidUrl" />
+    <result column="webid_body_app_id" property="webidBodyAppId" />
+    <result column="webid_body_referer" property="webidBodyReferer" />
+    <result column="webid_body_url" property="webidBodyUrl" />
+    <result column="webid_body_user_agent" property="webidBodyUserAgent" />
+    <result column="webid_body_user_unique_id" property="webidBodyUserUniqueId" />
+    <result column="odin_tt_url" property="odinTtUrl" />
+    <result column="visitor_url" property="visitorUrl" />
+    <result column="visitor_cb" property="visitorCb" />
+    <result column="visitor_tid" property="visitorTid" />
+    <result column="visitor_from" property="visitorFrom" />
+    <result column="created_at" property="createdAt" />
+    <result column="updated_at" property="updatedAt" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_by" property="createdBy" />
+    <result column="updated_by" property="updatedBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    config_app_id, config_app_name, base_request_model_version_code, base_request_model_version_name, 
+    base_request_model_browser_language, base_request_model_browser_platform, base_request_model_browser_name, 
+    base_request_model_browser_version, base_request_model_engine_name, base_request_model_engine_version, 
+    base_request_model_os_name, base_request_model_os_version, base_request_model_region, 
+    base_request_model_priority_region, base_request_model_webcast_language, base_request_model_tz_name, 
+    base_request_model_device_id, base_request_model_device_platform, base_live_model_language, 
+    base_live_model_browser_language, base_live_model_browser_platform, base_live_model_browser_name, 
+    base_live_model_browser_version, headers_user_agent, headers_referer, ms_token_url, 
+    ms_token_url2, ms_token_magic, ms_token_version, ms_token_data_type, ms_token_str_data, 
+    ttwid_url, ttwid_data, ttwid_cookie, webid_url, webid_body_app_id, webid_body_referer, 
+    webid_body_url, webid_body_user_agent, webid_body_user_unique_id, odin_tt_url, visitor_url, 
+    visitor_cb, visitor_tid, visitor_from, created_at, updated_at, del_flag, created_by, 
+    updated_by
+  </sql>
+</mapper>
