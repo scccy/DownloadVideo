@@ -8,7 +8,6 @@ import com.scccy.videoBase.handlerExption.CustomExceptions.CustomException;
 import com.scccy.videoBase.untils.OkHttpClientUtil;
 import com.scccy.videoBase.untils.Until;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
@@ -18,13 +17,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import static com.scccy.videoBase.untils.Until.genRandomStr;
 
 @Slf4j
-@Component
 public class TokenManager {
 
     private static ConfigAppConfig CONFIG_APP_CONFIG;
     private static OkHttpClientUtil okHttpClientUtil;
 
-    public  TokenManager(ConfigAppConfig configAppConfig,OkHttpClientUtil okHttpClientUtil) {
+    public  TokenManager( ConfigAppConfig configAppConfig, OkHttpClientUtil okHttpClientUtil) {
         CONFIG_APP_CONFIG = configAppConfig;
         this.okHttpClientUtil = okHttpClientUtil;
     }
@@ -67,7 +65,7 @@ public class TokenManager {
 
         if (ttwid == null) {
             log.error("ttwid: Check failed, please update ttwid in the configuration");
-            throw new CustomExceptions.CustomException("ttwid: Check failed, please update ttwid in the configuration");
+            throw new CustomException("ttwid: Check failed, please update ttwid in the configuration");
         }
 
         return ttwid;
@@ -91,7 +89,7 @@ public class TokenManager {
         String webid = response.getString("web_id");
 
         if (webid == null) {
-            throw new CustomExceptions.CustomException("webid 内容不符合要求");
+            throw new CustomException("webid 内容不符合要求");
         }
 
         return webid;
