@@ -1,6 +1,5 @@
 package com.scccy.videoBase.handlerExption;
 
-
 import com.scccy.videoBase.common.ResultData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -74,6 +73,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResultData> handleAPIUnauthorizedException(CustomExceptions.APIUnauthorizedException ex) {
         log.error("API 未授权异常: {}", ex.getMessage(), ex);
         return new ResponseEntity<>(ResultData.fail().setMsg("API 请求协议错误。").setData(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+
+    // 处理API响应错误异常
+    @ExceptionHandler(CustomExceptions.APIResponseError.class)
+    public ResponseEntity<ResultData> handleAPIResponseError(CustomExceptions.APIResponseError ex) {
+        log.error("API 响应错误异常: {}", ex.getMessage(), ex);
+        return new ResponseEntity<>(ResultData.fail().setMsg("API 响应错误。").setData(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // 处理所有未被特定异常处理器捕获的异常

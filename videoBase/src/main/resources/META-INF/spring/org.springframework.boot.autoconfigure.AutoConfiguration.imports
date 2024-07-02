@@ -1,13 +1,13 @@
-# 自动导包
-# 写入class 类
-# 替换fastjson2
-com.scccy.videoBase.config.sp.MyBatisPlusConfig
-com.scccy.videoBase.config.sp.RedisConfiguration
-com.scccy.videoBase.config.sp.TransactionConfig
-com.scccy.videoBase.config.sp.WebMvcConfig
-
-com.scccy.videoBase.handlerExption.GlobalExceptionHandler
-com.scccy.videoBase.handlerExption.CustomExceptions
-
-
-com.scccy.videoBase.config.manager.ClientConfManager
+## 自动导包
+## 写入class 类
+## 替换fastjson2
+#com.scccy.videoBase.config.sp.MyBatisPlusConfig
+#com.scccy.videoBase.config.sp.RedisConfiguration
+#com.scccy.videoBase.config.sp.TransactionConfig
+#com.scccy.videoBase.config.sp.WebMvcConfig
+#
+#com.scccy.videoBase.handlerExption.GlobalExceptionHandler
+#com.scccy.videoBase.handlerExption.CustomExceptions
+#
+#
+#com.scccy.videoBase.config.manager.ClientConfManager

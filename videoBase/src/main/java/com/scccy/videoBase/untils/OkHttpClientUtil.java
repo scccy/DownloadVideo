@@ -5,16 +5,13 @@ import com.alibaba.fastjson2.JSONReader;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@EnableAsync
-@Component
+//@Component
 public class OkHttpClientUtil {
 
     // 创建并配置 OkHttpClient 实例，设置连接超时、读取超时和写入超时
@@ -109,7 +106,7 @@ public class OkHttpClientUtil {
      * @return 响应体对象
      * @throws IOException 如果请求失败抛出异常
      */
-    private static <T> T executeRequest(Request request, Class<T> responseClass) throws IOException {
+    public static <T> T executeRequest(Request request, Class<T> responseClass) throws IOException {
         try (Response response = client.newCall(request).execute()) {
             // 检查响应是否成功
             if (!response.isSuccessful()) {
