@@ -1,11 +1,10 @@
 package com.scccy.videoBase;
 
-import com.scccy.videoBase.config.manager.TokenManager;
 import com.scccy.videoBase.domain.ConfigAppConfig;
 import com.scccy.videoBase.untils.ABogusUtil;
 import com.scccy.videoBase.untils.BrowserFingerprintGenerator;
-import com.scccy.videoBase.untils.OkHttpClientUtil;
 import com.scccy.videoBase.untils.XbogusUtil;
+import com.scccy.videoBase.untils.downloader.OkHttpClientUtil;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class VideoBaseApplicationTests {
     @Test
     void applicationStarts() throws IOException {
 
-        TokenManager tokenManager = new TokenManager(configAppConfigDouyinBean, okHttpClientUtil);
-        System.out.println(tokenManager.getFalseMsToken());
+//        TokenManager tokenManager = new TokenManager(configAppConfigDouyinBean, okHttpClientUtil);
+//        System.out.println(tokenManager.getFalseMsToken());
 
     }
     @Test

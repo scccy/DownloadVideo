@@ -54,6 +54,8 @@
     <result column="del_flag" property="delFlag" />
     <result column="created_by" property="createdBy" />
     <result column="updated_by" property="updatedBy" />
+    <result column="proxies_http" property="proxiesHttp" />
+    <result column="proxies_https" property="proxiesHttps" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
@@ -69,6 +71,6 @@
     ttwid_url, ttwid_data, ttwid_cookie, webid_url, webid_body_app_id, webid_body_referer, 
     webid_body_url, webid_body_user_agent, webid_body_user_unique_id, odin_tt_url, visitor_url, 
     visitor_cb, visitor_tid, visitor_from, created_at, updated_at, del_flag, created_by, 
-    updated_by
+    updated_by, proxies_http, proxies_https
   </sql>
 </mapper>

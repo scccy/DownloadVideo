@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-public class OkHttpFeignConfig {
+public class OkHttpConfig {
 
     @Bean
-    public okhttp3.OkHttpClient okHttpFeignClient() {
+    public okhttp3.OkHttpClient okHttpClient() {
         Dispatcher dispatcher = new Dispatcher();
         dispatcher.setMaxRequests(100);
         dispatcher.setMaxRequestsPerHost(20);

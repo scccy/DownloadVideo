@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoFlowDouyin.mapper.InfoUserWebMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoFlowDouyin.domain.InfoUserWeb">
+    <!--@mbg.generated-->
+    <!--@Table info_user_web-->
+    <id column="sec_user_id" property="secUserId" />
+    <result column="avatar_url" property="avatarUrl" />
+    <result column="aweme_count" property="awemeCount" />
+    <result column="city" property="city" />
+    <result column="country" property="country" />
+    <result column="favoriting_count" property="favoritingCount" />
+    <result column="follower_count" property="followerCount" />
+    <result column="following_count" property="followingCount" />
+    <result column="gender" property="gender" />
+    <result column="ip_location" property="ipLocation" />
+    <result column="is_ban" property="isBan" />
+    <result column="is_block" property="isBlock" />
+    <result column="is_blocked" property="isBlocked" />
+    <result column="is_star" property="isStar" />
+    <result column="live_status" property="liveStatus" />
+    <result column="mix_count" property="mixCount" />
+    <result column="mplatform_followers_count" property="mplatformFollowersCount" />
+    <result column="nickname" property="nickname" />
+    <result column="nickname_raw" property="nicknameRaw" />
+    <result column="room_id" property="roomId" />
+    <result column="school_name" property="schoolName" />
+    <result column="short_id" property="shortId" />
+    <result column="signature" property="signature" />
+    <result column="signature_raw" property="signatureRaw" />
+    <result column="total_favorited" property="totalFavorited" />
+    <result column="uid" property="uid" />
+    <result column="unique_id" property="uniqueId" />
+    <result column="user_age" property="userAge" />
+    <result column="last_aweme_id" property="lastAwemeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sec_user_id, avatar_url, aweme_count, city, country, favoriting_count, follower_count, 
+    following_count, gender, ip_location, is_ban, is_block, is_blocked, is_star, live_status, 
+    mix_count, mplatform_followers_count, nickname, nickname_raw, room_id, school_name, 
+    short_id, signature, signature_raw, total_favorited, `uid`, unique_id, user_age, 
+    last_aweme_id
+  </sql>
+</mapper>

@@ -1,4 +1,4 @@
-package com.scccy.videoBase.untils;
+package com.scccy.videoBase.untils.downloader;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;
@@ -10,9 +10,10 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static com.scccy.videoBase.untils.downloader.BaseCrawler.buildRequest;
+
 @Slf4j
-//@Component
-public class OkHttpClientUtil {
+public class OkHttpClientUtil  {
 
     // 创建并配置 OkHttpClient 实例，设置连接超时、读取超时和写入超时
     private static final OkHttpClient client = new OkHttpClient.Builder()
@@ -60,27 +61,6 @@ public class OkHttpClientUtil {
         return executeRequest(request, responseClass);
     }
 
-    /**
-     * 构建 POST 请求
-     * @param url 请求的 URL
-     * @param body 请求体
-     * @param headers 请求头，可为空
-     * @return 构建好的 POST 请求
-     */
-    private static Request buildRequest(String url, RequestBody body, Map<String, String> headers) {
-        Request.Builder requestBuilder = new Request.Builder()
-                .url(url)
-                .post(body);
-
-        // 如果 headers 不为空，则添加请求头
-        if (headers != null) {
-            for (Map.Entry<String, String> header : headers.entrySet()) {
-                requestBuilder.addHeader(header.getKey(), header.getValue());
-            }
-        }
-
-        return requestBuilder.build();
-    }
 
     /**
      * 发送 GET 请求

@@ -5,9 +5,7 @@ import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,7 +76,46 @@ public class Untils {
     public static String replaceT(String obj) {
         return obj.replaceAll("[^\\u4e00-\\u9fa5a-zA-Z0-9#]", "_");
     }
+    public static String formatFileName(
+            String namingTemplate,
+            Map<String, String> awemeData,
+            Map<String, String> customFields
+    ) throws Exception {
+        // 为不同系统设置不同的文件名长度限制
+        Map<String, Integer> osLimit = Map.of(
+                "win32", 200,
+                "cygwin", 60,
+                "darwin", 60,
+                "linux", 60
+        );
 
+        // 提取并设置字段
+        Map<String, String> fields = new HashMap<>();
+        fields.put("create", awemeData.getOrDefault("create_time", "")); // 长度固定19
+        fields.put("nickname", awemeData.getOrDefault("nickname", "")); // 最长30
+        fields.put("aweme_id", awemeData.getOrDefault("aweme_id", "")); // 长度固定19
+        fields.put("desc", splitFilename(awemeData.getOrDefault("desc", ""), osLimit.get("win32"))); // 假设当前系统为Windows
+        fields.put("uid", awemeData.getOrDefault("uid", "")); // 固定11
+
+        // 如果有自定义字段，更新字段值
+        if (customFields != null && !customFields.isEmpty()) {
+            fields.putAll(customFields);
+        }
+
+        try {
+            return formatTemplate(namingTemplate, fields);
+        } catch (Exception e) {
+            throw new Exception(String.format("文件名模板字段 %s 不存在，请检查", e.getMessage()));
+        }
+    }
+
+
+    private static String formatTemplate(String template, Map<String, String> fields) {
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
+            template = template.replace("{" + entry.getKey() + "}", entry.getValue());
+        }
+        return template;
+    }
     // 根据操作系统限制分割文件名
     public static String splitFilename(String text, int filenameLengthLimit) {
         return text.substring(0, Math.min(text.length(), filenameLengthLimit));
@@ -102,7 +139,6 @@ public class Untils {
         return "merged_config";
     }
 
-    // 解码JSON文本
 
 
     // 模型到端点的转换
@@ -140,8 +176,33 @@ public class Untils {
         }
         return validUrls;
     }
+
+//  提取代理url和端口
+public static Map<String, String> getProxyUrlAndPort(String url) {
+    Map<String, String> result = new HashMap<>();
+    String regex = "http[s]?://([^:/]+):?(\\d*)";
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(url);
+
+    if (matcher.find()) {
+        String ip = matcher.group(1);
+        String port = matcher.group(2);
+
+        result.put("ip", ip);
+        result.put("port", port.isEmpty() ? "8080" : port);
+    } else {
+        result.put("error", "URL格式不正确");
+    }
+
+    return result;
+}
+
     // 测试方法
     public static void main(String[] args) {
+        Map<String, String> proxyUrlAndPort = getProxyUrlAndPort("http://192.168.3.2.1:11000");
+        System.out.println("IP: " + proxyUrlAndPort.get("ip"));
+        System.out.println("Port: " + proxyUrlAndPort.get("port"));
+
         // 示例使用Utils方法
         String randomStr = genRandomStr(10);
         System.out.println("随机字符串: " + randomStr);

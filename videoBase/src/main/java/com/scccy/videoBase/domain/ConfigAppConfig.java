@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper=true)
 @Accessors(chain = true)
-
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "config_app_config")
@@ -152,4 +151,10 @@ public class ConfigAppConfig extends BaseEntity {
 
     @TableField(value = "visitor_from")
     private String visitorFrom;
+
+    @TableField(value = "proxies_http")
+    private String proxiesHttp;
+
+    @TableField(value = "proxies_https")
+    private String proxiesHttps;
 }

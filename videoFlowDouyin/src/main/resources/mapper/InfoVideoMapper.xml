@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.videoFlowDouyin.mapper.InfoVideoMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.videoFlowDouyin.domain.InfoVideo">
+    <!--@mbg.generated-->
+    <!--@Table info_video-->
+    <id column="aweme_id" property="awemeId" />
+    <result column="api_status_code" property="apiStatusCode" />
+    <result column="aweme_type" property="awemeType" />
+    <result column="nickname" property="nickname" />
+    <result column="nickname_raw" property="nicknameRaw" />
+    <result column="sec_user_id" property="secUserId" />
+    <result column="short_id" property="shortId" />
+    <result column="uid" property="uid" />
+    <result column="unique_id" property="uniqueId" />
+    <result column="can_comment" property="canComment" />
+    <result column="can_forward" property="canForward" />
+    <result column="can_share" property="canShare" />
+    <result column="can_show_comment" property="canShowComment" />
+    <result column="comment_gid" property="commentGid" />
+    <result column="create_time" property="createTime" />
+    <result column="desc" property="desc" />
+    <result column="desc_raw" property="descRaw" />
+    <result column="duration" property="duration" />
+    <result column="is_ads" property="isAds" />
+    <result column="is_story" property="isStory" />
+    <result column="is_top" property="isTop" />
+    <result column="video_bit_rate" property="videoBitRate" />
+    <result column="video_play_addr" property="videoPlayAddr" />
+    <result column="images" property="images" />
+    <result column="animated_cover" property="animatedCover" />
+    <result column="cover" property="cover" />
+    <result column="part_see" property="partSee" />
+    <result column="private_status" property="privateStatus" />
+    <result column="is_delete" property="isDelete" />
+    <result column="is_prohibited" property="isProhibited" />
+    <result column="is_long_video" property="isLongVideo" />
+    <result column="media_type" property="mediaType" />
+    <result column="mix_desc" property="mixDesc" />
+    <result column="mix_desc_raw" property="mixDescRaw" />
+    <result column="mix_create_time" property="mixCreateTime" />
+    <result column="mix_id" property="mixId" />
+    <result column="mix_name" property="mixName" />
+    <result column="mix_pic_type" property="mixPicType" />
+    <result column="mix_type" property="mixType" />
+    <result column="mix_share_url" property="mixShareUrl" />
+    <result column="mix_update_time" property="mixUpdateTime" />
+    <result column="is_commerce_music" property="isCommerceMusic" />
+    <result column="is_original" property="isOriginal" />
+    <result column="is_original_sound" property="isOriginalSound" />
+    <result column="is_pgc" property="isPgc" />
+    <result column="music_author" property="musicAuthor" />
+    <result column="music_author_raw" property="musicAuthorRaw" />
+    <result column="music_author_deleted" property="musicAuthorDeleted" />
+    <result column="music_duration" property="musicDuration" />
+    <result column="music_id" property="musicId" />
+    <result column="music_mid" property="musicMid" />
+    <result column="pgc_author" property="pgcAuthor" />
+    <result column="pgc_author_raw" property="pgcAuthorRaw" />
+    <result column="pgc_author_title" property="pgcAuthorTitle" />
+    <result column="pgc_author_title_raw" property="pgcAuthorTitleRaw" />
+    <result column="pgc_music_type" property="pgcMusicType" />
+    <result column="music_status" property="musicStatus" />
+    <result column="music_owner_handle" property="musicOwnerHandle" />
+    <result column="music_owner_handle_raw" property="musicOwnerHandleRaw" />
+    <result column="music_owner_id" property="musicOwnerId" />
+    <result column="music_owner_nickname" property="musicOwnerNickname" />
+    <result column="music_owner_nickname_raw" property="musicOwnerNicknameRaw" />
+    <result column="music_play_url" property="musicPlayUrl" />
+    <result column="position" property="position" />
+    <result column="region" property="region" />
+    <result column="seo_ocr_content" property="seoOcrContent" />
+    <result column="allow_douplus" property="allowDouplus" />
+    <result column="download_setting" property="downloadSetting" />
+    <result column="allow_share" property="allowShare" />
+    <result column="admire_count" property="admireCount" />
+    <result column="collect_count" property="collectCount" />
+    <result column="comment_count" property="commentCount" />
+    <result column="digg_count" property="diggCount" />
+    <result column="share_count" property="shareCount" />
+    <result column="hashtag_ids" property="hashtagIds" />
+    <result column="hashtag_names" property="hashtagNames" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    aweme_id, api_status_code, aweme_type, nickname, nickname_raw, sec_user_id, short_id, 
+    `uid`, unique_id, can_comment, can_forward, can_share, can_show_comment, comment_gid, 
+    create_time, `desc`, desc_raw, duration, is_ads, is_story, is_top, video_bit_rate, 
+    video_play_addr, images, animated_cover, cover, part_see, private_status, is_delete, 
+    is_prohibited, is_long_video, media_type, mix_desc, mix_desc_raw, mix_create_time, 
+    mix_id, mix_name, mix_pic_type, mix_type, mix_share_url, mix_update_time, is_commerce_music, 
+    is_original, is_original_sound, is_pgc, music_author, music_author_raw, music_author_deleted, 
+    music_duration, music_id, music_mid, pgc_author, pgc_author_raw, pgc_author_title, 
+    pgc_author_title_raw, pgc_music_type, music_status, music_owner_handle, music_owner_handle_raw, 
+    music_owner_id, music_owner_nickname, music_owner_nickname_raw, music_play_url, `position`, 
+    region, seo_ocr_content, allow_douplus, download_setting, allow_share, admire_count, 
+    collect_count, comment_count, digg_count, share_count, hashtag_ids, hashtag_names
+  </sql>
+</mapper>

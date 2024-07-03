@@ -1,5 +1,7 @@
 package com.scccy.videoBase.handlerExption;
 
+import okhttp3.Response;
+
 import java.io.IOException;
 
 public class CustomExceptions {
@@ -47,6 +49,25 @@ public class CustomExceptions {
             super(message, cause);
         }
     }
+
+    public static class APIUnavailableException extends CustomException {
+        public APIUnavailableException(String message) {
+            super(message);
+        }
+    }
+
+    public static class APIRateLimitException extends CustomException {
+        public APIRateLimitException(String message) {
+            super(message);
+        }
+    }
+
+    public static class APIRetryExhaustedException extends CustomException {
+        public APIRetryExhaustedException(String message) {
+            super(message);
+        }
+    }
+
     public static void handleException(Exception e, String url) throws CustomExceptions.APITimeoutException, CustomExceptions.APIConnectionException, CustomExceptions.APIUnauthorizedException, CustomExceptions.APIResponseException {
         if (e instanceof IOException) {
             String message = e.getMessage();
@@ -66,4 +87,24 @@ public class CustomExceptions {
 
     public class APIResponseError extends Throwable {
     }
+
+    // 新增的异常处理方法
+    public static void handleHttpStatusError(Response response, int attempt) throws CustomExceptions.APINotFoundException, CustomExceptions.APIUnavailableException, CustomExceptions.APITimeoutException, CustomExceptions.APIUnauthorizedException, CustomExceptions.APIRateLimitException, CustomExceptions.APIResponseException {
+        int statusCode = response.code();
+        switch (statusCode) {
+            case 404:
+                throw new CustomExceptions.APINotFoundException("HTTP status code 404: Not Found");
+            case 503:
+                throw new CustomExceptions.APIUnavailableException("HTTP status code 503: Service Unavailable");
+            case 408:
+                throw new CustomExceptions.APITimeoutException("HTTP status code 408: Request Timeout", new Throwable("HTTP status code 408: Request Timeout"));
+            case 401:
+                throw new CustomExceptions.APIUnauthorizedException("HTTP status code 401: Unauthorized", new Throwable("HTTP status code 401: Unauthorized"));
+            case 429:
+                throw new CustomExceptions.APIRateLimitException("HTTP status code 429: Too Many Requests");
+            default:
+                throw new CustomExceptions.APIResponseException("HTTP status code " + statusCode + ": Unexpected status");
+        }
+    }
+
 }
