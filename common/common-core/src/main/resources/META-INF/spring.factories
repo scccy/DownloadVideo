@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.scccy.downloadvideo.common.core.config.CommonAutoConfiguration 

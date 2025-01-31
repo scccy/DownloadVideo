@@ -12,7 +12,62 @@
 
     <groupId>com.scccy.downloadvideo</groupId>
     <artifactId>common</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <modules>
+        <module>common-core</module>
+        <module>common-download</module>
+        <module>common-websocket</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <spring-boot.version>2.6.3</spring-boot.version>
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <fastjson.version>2.0.32</fastjson.version>
+        <okhttp.version>4.9.3</okhttp.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <!-- Common Modules -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>common-download</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>common-websocket</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- Spring Boot -->
         <dependency>
@@ -103,8 +158,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <modules>
-        <module>common-core</module>
-        <module>common-download</module>
-    </modules>
 </project> 

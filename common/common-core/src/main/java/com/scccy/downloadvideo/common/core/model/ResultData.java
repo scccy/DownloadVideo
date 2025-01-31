@@ -20,6 +20,13 @@ public class ResultData {
         resultData.setMsg("SUSSES");
         return resultData;
     }
+    public static ResultData ok(Object data) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(200);
+        resultData.setMsg("SUSSES");
+        resultData.setData(data);
+        return resultData;
+    }
     public static ResultData ok(String mes,Object data) {
         ResultData resultData = new ResultData();
         resultData.setCode(200);

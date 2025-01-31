@@ -1,0 +1,8 @@
+ com.scccy.downloadvideo.common.core.config.Knife4jConfig
+ com.scccy.downloadvideo.common.core.config.MybatisPlusConfig
+ com.scccy.downloadvideo.common.core.config.WebMvcConfig
+ com.scccy.downloadvideo.common.core.config.FastJson2Config
+ com.scccy.downloadvideo.common.core.config.DatabaseInitConfig
+ com.scccy.downloadvideo.common.core.config.FeignConfig
+ com.scccy.downloadvideo.common.core.config.OkHttpConfig
+

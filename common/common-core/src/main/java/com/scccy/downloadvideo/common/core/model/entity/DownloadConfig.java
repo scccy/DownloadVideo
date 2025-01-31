@@ -18,8 +18,23 @@ public class DownloadConfig {
     private Integer maxCounts = 0;
     private Integer maxTasks = 10;
     private Integer pageCounts = 20;
-    
+    private Integer corePoolSize = 20;
+    private Integer chunks = 20;
+    private Boolean EnableChunks = true;
+
     // 代理配置
     private String proxyHost;
     private Integer proxyPort;
-} 
+
+    // 新增 enableChunks 属性
+    private Boolean enableChunks = true;
+
+    public Boolean getEnableChunks() {
+        return enableChunks;
+    }
+
+    public void setEnableChunks(Boolean enableChunks) {
+        this.enableChunks = enableChunks;
+    }
+
+}

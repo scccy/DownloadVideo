@@ -1,5 +1,6 @@
 package com.scccy.downloadvideo.common.download.feign;
 
+import com.alibaba.fastjson2.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,4 +37,8 @@ public interface DownloadFeignClient {
     ResponseEntity<byte[]> downloadWithRange2Byte(@RequestParam("url") String url,
                                              @RequestHeader Map<String, String> headers,
                                              @RequestHeader("Range") String range);
+
+    @GetMapping("/user/likes")
+    ResponseEntity<JSONObject> fetchUserLikes(@RequestParam("userId") String userId, @RequestParam("page") int page);
+
 } 

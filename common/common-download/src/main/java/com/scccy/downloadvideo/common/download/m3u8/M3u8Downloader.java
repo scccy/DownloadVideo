@@ -1,6 +1,13 @@
 package com.scccy.downloadvideo.common.download.m3u8;
 
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
+import com.scccy.downloadvideo.common.download.listener.DownLoadProgressListener;
+import com.scccy.downloadvideo.common.download.model.TaskStatus;
+import com.scccy.downloadvideo.common.download.model.DownloadTask;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
@@ -12,8 +19,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import reactor.core.publisher.Mono;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class M3u8Downloader {
@@ -24,6 +36,8 @@ public class M3u8Downloader {
     
     private final ConcurrentHashMap<String, Boolean> downloadedSegments = new ConcurrentHashMap<>();
     private final AtomicInteger segmentCount = new AtomicInteger(0);
+    private final ConcurrentHashMap<String, DownloadTask> downloadTasks = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, DownLoadProgressListener> listeners = new ConcurrentHashMap<>();
 
     public M3u8Downloader(DownloadFeignClient downloadClient, Map<String, String> headers) {
         this.downloadClient = downloadClient;
@@ -64,45 +78,85 @@ public class M3u8Downloader {
     }
 
     /**
+     * 添加下载进度监听器
+     */
+    public void addListener(String taskId, DownLoadProgressListener listener) {
+        listeners.put(taskId, listener);
+    }
+
+    /**
      * 下载M3U8流
      */
-    public Path download(String url, String savePath, String fileName) throws IOException {
+    public CompletableFuture<Path> download(String url, String savePath, String fileName) {
+        String taskId = UUID.randomUUID().toString();
         Path fullPath = Paths.get(savePath, fileName);
         File dir = new File(savePath);
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        List<M3u8Segment> segments = parseM3u8(url);
-        
-        try (FileOutputStream fos = new FileOutputStream(fullPath.toFile())) {
-            for (M3u8Segment segment : segments) {
-                if (!downloadedSegments.containsKey(segment.getUrl())) {
-                    try {
-                        byte[] bytes = downloadSegment(segment.getUrl());
-                        fos.write(bytes);
-                        downloadedSegments.put(segment.getUrl(), true);
+        // 创建下载任务
+        DownloadTask task = DownloadTask.builder()
+            .id(taskId)
+            .url(url)
+            .savePath(savePath)
+            .fileName(fileName)
+            .status(TaskStatus.PENDING)
+            .build();
+            
+        downloadTasks.put(taskId, task);
 
-                        // 清理缓存
-                        if (segmentCount.incrementAndGet() > MAX_SEGMENT_COUNT) {
-                            downloadedSegments.clear();
-                            segmentCount.set(0);
+        try {
+            List<M3u8Segment> segments = parseM3u8(url);
+            long totalSize = (long) (segments.stream().mapToDouble(M3u8Segment::getDuration).sum() * 1000); // 估算总大小
+            task.setContentLength(totalSize);
+
+            try (FileOutputStream fos = new FileOutputStream(fullPath.toFile(), true)) {
+                long downloadedSize = 0;
+                for (M3u8Segment segment : segments) {
+                    if (!downloadedSegments.containsKey(segment.getUrl())) {
+                        try {
+                            byte[] bytes = downloadSegment(segment.getUrl());
+                            fos.write(bytes);
+                            downloadedSegments.put(segment.getUrl(), true);
+                            downloadedSize += bytes.length;
+                            task.setDownloadedSize(downloadedSize);
+
+                            // 更新进度
+                            DownLoadProgressListener listener = listeners.get(taskId);
+                            if (listener != null) {
+                                listener.onProgress(taskId, downloadedSize, totalSize);
+                            }
+
+                            // 清理缓存
+                            if (segmentCount.incrementAndGet() > MAX_SEGMENT_COUNT) {
+                                downloadedSegments.clear();
+                                segmentCount.set(0);
+                            }
+
+                            // 等待片段时长，避免过快下载
+                            Thread.sleep((long) (segment.getDuration() * 1000));
+
+                        } catch (IOException e) {
+                            log.error("Error downloading segment: " + segment.getUrl(), e);
+                            task.setStatus(TaskStatus.ERROR);
+                            task.setError(e.getMessage());
+                            throw e;
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            throw new IOException("Download interrupted", e);
                         }
-
-                        // 等待片段时长，避免过快下载
-                        Thread.sleep((long) (segment.getDuration() * 1000));
-
-                    } catch (IOException e) {
-                        log.error("Error downloading segment: " + segment.getUrl(), e);
-                        throw e;
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        throw new IOException("Download interrupted", e);
                     }
                 }
             }
-        }
 
-        return fullPath;
+            task.setStatus(TaskStatus.COMPLETED);
+            return CompletableFuture.completedFuture(fullPath);
+
+        } catch (IOException e) {
+            task.setStatus(TaskStatus.ERROR);
+            task.setError(e.getMessage());
+            return CompletableFuture.failedFuture(e);
+        }
     }
-} 
+}

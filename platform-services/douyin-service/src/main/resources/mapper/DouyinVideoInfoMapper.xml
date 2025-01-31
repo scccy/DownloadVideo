@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.downloadvideo.platform.douyin.mapper.DouyinVideoInfoMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.downloadvideo.platform.douyin.model.DouyinVideoInfo">
+    <!--@mbg.generated-->
+    <!--@Table douyin_video_info-->
+    <id column="aweme_id" jdbcType="VARCHAR" property="awemeId" />
+    <result column="api_status_code" jdbcType="VARCHAR" property="apiStatusCode" />
+    <result column="aweme_type" jdbcType="VARCHAR" property="awemeType" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="nickname_raw" jdbcType="VARCHAR" property="nicknameRaw" />
+    <result column="sec_user_id" jdbcType="VARCHAR" property="secUserId" />
+    <result column="short_id" jdbcType="VARCHAR" property="shortId" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="unique_id" jdbcType="VARCHAR" property="uniqueId" />
+    <result column="can_comment" jdbcType="VARCHAR" property="canComment" />
+    <result column="can_forward" jdbcType="VARCHAR" property="canForward" />
+    <result column="can_share" jdbcType="VARCHAR" property="canShare" />
+    <result column="can_show_comment" jdbcType="VARCHAR" property="canShowComment" />
+    <result column="comment_gid" jdbcType="VARCHAR" property="commentGid" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+    <result column="desc_raw" jdbcType="LONGVARCHAR" property="descRaw" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="is_ads" jdbcType="VARCHAR" property="isAds" />
+    <result column="is_story" jdbcType="VARCHAR" property="isStory" />
+    <result column="is_top" jdbcType="VARCHAR" property="isTop" />
+    <result column="video_bit_rate" jdbcType="VARCHAR" property="videoBitRate" />
+    <result column="video_play_addr" jdbcType="VARCHAR" property="videoPlayAddr" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="animated_cover" jdbcType="VARCHAR" property="animatedCover" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="part_see" jdbcType="VARCHAR" property="partSee" />
+    <result column="private_status" jdbcType="VARCHAR" property="privateStatus" />
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="is_prohibited" jdbcType="VARCHAR" property="isProhibited" />
+    <result column="is_long_video" jdbcType="VARCHAR" property="isLongVideo" />
+    <result column="media_type" jdbcType="VARCHAR" property="mediaType" />
+    <result column="mix_desc" jdbcType="LONGVARCHAR" property="mixDesc" />
+    <result column="mix_desc_raw" jdbcType="LONGVARCHAR" property="mixDescRaw" />
+    <result column="mix_create_time" jdbcType="VARCHAR" property="mixCreateTime" />
+    <result column="mix_id" jdbcType="VARCHAR" property="mixId" />
+    <result column="mix_name" jdbcType="VARCHAR" property="mixName" />
+    <result column="mix_pic_type" jdbcType="VARCHAR" property="mixPicType" />
+    <result column="mix_type" jdbcType="VARCHAR" property="mixType" />
+    <result column="mix_share_url" jdbcType="VARCHAR" property="mixShareUrl" />
+    <result column="mix_update_time" jdbcType="VARCHAR" property="mixUpdateTime" />
+    <result column="is_commerce_music" jdbcType="VARCHAR" property="isCommerceMusic" />
+    <result column="is_original" jdbcType="VARCHAR" property="isOriginal" />
+    <result column="is_original_sound" jdbcType="VARCHAR" property="isOriginalSound" />
+    <result column="is_pgc" jdbcType="VARCHAR" property="isPgc" />
+    <result column="music_author" jdbcType="VARCHAR" property="musicAuthor" />
+    <result column="music_author_raw" jdbcType="VARCHAR" property="musicAuthorRaw" />
+    <result column="music_author_deleted" jdbcType="VARCHAR" property="musicAuthorDeleted" />
+    <result column="music_duration" jdbcType="VARCHAR" property="musicDuration" />
+    <result column="music_id" jdbcType="VARCHAR" property="musicId" />
+    <result column="music_mid" jdbcType="VARCHAR" property="musicMid" />
+    <result column="pgc_author" jdbcType="VARCHAR" property="pgcAuthor" />
+    <result column="pgc_author_raw" jdbcType="VARCHAR" property="pgcAuthorRaw" />
+    <result column="pgc_author_title" jdbcType="VARCHAR" property="pgcAuthorTitle" />
+    <result column="pgc_author_title_raw" jdbcType="VARCHAR" property="pgcAuthorTitleRaw" />
+    <result column="pgc_music_type" jdbcType="VARCHAR" property="pgcMusicType" />
+    <result column="music_status" jdbcType="VARCHAR" property="musicStatus" />
+    <result column="music_owner_handle" jdbcType="VARCHAR" property="musicOwnerHandle" />
+    <result column="music_owner_handle_raw" jdbcType="VARCHAR" property="musicOwnerHandleRaw" />
+    <result column="music_owner_id" jdbcType="VARCHAR" property="musicOwnerId" />
+    <result column="music_owner_nickname" jdbcType="VARCHAR" property="musicOwnerNickname" />
+    <result column="music_owner_nickname_raw" jdbcType="VARCHAR" property="musicOwnerNicknameRaw" />
+    <result column="music_play_url" jdbcType="VARCHAR" property="musicPlayUrl" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="seo_ocr_content" jdbcType="LONGVARCHAR" property="seoOcrContent" />
+    <result column="allow_douplus" jdbcType="VARCHAR" property="allowDouplus" />
+    <result column="download_setting" jdbcType="VARCHAR" property="downloadSetting" />
+    <result column="allow_share" jdbcType="VARCHAR" property="allowShare" />
+    <result column="admire_count" jdbcType="VARCHAR" property="admireCount" />
+    <result column="collect_count" jdbcType="VARCHAR" property="collectCount" />
+    <result column="comment_count" jdbcType="VARCHAR" property="commentCount" />
+    <result column="digg_count" jdbcType="VARCHAR" property="diggCount" />
+    <result column="share_count" jdbcType="VARCHAR" property="shareCount" />
+    <result column="hashtag_ids" jdbcType="VARCHAR" property="hashtagIds" />
+    <result column="hashtag_names" jdbcType="VARCHAR" property="hashtagNames" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    aweme_id, api_status_code, aweme_type, nickname, nickname_raw, sec_user_id, short_id, 
+    `uid`, unique_id, can_comment, can_forward, can_share, can_show_comment, comment_gid, 
+    create_time, `desc`, desc_raw, duration, is_ads, is_story, is_top, video_bit_rate, 
+    video_play_addr, images, animated_cover, cover, part_see, private_status, is_delete, 
+    is_prohibited, is_long_video, media_type, mix_desc, mix_desc_raw, mix_create_time, 
+    mix_id, mix_name, mix_pic_type, mix_type, mix_share_url, mix_update_time, is_commerce_music, 
+    is_original, is_original_sound, is_pgc, music_author, music_author_raw, music_author_deleted, 
+    music_duration, music_id, music_mid, pgc_author, pgc_author_raw, pgc_author_title, 
+    pgc_author_title_raw, pgc_music_type, music_status, music_owner_handle, music_owner_handle_raw, 
+    music_owner_id, music_owner_nickname, music_owner_nickname_raw, music_play_url, `position`, 
+    region, seo_ocr_content, allow_douplus, download_setting, allow_share, admire_count, 
+    collect_count, comment_count, digg_count, share_count, hashtag_ids, hashtag_names
+  </sql>
+</mapper>

@@ -1,0 +1,8 @@
+download:
+  thread-count: 10
+  connect-timeout: 60
+  read-timeout: 60
+  write-timeout: 60
+  max-retries: 5
+  max-segment-cache: 2000
+  chunk-size: 16384 

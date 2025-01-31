@@ -1,13 +1,9 @@
 package com.scccy.downloadvideo.common.core.config;
 
-import com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter;
 import feign.Logger;
 import feign.Request;
 import feign.Retryer;
-import feign.codec.Decoder;
-import feign.codec.Encoder;
 import okhttp3.OkHttpClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,33 +11,30 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class FeignConfig {
-    
-    @Bean
-    public OkHttpClient okHttpClient() {
-        return new OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .build();
+
+    private final OkHttpClient okHttpClient;
+
+    // 通过构造方法注入 OkHttpClient，复用 OkHttpConfig 里的 Bean
+    public FeignConfig(OkHttpClient okHttpClient) {
+        this.okHttpClient = okHttpClient;
     }
-    
+
     @Bean
     public Request.Options options() {
         return new Request.Options(
-            10, TimeUnit.SECONDS,  // connectTimeout
-            60, TimeUnit.SECONDS,  // readTimeout
-            true                   // followRedirects
+                10, TimeUnit.SECONDS,  // 连接超时
+                60, TimeUnit.SECONDS,  // 读取超时
+                true                   // 跟随重定向
         );
     }
-    
+
     @Bean
     public Logger.Level feignLoggerLevel() {
-        return Logger.Level.FULL;
+        return Logger.Level.FULL; // 开启 Feign 完整日志
     }
-    
+
     @Bean
     public Retryer feignRetryer() {
-        return new Retryer.Default(100, TimeUnit.SECONDS.toMillis(1), 3);
+        return new Retryer.Default(100, TimeUnit.SECONDS.toMillis(1), 3); // 重试策略
     }
-} 
+}

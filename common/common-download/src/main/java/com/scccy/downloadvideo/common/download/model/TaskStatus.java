@@ -5,5 +5,6 @@ public enum TaskStatus {
     DOWNLOADING,
     COMPLETED,
     ERROR,
-    CANCELLED
+    CANCELLED,
+    PAUSED // 添加 PAUSED 状态
 }

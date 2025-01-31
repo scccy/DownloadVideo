@@ -1,0 +1,259 @@
+class DouyinCrawler(BaseCrawler):
+    def __init__(
+        self,
+        kwargs: Dict = ...,
+    ):
+        # 需要与cli同步
+        proxies = kwargs.get("proxies", {"http://": None, "https://": None})
+        self.headers = kwargs.get("headers", {}) | {"Cookie": kwargs["cookie"]}
+        if ClientConfManager.encryption() == "ab":
+            self.bogus_manager = ABogusManager
+        else:
+            self.bogus_manager = XBogusManager
+        super().__init__(kwargs, proxies=proxies, crawler_headers=self.headers)
+
+    async def fetch_user_profile(self, params: UserProfile):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_DETAIL,
+            params.model_dump(),
+        )
+        logger.debug(_("用户信息接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_post(self, params: UserPost):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_POST,
+            params.model_dump(),
+        )
+        logger.debug(_("主页作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_like(self, params: UserLike):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_FAVORITE_A,
+            params.model_dump(),
+        )
+        logger.debug(_("主页喜欢作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_collection(self, params: UserCollection):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_COLLECTION,
+            params.model_dump(),
+        )
+        logger.debug(_("主页收藏作品接口地址：{0}").format(endpoint))
+        return await self._fetch_post_json(endpoint, params.model_dump())
+
+    async def fetch_user_collects(self, params: UserCollects):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_COLLECTS,
+            params.model_dump(),
+        )
+        logger.debug(_("收藏夹接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_collects_video(self, params: UserCollectsVideo):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_COLLECTS_VIDEO,
+            params.model_dump(),
+        )
+        logger.debug(_("收藏夹作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_music_collection(self, params: UserMusicCollection):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_MUSIC_COLLECTION,
+            params.model_dump(),
+        )
+        logger.debug(_("音乐收藏接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_mix(self, params: UserMix):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.MIX_AWEME,
+            params.model_dump(),
+        )
+        logger.debug(_("合集作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_post_detail(self, params: PostDetail):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.POST_DETAIL,
+            params.model_dump(),
+        )
+        logger.debug(_("作品详情接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_post_comment(self, params: PostDetail):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.POST_COMMENT,
+            params.model_dump(),
+        )
+        logger.debug(_("作品评论接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_post_feed(self, params: PostDetail):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.TAB_FEED,
+            params.model_dump(),
+        )
+        logger.debug(_("首页推荐作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_follow_feed(self, params: PostDetail):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.FOLLOW_FEED,
+            params.model_dump(),
+        )
+        logger.debug(_("关注作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_friend_feed(self, params: PostDetail):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.FRIEND_FEED,
+            params.model_dump(),
+        )
+        logger.debug(_("朋友作品接口地址：{0}").format(endpoint))
+        return await self._fetch_post_json(endpoint)
+
+    async def fetch_post_related(self, params: PostDetail):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.POST_RELATED,
+            params.model_dump(),
+        )
+        logger.debug(_("相关推荐作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_live(self, params: UserLive):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.LIVE_INFO,
+            params.model_dump(),
+        )
+        logger.debug(_("直播信息接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_live_room_id(self, params: UserLive2):
+        original_headers = self.aclient.headers.copy()
+        try:
+            # 避免invalid session
+            self.aclient.headers.update({"Cookie": ""})
+            endpoint = self.bogus_manager.model_2_endpoint(
+                self.headers.get("User-Agent"),
+                dyendpoint.LIVE_INFO_ROOM_ID,
+                params.model_dump(),
+            )
+            logger.debug(_("直播接口地址（room_id）：{0}").format(endpoint))
+            return await self._fetch_get_json(endpoint)
+        finally:
+            self.aclient.headers = original_headers
+
+    async def fetch_following_live(self, params: FollowingUserLive):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.FOLLOW_USER_LIVE,
+            params.model_dump(),
+        )
+        logger.debug(_("关注用户直播接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_locate_post(self, params: UserPost):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.LOCATE_POST,
+            params.model_dump(),
+        )
+        logger.debug(_("定位上一次作品接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_login_qrcode(self, parms: LoginGetQr):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.SSO_LOGIN_GET_QR,
+            parms.model_dump(),
+        )
+        logger.debug(_("SSO获取二维码接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_check_qrcode(self, parms: LoginCheckQr):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.SSO_LOGIN_CHECK_QR,
+            parms.model_dump(),
+        )
+        logger.debug(_("SSO检查扫码状态接口地址：{0}").format(endpoint))
+        return await self._fetch_response(endpoint)
+
+    async def fetch_check_login(self, parms: LoginCheckQr):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.SSO_LOGIN_CHECK_LOGIN,
+            parms.model_dump(),
+        )
+        logger.debug(_("SSO检查登录状态接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_following(self, params: UserFollowing):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_FOLLOWING,
+            params.model_dump(),
+        )
+        logger.debug(_("用户关注列表接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_user_follower(self, params: UserFollower):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.USER_FOLLOWER,
+            params.model_dump(),
+        )
+        logger.debug(_("用户粉丝列表接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_live_im_fetch(self, params: LiveImFetch):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.LIVE_IM_FETCH,
+            params.model_dump(),
+        )
+        logger.debug(_("直播弹幕初始化接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_query_user(self, params: QueryUser):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.QUERY_USER,
+            params.model_dump(),
+        )
+        logger.debug(_("查询用户接口地址：{0}").format(endpoint))
+        return await self._fetch_get_json(endpoint)
+
+    async def fetch_post_stats(self, params: PostStats):
+        endpoint = self.bogus_manager.model_2_endpoint(
+            self.headers.get("User-Agent"),
+            dyendpoint.POST_STATS,
+            params.model_dump(),
+        )
+        logger.debug(_("作品统计接口地址：{0}").format(endpoint))
+        return await self._fetch_post_json(endpoint, params.model_dump())
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.close()
