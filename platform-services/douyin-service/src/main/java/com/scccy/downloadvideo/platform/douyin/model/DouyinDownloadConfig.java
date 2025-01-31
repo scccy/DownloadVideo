@@ -18,10 +18,11 @@ import lombok.NoArgsConstructor;
  */
 @Schema(description = "抖音应用配置表")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "douyin_download_config")
-public class DouyinDownloadConfig  implements Serializable {
+public class DouyinDownloadConfig extends BaseEntity implements Serializable {
     /**
      * 主键ID
      */

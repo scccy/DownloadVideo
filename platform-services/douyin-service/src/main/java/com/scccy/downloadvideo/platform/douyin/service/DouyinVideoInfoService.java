@@ -1,4 +1,4 @@
-package com.scccy.downloadvideo.platform.douyin.service.Impl;
+package com.scccy.downloadvideo.platform.douyin.service;
 
 import com.scccy.downloadvideo.platform.douyin.model.DouyinVideoInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
