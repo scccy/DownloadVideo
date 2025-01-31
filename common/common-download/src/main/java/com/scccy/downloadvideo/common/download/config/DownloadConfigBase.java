@@ -3,7 +3,7 @@ package com.scccy.downloadvideo.common.download.config;
 import lombok.Data;
 
 @Data
-public class DownloadConfig {
+public class DownloadConfigBase {
     private String path = "Download";
     private Boolean folderize = true;
     private String naming = "{create}_{desc}";

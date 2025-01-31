@@ -88,7 +88,7 @@ public class BaseDownloader {
 
             // 执行下载
             String range = String.format("bytes=%d-", startPosition);
-            ResponseEntity<byte[]> response = downloadClient.downloadWithRange(url, headers, range);
+            ResponseEntity<byte[]> response = downloadClient.downloadWithRange2Byte(url, headers, range);
 
             try(RandomAccessFile file = new RandomAccessFile(tmpPath.toFile(), "rw")) {
                 file.seek(startPosition);

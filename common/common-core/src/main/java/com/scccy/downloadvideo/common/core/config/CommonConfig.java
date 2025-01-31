@@ -32,13 +32,6 @@ public class CommonConfig {
     }
 
     @Bean
-    public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
-        return restTemplate;
-    }
-
-    @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
             String traceId = TraceIdUtil.getTraceId();
