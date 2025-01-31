@@ -62,3 +62,17 @@ custom:
 nodejs:
     path: /Volumes/opt/lan/nodejs/node-v22.13.0/bin/node    # Linux/Mac 默认路径
     # path: C:\\Program Files\\nodejs\\node.exe  # Windows 默认路径 
+
+douyin:
+  api:
+    url: https://www.douyin.com
+
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full 

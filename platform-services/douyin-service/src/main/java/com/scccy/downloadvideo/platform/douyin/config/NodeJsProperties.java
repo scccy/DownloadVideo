@@ -9,4 +9,4 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "nodejs")
 public class NodeJsProperties {
     private String path = "node"; // 默认从 PATH 环境变量中查找
-} 
+}

@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://prod-host:3306/video_platform?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
-
-logging:
-  level:
-    com.video.platform: info 

@@ -27,29 +27,29 @@ public class WebcastSignatureUtil {
             // 复制 JS 文件到临时目录
             ClassPathResource signatureResource = new ClassPathResource("algorithm/webcast_signature.js");
             ClassPathResource nodeResource = new ClassPathResource("algorithm/webcast_signature_node.js");
-            
+
             Path tempDir = Files.createTempDirectory("douyin-signature");
             Path signatureJs = tempDir.resolve("webcast_signature.js");
             Path nodeJs = tempDir.resolve("webcast_signature_node.js");
-            
+
             try (InputStream signatureIs = signatureResource.getInputStream();
                  InputStream nodeIs = nodeResource.getInputStream()) {
                 Files.copy(signatureIs, signatureJs, StandardCopyOption.REPLACE_EXISTING);
                 Files.copy(nodeIs, nodeJs, StandardCopyOption.REPLACE_EXISTING);
-                
+
                 // 添加执行权限
                 File nodeJsFile = nodeJs.toFile();
                 if (!nodeJsFile.setExecutable(true)) {
                     log.warn("无法为脚本文件添加执行权限: {}", nodeJs);
                 }
             }
-            
+
             this.nodePath = nodeJsProperties.getPath();
             this.scriptPath = nodeJs.toString();
-            
+
             // 验证 Node.js 是否可用
             validateNodeJs();
-            
+
             // 添加关闭钩子清理临时文件
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
@@ -82,14 +82,14 @@ public class WebcastSignatureUtil {
             ProcessBuilder pb = new ProcessBuilder(nodePath, "--version");
             pb.redirectErrorStream(true);
             Process process = pb.start();
-            
+
             String output = StreamUtils.copyToString(process.getInputStream(), StandardCharsets.UTF_8);
             int exitCode = process.waitFor();
-            
+
             if (exitCode != 0) {
                 throw new RuntimeException("Node.js 不可用: " + output);
             }
-            
+
             log.info("Node.js 版本: {}", output.trim());
         } catch (Exception e) {
             log.error("验证 Node.js 失败: {}", e.getMessage());
@@ -132,7 +132,7 @@ public class WebcastSignatureUtil {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes(StandardCharsets.UTF_8));
-            
+
             StringBuilder hexString = new StringBuilder();
             for (byte b : messageDigest) {
                 String hex = Integer.toHexString(0xff & b);
@@ -147,4 +147,4 @@ public class WebcastSignatureUtil {
             throw new RuntimeException("计算MD5失败", e);
         }
     }
-} 
+}
