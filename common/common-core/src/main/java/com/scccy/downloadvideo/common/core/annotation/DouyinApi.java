@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 public @interface DouyinApi {
     DouyinApiEndpoint value();
     
-    @AliasFor(annotation = RequestMapping.class, attribute = "path")
+//    @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String path() default "";
 
     RequestMethod method() default RequestMethod.GET;

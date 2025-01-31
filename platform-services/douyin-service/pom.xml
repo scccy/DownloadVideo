@@ -12,7 +12,7 @@
     <artifactId>douyin-service</artifactId>
 
     <dependencies>
-        <!-- Spring Boot -->
+        <!-- Spring MVC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

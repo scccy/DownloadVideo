@@ -11,12 +11,15 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor;
 
 @Configuration
 @EnableConfigurationProperties({
     DownloadProperties.class,
     WebSocketProperties.class
 })
+@ComponentScan(basePackages = "com.scccy.downloadvideo.common.core")
 public class CommonAutoConfiguration {
     
     @Bean
@@ -31,6 +34,11 @@ public class CommonAutoConfiguration {
         return new ObjectMapper()
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    @Bean
+    public static ConfigurationPropertiesBindingPostProcessor configurationPropertiesBindingPostProcessor() {
+        return new ConfigurationPropertiesBindingPostProcessor();
     }
 
 } 

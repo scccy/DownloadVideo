@@ -48,6 +48,10 @@ public class FastJson2Config implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(0, fastJsonHttpMessageConverter());
+        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+        FastJsonConfig config = new FastJsonConfig();
+        // ... 配置
+        converter.setFastJsonConfig(config);
+        converters.add(0, converter);
     }
 } 

@@ -28,6 +28,8 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
       filters: stat,wall
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  main:
+    web-application-type: servlet  # 明确指定使用servlet模式
 
 mybatis-plus:
   mapper-locations: 

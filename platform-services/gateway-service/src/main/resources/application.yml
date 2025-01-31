@@ -27,6 +27,8 @@ spring:
             - Path=/api/douyin/**
           filters:
             - StripPrefix=2
+  main:
+    web-application-type: reactive
 
 # 日志配置
 logging:

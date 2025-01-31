@@ -5,7 +5,6 @@ import com.scccy.downloadvideo.common.core.config.manager.XBogusManager;
 import com.scccy.downloadvideo.common.core.exception.ServiceException;
 import com.scccy.downloadvideo.common.download.core.BaseCrawler;
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
-import com.scccy.downloadvideo.common.download.model.douyin.*;
 import io.swagger.v3.core.util.Json;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

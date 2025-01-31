@@ -20,6 +20,7 @@
             <artifactId>common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
     <modules>
