@@ -3,7 +3,7 @@ package com.scccy.downloadvideo.common.core.config;
 import feign.Logger;
 import feign.Retryer;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import feign.Request;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,9 +22,8 @@ public class FeignConfig {
     @Bean
     public Request.Options options() {
         return new Request.Options(
-                10, TimeUnit.SECONDS,  // 连接超时
-                60, TimeUnit.SECONDS,  // 读取超时
-                true                   // 跟随重定向
+                (int) TimeUnit.SECONDS.toMillis(10),  // 连接超时
+                (int) TimeUnit.SECONDS.toMillis(60)   // 读取超时
         );
     }
 
