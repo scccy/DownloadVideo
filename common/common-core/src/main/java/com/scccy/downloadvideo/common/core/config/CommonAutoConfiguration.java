@@ -13,6 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor;
+import org.springframework.http.codec.ServerCodecConfigurer;
+import org.springframework.http.codec.json.Jackson2JsonDecoder;
+import org.springframework.http.codec.json.Jackson2JsonEncoder;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 @Configuration
 @EnableConfigurationProperties({
@@ -20,7 +24,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesBindin
     WebSocketProperties.class
 })
 @ComponentScan(basePackages = "com.scccy.downloadvideo.common.core")
-public class CommonAutoConfiguration {
+public class CommonAutoConfiguration implements WebFluxConfigurer {
     
     @Bean
     @ConditionalOnMissingBean
@@ -41,4 +45,14 @@ public class CommonAutoConfiguration {
         return new ConfigurationPropertiesBindingPostProcessor();
     }
 
+    @Override
+    public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
+        ObjectMapper mapper = objectMapper();
+        configurer.defaultCodecs().jackson2JsonEncoder(
+            new Jackson2JsonEncoder(mapper)
+        );
+        configurer.defaultCodecs().jackson2JsonDecoder(
+            new Jackson2JsonDecoder(mapper)
+        );
+    }
 } 

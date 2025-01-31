@@ -16,6 +16,7 @@ import java.nio.channels.FileChannel;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.*;
+import reactor.core.publisher.Flux;
 
 @Component
 @Slf4j
@@ -50,97 +51,105 @@ public class BaseDownloader {
     }
 
     @Async
-    public CompletableFuture<Path> downloadFile(String url, String savePath, String fileName) {
-        return startDownload(url, savePath, fileName, false).toCompletableFuture();
+    public Mono<Path> downloadFile(String url, String savePath, String fileName) {
+        return startDownload(url, savePath, fileName, false);
     }
 
     @Async
-    public CompletableFuture<Path> downloadM3u8Stream(String url, String savePath, String fileName) {
+    public Mono<Path> downloadM3u8Stream(String url, String savePath, String fileName) {
         M3u8Downloader m3u8Downloader = new M3u8Downloader(downloadClient, headers);
-        return m3u8Downloader.download(url, savePath, fileName).toCompletableFuture();
+        return m3u8Downloader.download(url, savePath, fileName);
     }
 
-    private CompletableFuture<Path> startDownload(String url, String savePath, String fileName, boolean useChunks) {
+    private Mono<Path> startDownload(String url, String savePath, String fileName, boolean useChunks) {
         String taskId = UUID.randomUUID().toString();
         Path fullPath = Paths.get(savePath, fileName);
-
         DownloadTask task = new DownloadTask(taskId, url, savePath, fileName, TaskStatus.PENDING);
         downloadTasks.put(taskId, task);
 
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                Files.createDirectories(fullPath.getParent());
-                long contentLength = getContentLength(url);
-                task.setContentLength(contentLength);
-
-                if (useChunks) {
-                    downloadWithChunks(task, fullPath, contentLength).join();
-                } else {
-                    downloadSingleFile(task, fullPath);
-                }
-
-                task.setStatus(TaskStatus.COMPLETED);
-                return fullPath;
-            } catch (Exception e) {
-                task.setStatus(TaskStatus.ERROR);
-                task.setError(e.getMessage());
-                throw new CompletionException(e);
+        return Mono.fromCallable(() -> {
+            Files.createDirectories(fullPath.getParent());
+            return getContentLength(url);
+        }).flatMap(contentLength -> {
+            task.setContentLength(contentLength);
+            if (useChunks) {
+                return downloadWithChunks(task, fullPath, contentLength);
+            } else {
+                return downloadSingleFile(task, fullPath);
             }
-        }, downloadExecutor);
+        }).doOnSuccess(path -> {
+            task.setStatus(TaskStatus.COMPLETED);
+        }).doOnError(e -> {
+            task.setStatus(TaskStatus.ERROR);
+            task.setError(e.getMessage());
+        }).thenReturn(fullPath);
     }
 
-    private void downloadSingleFile(DownloadTask task, Path fullPath) throws IOException {
-        ResponseEntity<byte[]> response = downloadClient.download2Byte(task.getUrl(), headers);
-        Files.write(fullPath, response.getBody());
+    private Mono<Path> downloadSingleFile(DownloadTask task, Path fullPath) {
+        return Mono.fromCallable(() -> {
+            ResponseEntity<byte[]> response = downloadClient.download2Byte(task.getUrl(), headers);
+            Files.write(fullPath, response.getBody());
+            return fullPath;
+        });
     }
 
-    private CompletableFuture<Void> downloadWithChunks(DownloadTask task, Path fullPath, long contentLength) throws IOException {
+    private Mono<Path> downloadWithChunks(DownloadTask task, Path fullPath, long contentLength) {
         int chunks = downloadConfig.getChunks();
         long chunkSize = contentLength / chunks;
-        Path tmpDir = Paths.get(task.getSavePath(), ".tmp");
-        Files.createDirectories(tmpDir);
-
-        List<CompletableFuture<Void>> futures = new ArrayList<>();
-        for (int i = 0; i < chunks; i++) {
-            long start = i * chunkSize;
-            long end = (i == chunks - 1) ? contentLength : (i + 1) * chunkSize - 1;
-            Path chunkPath = tmpDir.resolve(task.getFileName() + ".part" + i);
-            futures.add(CompletableFuture.runAsync(() -> downloadChunk(task.getUrl(), chunkPath, start, end), downloadExecutor));
-        }
-        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-    }
-
-    private void downloadChunk(String url, Path chunkPath, long start, long end) {
-        try {
-            ResponseEntity<byte[]> response = downloadClient.downloadWithRange2Byte(url, headers, String.format("bytes=%d-%d", start, end));
-            Files.write(chunkPath, response.getBody(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            log.error("Chunk download failed: {}", chunkPath, e);
-        }
-    }
-
-    private void mergeChunks(Path tmpDir, Path fullPath, int chunks) throws IOException {
-        try (FileChannel outChannel = FileChannel.open(fullPath, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
+        
+        return Mono.fromCallable(() -> {
+            Path tmpDir = Paths.get(task.getSavePath(), ".tmp");
+            Files.createDirectories(tmpDir);
+            return tmpDir;
+        }).flatMap(tmpDir -> {
+            List<Mono<Void>> chunkDownloads = new ArrayList<>();
             for (int i = 0; i < chunks; i++) {
-                Path chunkPath = tmpDir.resolve(fullPath.getFileName() + ".part" + i);
-                try (FileChannel inChannel = FileChannel.open(chunkPath, StandardOpenOption.READ)) {
-                    inChannel.transferTo(0, inChannel.size(), outChannel);
-                }
-                Files.delete(chunkPath);
+                long start = i * chunkSize;
+                long end = (i == chunks - 1) ? contentLength : (i + 1) * chunkSize - 1;
+                Path chunkPath = tmpDir.resolve(task.getFileName() + ".part" + i);
+                chunkDownloads.add(downloadChunk(task.getUrl(), chunkPath, start, end));
             }
-        }
+            return Mono.when(chunkDownloads)
+                    .then(mergeChunks(tmpDir, fullPath, chunks));
+        });
+    }
+
+    private Mono<Void> downloadChunk(String url, Path chunkPath, long start, long end) {
+        return Mono.fromCallable(() -> {
+            ResponseEntity<byte[]> response = downloadClient.downloadWithRange2Byte(
+                url, headers, String.format("bytes=%d-%d", start, end));
+            Files.write(chunkPath, response.getBody(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            return null;
+        }).onErrorResume(e -> {
+            log.error("Chunk download failed: {}", chunkPath, e);
+            return Mono.error(e);
+        });
+    }
+
+    private Mono<Void> mergeChunks(Path tmpDir, Path fullPath, int chunks) {
+        return Mono.fromCallable(() -> {
+            try (FileChannel outChannel = FileChannel.open(fullPath, 
+                    StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
+                for (int i = 0; i < chunks; i++) {
+                    Path chunkPath = tmpDir.resolve(fullPath.getFileName() + ".part" + i);
+                    try (FileChannel inChannel = FileChannel.open(chunkPath, StandardOpenOption.READ)) {
+                        inChannel.transferTo(0, inChannel.size(), outChannel);
+                    }
+                    Files.delete(chunkPath);
+                }
+            }
+            return null;
+        });
     }
 
     private void processQueue() {
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
-                DownloadTask task = downloadQueue.take();
-                startDownload(task.getUrl(), task.getSavePath(), task.getFileName(), downloadConfig.getEnableChunks()).join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
-        }
+        Flux.fromIterable(() -> downloadQueue.iterator())
+            .flatMap(task -> startDownload(task.getUrl(), task.getSavePath(), task.getFileName(), 
+                downloadConfig.getEnableChunks()))
+            .subscribe(
+                path -> log.info("Download completed: {}", path),
+                error -> log.error("Download failed", error)
+            );
     }
 
     public void shutdown() {

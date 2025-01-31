@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 
 @Slf4j
 public class M3u8Downloader {
@@ -47,34 +48,38 @@ public class M3u8Downloader {
     /**
      * 解析M3U8文件
      */
-    public List<M3u8Segment> parseM3u8(String url) throws IOException {
-        ResponseEntity<String> response = downloadClient.download(url, headers);
-        String content = response.getBody();
-        
-        List<M3u8Segment> segments = new ArrayList<>();
-        // 解析M3U8内容,提取ts片段URL
-        String[] lines = content.split("\n");
-        double duration = 0;
-        for (String line : lines) {
-            if (line.startsWith("#EXTINF:")) {
-                // 提取分片时长
-                duration = Double.parseDouble(line.substring(8, line.length() - 1));
-            } else if (!line.startsWith("#") && line.trim().length() > 0) {
-                // 创建分片对象
-                M3u8Segment segment = new M3u8Segment(line.trim());
-                segment.setDuration(duration);
-                segments.add(segment);
+    public Mono<List<M3u8Segment>> parseM3u8(String url) {
+        return Mono.fromCallable(() -> {
+            ResponseEntity<String> response = downloadClient.download(url, headers);
+            String content = response.getBody();
+            
+            List<M3u8Segment> segments = new ArrayList<>();
+            String[] lines = content.split("\n");
+            double duration = 0;
+            for (String line : lines) {
+                if (line.startsWith("#EXTINF:")) {
+                    duration = Double.parseDouble(line.substring(8, line.length() - 1));
+                } else if (!line.startsWith("#") && line.trim().length() > 0) {
+                    M3u8Segment segment = new M3u8Segment(line.trim());
+                    segment.setDuration(duration);
+                    segments.add(segment);
+                }
             }
-        }
-        return segments;
+            return segments;
+        });
     }
 
     /**
      * 下载单个片段
      */
-    private byte[] downloadSegment(String url) throws IOException {
-        ResponseEntity<byte[]> response = downloadClient.download2Byte(url, headers);
-        return response.getBody();
+    private Mono<byte[]> downloadSegment(String url) {
+        return Mono.fromCallable(() -> {
+            ResponseEntity<byte[]> response = downloadClient.download2Byte(url, headers);
+            return response.getBody();
+        }).onErrorResume(e -> {
+            log.error("Error downloading segment: {}", url, e);
+            return Mono.error(e);
+        });
     }
 
     /**
@@ -87,76 +92,28 @@ public class M3u8Downloader {
     /**
      * 下载M3U8流
      */
-    public CompletableFuture<Path> download(String url, String savePath, String fileName) {
+    public Mono<Path> download(String url, String savePath, String fileName) {
         String taskId = UUID.randomUUID().toString();
         Path fullPath = Paths.get(savePath, fileName);
-        File dir = new File(savePath);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-
-        // 创建下载任务
-        DownloadTask task = DownloadTask.builder()
-            .id(taskId)
-            .url(url)
-            .savePath(savePath)
-            .fileName(fileName)
-            .status(TaskStatus.PENDING)
-            .build();
-            
-        downloadTasks.put(taskId, task);
-
-        try {
-            List<M3u8Segment> segments = parseM3u8(url);
-            long totalSize = (long) (segments.stream().mapToDouble(M3u8Segment::getDuration).sum() * 1000); // 估算总大小
-            task.setContentLength(totalSize);
-
-            try (FileOutputStream fos = new FileOutputStream(fullPath.toFile(), true)) {
-                long downloadedSize = 0;
-                for (M3u8Segment segment : segments) {
-                    if (!downloadedSegments.containsKey(segment.getUrl())) {
-                        try {
-                            byte[] bytes = downloadSegment(segment.getUrl());
-                            fos.write(bytes);
-                            downloadedSegments.put(segment.getUrl(), true);
-                            downloadedSize += bytes.length;
-                            task.setDownloadedSize(downloadedSize);
-
-                            // 更新进度
-                            DownLoadProgressListener listener = listeners.get(taskId);
-                            if (listener != null) {
-                                listener.onProgress(taskId, downloadedSize, totalSize);
+        
+        return Mono.fromCallable(() -> {
+            Files.createDirectories(Paths.get(savePath));
+            return fullPath;
+        }).flatMap(path -> parseM3u8(url)
+            .flatMap(segments -> {
+                long totalSize = (long) (segments.stream()
+                    .mapToDouble(M3u8Segment::getDuration).sum() * 1000);
+                
+                return Flux.fromIterable(segments)
+                    .flatMap(segment -> downloadSegment(segment.getUrl())
+                        .doOnNext(bytes -> {
+                            try {
+                                Files.write(path, bytes, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
                             }
-
-                            // 清理缓存
-                            if (segmentCount.incrementAndGet() > MAX_SEGMENT_COUNT) {
-                                downloadedSegments.clear();
-                                segmentCount.set(0);
-                            }
-
-                            // 等待片段时长，避免过快下载
-                            Thread.sleep((long) (segment.getDuration() * 1000));
-
-                        } catch (IOException e) {
-                            log.error("Error downloading segment: " + segment.getUrl(), e);
-                            task.setStatus(TaskStatus.ERROR);
-                            task.setError(e.getMessage());
-                            throw e;
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            throw new IOException("Download interrupted", e);
-                        }
-                    }
-                }
-            }
-
-            task.setStatus(TaskStatus.COMPLETED);
-            return CompletableFuture.completedFuture(fullPath);
-
-        } catch (IOException e) {
-            task.setStatus(TaskStatus.ERROR);
-            task.setError(e.getMessage());
-            return CompletableFuture.failedFuture(e);
-        }
+                        }))
+                    .then(Mono.just(path));
+            }));
     }
 }

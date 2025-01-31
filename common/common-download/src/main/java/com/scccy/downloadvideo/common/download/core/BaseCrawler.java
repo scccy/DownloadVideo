@@ -7,6 +7,7 @@ import com.scccy.downloadvideo.common.download.feign.CrawlerFeignClient;
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -31,63 +32,62 @@ public abstract class BaseCrawler {
     /**
      * GET请求并解析响应
      */
-    protected <T> T fetchGet(String url, Class<T> clazz) {
-        ResponseEntity<String> response = crawlerClient.get(url, headers, proxies);
-        return ApiResponse.parseData(response.getBody(), clazz);
+    protected <T> Mono<T> fetchGet(String url, Class<T> clazz) {
+        return Mono.fromCallable(() -> crawlerClient.get(url, headers, proxies))
+                .map(response -> ApiResponse.parseData(response.getBody(), clazz));
     }
 
     /**
      * POST请求并解析响应
      */
-    protected <T> T fetchPost(String url, Object body, Class<T> clazz) {
-        ResponseEntity<String> response = crawlerClient.post(url, 
-            JSONObject.toJSONString(body), headers, proxies);
-        return ApiResponse.parseData(response.getBody(), clazz);
+    protected <T> Mono<T> fetchPost(String url, Object body, Class<T> clazz) {
+        return Mono.fromCallable(() -> 
+            crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies))
+                .map(response -> ApiResponse.parseData(response.getBody(), clazz));
     }
 
     /**
      * 获取原始响应
      */
-    protected ResponseEntity<String> fetchResponse(String url) {
-        return crawlerClient.get(url, headers, proxies);
+    protected Mono<ResponseEntity<String>> fetchResponse(String url) {
+        return Mono.fromCallable(() -> crawlerClient.get(url, headers, proxies));
     }
 
     /**
      * POST获取原始响应
      */
-    protected ResponseEntity<String> fetchPostResponse(String url, Object body) {
-        return crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies);
+    protected Mono<ResponseEntity<String>> fetchPostResponse(String url, Object body) {
+        return Mono.fromCallable(() -> 
+            crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies));
     }
 
     /**
      * 发送GET请求并获取二进制响应
      */
-    protected ResponseEntity<byte[]> fetchBytes(String url) {
-        try {
-            return downloadClient.download2Byte(url, headers);
-        } catch (Exception e) {
-            log.error("Failed to fetch bytes from: {}", url, e);
-            throw new ServiceException("500", "Failed to fetch bytes: " + e.getMessage());
-        }
+    protected Mono<ResponseEntity<byte[]>> fetchBytes(String url) {
+        return Mono.fromCallable(() -> downloadClient.download2Byte(url, headers))
+                .onErrorResume(e -> {
+                    log.error("Failed to fetch bytes from: {}", url, e);
+                    return Mono.error(new ServiceException("500", "Failed to fetch bytes: " + e.getMessage()));
+                });
     }
 
     /**
      * 发送带Range的GET请求
      */
-    protected ResponseEntity<String> fetchWithRange(String url, String range) {
-        try {
-            return downloadClient.downloadWithRange(url, headers, range);
-        } catch (Exception e) {
-            log.error("Failed to fetch with range from: {}", url, e);
-            throw new ServiceException("500", "Failed to fetch with range: " + e.getMessage());
-        }
+    protected Mono<ResponseEntity<String>> fetchWithRange(String url, String range) {
+        return Mono.fromCallable(() -> downloadClient.downloadWithRange(url, headers, range))
+                .onErrorResume(e -> {
+                    log.error("Failed to fetch with range from: {}", url, e);
+                    return Mono.error(new ServiceException("500", "Failed to fetch with range: " + e.getMessage()));
+                });
     }
 
     /**
      * 发送GET请求并获取JSON响应
      */
-    protected ResponseEntity<String> fetchGetJson(String url) {
-        return crawlerClient.getJson(url, headers, proxies);
+    protected Mono<ResponseEntity<String>> fetchGetJson(String url) {
+        return Mono.fromCallable(() -> crawlerClient.getJson(url, headers, proxies));
     }
 
     /**

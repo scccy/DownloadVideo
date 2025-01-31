@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
+import reactor.core.publisher.Mono;
 
 import javax.naming.directory.SearchResult;
 import java.util.List;
@@ -30,16 +31,19 @@ public class DouyinCrawler {
         this.crawlerClient = crawlerClient;
     }
 
-    public JSONObject getUserProfile(String userId) {
-        return crawlerClient.fetchUserProfile(userId).getBody();
+    public Mono<JSONObject> getUserProfile(String userId) {
+        return Mono.fromCallable(() -> crawlerClient.fetchUserProfile(userId))
+                .map(ResponseEntity::getBody);
     }
 
-    public JSONObject getUserPosts(String userId, int page) {
-        return crawlerClient.fetchUserPosts(userId, page).getBody();
+    public Mono<JSONObject> getUserPosts(String userId, int page) {
+        return Mono.fromCallable(() -> crawlerClient.fetchUserPosts(userId, page))
+                .map(ResponseEntity::getBody);
     }
 
-    public JSONObject getUserLikes(String userId, int page) {
-        return crawlerClient.fetchUserLikes(userId, page).getBody();
+    public Mono<JSONObject> getUserLikes(String userId, int page) {
+        return Mono.fromCallable(() -> crawlerClient.fetchUserLikes(userId, page))
+                .map(ResponseEntity::getBody);
     }
 
     // ... 其他方法
