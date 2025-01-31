@@ -1,9 +1,9 @@
 package com.scccy.downloadvideo.common.core.config;
 
 import feign.Logger;
-import feign.Request;
 import feign.Retryer;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -11,15 +11,22 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    
+
     @ExceptionHandler(Exception.class)
     public Mono<ResponseEntity<ResultData>> handleGlobalException(Exception ex) {
         log.error("Unexpected error: ", ex);
         return Mono.just(new ResponseEntity<>(
-            ResultData.fail()
-                .setMsg("An unexpected error occurred")
-                .setData(ex.getMessage()),
-            HttpStatus.INTERNAL_SERVER_ERROR
+                ResultData.fail()
+                        .setMsg("An unexpected error occurred")
+                        .setData(ex.getMessage()),
+                HttpStatus.INTERNAL_SERVER_ERROR
         ));
+    }
+
+    // 自定义的异常类
+    public static class CustomException extends RuntimeException {
+        public CustomException(String message) {
+            super(message);
+        }
     }
 }
