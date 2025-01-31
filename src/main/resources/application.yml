@@ -1,0 +1,5 @@
+spring:
+  webflux:
+    base-path: /api  # 如果需要基础路径
+  codec:
+    max-in-memory-size: 10MB  # 如果需要处理大文件 
