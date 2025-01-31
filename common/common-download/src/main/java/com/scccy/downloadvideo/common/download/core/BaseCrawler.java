@@ -93,16 +93,16 @@ public abstract class BaseCrawler {
     /**
      * 处理HTTP错误
      */
-    protected void handleHttpError(int statusCode, String url) {
-        String code = String.valueOf(statusCode);
-        String message = switch (statusCode) {
-            case 401 -> "Unauthorized access";
-            case 403 -> "Forbidden access";
-            case 404 -> "Resource not found";
-            case 429 -> "Too many requests";
-            case 500 -> "Server error";
-            default -> "HTTP error";
-        };
-        throw new ServiceException(code, message + ": " + url);
-    }
+//    protected void handleHttpError(int statusCode, String url) {
+//        String code = String.valueOf(statusCode);
+//        String message = switch (statusCode) {
+//            case 401 -> "Unauthorized access";
+//            case 403 -> "Forbidden access";
+//            case 404 -> "Resource not found";
+//            case 429 -> "Too many requests";
+//            case 500 -> "Server error";
+//            default -> "HTTP error";
+//        };
+//        throw new ServiceException(code, message + ": " + url);
+//    }
 } 

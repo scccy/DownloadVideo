@@ -1,3 +1,17 @@
+package com.scccy.downloadvideo.common.core.config;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scccy.downloadvideo.common.core.config.manager.XBogusManager;
+import com.scccy.downloadvideo.common.core.config.properties.DownloadProperties;
+import com.scccy.downloadvideo.common.core.config.properties.WebSocketProperties;
+import okhttp3.OkHttpClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 @Configuration
 @EnableConfigurationProperties({
     DownloadProperties.class,
@@ -18,14 +32,5 @@ public class CommonAutoConfiguration {
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
-    
-    @Bean
-    @ConditionalOnMissingBean
-    public OkHttpClient okHttpClient() {
-        return new OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .build();
-    }
+
 } 

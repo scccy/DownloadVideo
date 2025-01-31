@@ -1,3 +1,9 @@
+package com.scccy.downloadvideo.common.core.model.vo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

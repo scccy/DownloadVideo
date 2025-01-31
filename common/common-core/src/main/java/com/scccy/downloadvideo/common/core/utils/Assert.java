@@ -1,3 +1,8 @@
+package com.scccy.downloadvideo.common.core.utils;
+
+import com.scccy.downloadvideo.common.core.exception.ErrorCode;
+import com.scccy.downloadvideo.common.core.exception.ServiceException;
+
 public class Assert {
     
     public static void notNull(Object object, String message) {
