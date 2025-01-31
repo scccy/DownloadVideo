@@ -27,21 +27,21 @@ public class DouyinDownloader extends BaseDownloader {
     /**
      * 下载视频
      */
-    public CompletableFuture<Path> downloadVideo(String videoUrl, String savePath, String fileName) throws IOException {
+    public Mono<Path> downloadVideo(String videoUrl, String savePath, String fileName) throws IOException {
         return downloadFile(videoUrl, savePath, fileName + "_video.mp4");
     }
 
     /**
      * 下载音乐
      */
-    public CompletableFuture<Path> downloadMusic(String musicUrl, String savePath, String fileName) throws IOException {
+    public Mono<Path> downloadMusic(String musicUrl, String savePath, String fileName) throws IOException {
         return downloadFile(musicUrl, savePath, fileName + "_music.mp3");
     }
 
     /**
-     * 下载封面
+     * 下载封面 CompletableFuture
      */
-    public CompletableFuture<Path> downloadCover(String coverUrl, String savePath, String fileName) throws IOException {
+    public Mono<Path> downloadCover(String coverUrl, String savePath, String fileName) throws IOException {
         String suffix = coverUrl.contains(".webp") ? ".webp" : ".jpeg";
         return downloadFile(coverUrl, savePath, fileName + "_cover" + suffix);
     }

@@ -93,7 +93,7 @@ public class BaseDownloader {
         });
     }
 
-    private Mono<Path> downloadWithChunks(DownloadTask task, Path fullPath, long contentLength) {
+    private Mono<Void> downloadWithChunks(DownloadTask task, Path fullPath, long contentLength) {
         int chunks = downloadConfig.getChunks();
         long chunkSize = contentLength / chunks;
         
@@ -123,7 +123,7 @@ public class BaseDownloader {
         }).onErrorResume(e -> {
             log.error("Chunk download failed: {}", chunkPath, e);
             return Mono.error(e);
-        });
+        }).then();
     }
 
     private Mono<Void> mergeChunks(Path tmpDir, Path fullPath, int chunks) {
