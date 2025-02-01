@@ -1,0 +1,4 @@
+com.scccy.downloadvideo.common.core.config.WebConfig
+com.scccy.downloadvideo.common.core.config.FastJson2Config
+com.scccy.downloadvideo.common.core.config.FeignConfig
+com.scccy.downloadvideo.common.core.config.manager.XBogusManager 
