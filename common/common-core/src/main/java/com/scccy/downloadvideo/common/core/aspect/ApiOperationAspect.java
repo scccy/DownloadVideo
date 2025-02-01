@@ -1,7 +1,7 @@
 package com.scccy.downloadvideo.common.core.aspect;
 
 import com.scccy.downloadvideo.common.core.annotation.ApiOperation;
-import com.scccy.downloadvideo.common.core.config.manager.XBogusManager;
+import com.scccy.downloadvideo.common.core.utils.manager.XBogusManager;
 import com.scccy.downloadvideo.common.core.context.ApiContext;
 import com.scccy.downloadvideo.common.core.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;

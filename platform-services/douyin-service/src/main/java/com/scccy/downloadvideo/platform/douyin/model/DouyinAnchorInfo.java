@@ -14,125 +14,125 @@ import lombok.NoArgsConstructor;
 
 @Schema
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "douyin_anchor_info")
 public class DouyinAnchorInfo extends BaseEntity implements Serializable {
     @TableId(value = "sec_user_id", type = IdType.INPUT)
-    @Schema(description = "")
+    @Schema(description="")
     private String secUserId;
 
     @TableField(value = "avatar_url")
-    @Schema(description = "")
+    @Schema(description="")
     private String avatarUrl;
 
     @TableField(value = "aweme_count")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer awemeCount;
 
     @TableField(value = "city")
-    @Schema(description = "")
+    @Schema(description="")
     private String city;
 
     @TableField(value = "country")
-    @Schema(description = "")
+    @Schema(description="")
     private String country;
 
     @TableField(value = "favoriting_count")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer favoritingCount;
 
     @TableField(value = "follower_count")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer followerCount;
 
     @TableField(value = "following_count")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer followingCount;
 
     @TableField(value = "gender")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer gender;
 
     @TableField(value = "ip_location")
-    @Schema(description = "")
+    @Schema(description="")
     private String ipLocation;
 
     @TableField(value = "is_ban")
-    @Schema(description = "")
+    @Schema(description="")
     private Boolean isBan;
 
     @TableField(value = "is_block")
-    @Schema(description = "")
+    @Schema(description="")
     private Boolean isBlock;
 
     @TableField(value = "is_blocked")
-    @Schema(description = "")
+    @Schema(description="")
     private Boolean isBlocked;
 
     @TableField(value = "is_star")
-    @Schema(description = "")
+    @Schema(description="")
     private Boolean isStar;
 
     @TableField(value = "live_status")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer liveStatus;
 
     @TableField(value = "mix_count")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer mixCount;
 
     @TableField(value = "mplatform_followers_count")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer mplatformFollowersCount;
 
     @TableField(value = "nickname")
-    @Schema(description = "")
+    @Schema(description="")
     private String nickname;
 
     @TableField(value = "nickname_raw")
-    @Schema(description = "")
+    @Schema(description="")
     private String nicknameRaw;
 
     @TableField(value = "room_id")
-    @Schema(description = "")
+    @Schema(description="")
     private String roomId;
 
     @TableField(value = "school_name")
-    @Schema(description = "")
+    @Schema(description="")
     private String schoolName;
 
     @TableField(value = "short_id")
-    @Schema(description = "")
+    @Schema(description="")
     private String shortId;
 
     @TableField(value = "signature")
-    @Schema(description = "")
+    @Schema(description="")
     private String signature;
 
     @TableField(value = "signature_raw")
-    @Schema(description = "")
+    @Schema(description="")
     private String signatureRaw;
 
     @TableField(value = "total_favorited")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer totalFavorited;
 
     @TableField(value = "`uid`")
-    @Schema(description = "")
+    @Schema(description="")
     private String uid;
 
     @TableField(value = "unique_id")
-    @Schema(description = "")
+    @Schema(description="")
     private String uniqueId;
 
     @TableField(value = "user_age")
-    @Schema(description = "")
+    @Schema(description="")
     private Integer userAge;
 
     @TableField(value = "last_aweme_id")
-    @Schema(description = "")
+    @Schema(description="")
     private String lastAwemeId;
 
     private static final long serialVersionUID = 1L;

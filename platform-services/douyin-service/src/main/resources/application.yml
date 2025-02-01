@@ -1,16 +1,19 @@
 spring:
   application:
     name: douyin-service
+  config:
+    import: "optional:nacos:douyin-service-config.yaml"
   cloud:
     nacos:
       discovery:
         server-addr: ${NACOS_HOST:localhost}:8848
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
       config:
         server-addr: ${NACOS_HOST:localhost}:8848
         file-extension: yaml
-        shared-configs:
-          - data-id: douyin-service-config.yaml
-            refresh: true
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
         refresh:
           enabled: true
           
@@ -22,3 +25,10 @@ spring:
 #  max-retries: 5
 #  max-segment-cache: 2000
 #  chunk-size: 16384
+
+logging:
+  level:
+    root: INFO
+    com.scccy.downloadvideo: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
+    org.springframework.web: DEBUG

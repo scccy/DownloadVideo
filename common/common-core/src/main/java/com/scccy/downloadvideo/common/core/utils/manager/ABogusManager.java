@@ -1,4 +1,4 @@
-package com.scccy.downloadvideo.common.core.config.manager;
+package com.scccy.downloadvideo.common.core.utils.manager;
 
 
 

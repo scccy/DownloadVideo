@@ -7,10 +7,12 @@ import com.scccy.downloadvideo.common.download.feign.CrawlerFeignClient;
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
+@Component
 @Slf4j
 public abstract class BaseCrawler {
     
@@ -57,7 +59,7 @@ public abstract class BaseCrawler {
      * POST获取原始响应
      */
     protected Mono<ResponseEntity<String>> fetchPostResponse(String url, Object body) {
-        return Mono.fromCallable(() -> 
+        return Mono.fromCallable(() ->
             crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies));
     }
 
@@ -86,9 +88,9 @@ public abstract class BaseCrawler {
     /**
      * 发送GET请求并获取JSON响应
      */
-    protected Mono<ResponseEntity<String>> fetchGetJson(String url) {
-        return Mono.fromCallable(() -> crawlerClient.getJson(url, headers, proxies));
-    }
+//    protected Mono<ResponseEntity<String>> fetchGetJson(String url) {
+//        return Mono.fromCallable(() -> crawlerClient.getJson(url, headers, proxies));
+//    }
 
     /**
      * 处理HTTP错误

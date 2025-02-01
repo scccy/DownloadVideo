@@ -2,9 +2,8 @@ package com.scccy.downloadvideo.common.core.aspect;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.scccy.downloadvideo.common.core.annotation.DouyinApi;
-import com.scccy.downloadvideo.common.core.config.manager.XBogusManager;
-import com.scccy.downloadvideo.common.core.enums.DouyinApiEndpoint;
-import com.scccy.downloadvideo.common.core.exception.ServiceException;
+import com.scccy.downloadvideo.common.core.utils.manager.XBogusManager;
+import com.scccy.downloadvideo.common.core.enums.DouyinApiEnum;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +13,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -26,7 +24,7 @@ public class DouyinCrawlerAspect extends BaseAspect {
     public Object around(ProceedingJoinPoint point, DouyinApi douyinApi) throws Throwable {
         try {
             // 获取API端点和参数
-            DouyinApiEndpoint endpoint = douyinApi.value();
+            DouyinApiEnum endpoint = douyinApi.value();
             Map<String, String> params = buildParams(
                 ((MethodSignature) point.getSignature()).getParameterNames(), 
                 point.getArgs()

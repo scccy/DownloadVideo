@@ -1,6 +1,6 @@
 package com.scccy.downloadvideo.common.core.aspect;
 
-import com.scccy.downloadvideo.common.core.config.manager.XBogusManager;
+import com.scccy.downloadvideo.common.core.utils.manager.XBogusManager;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

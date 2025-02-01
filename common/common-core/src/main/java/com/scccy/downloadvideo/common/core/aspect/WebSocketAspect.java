@@ -3,7 +3,7 @@ package com.scccy.downloadvideo.common.core.aspect;
 import com.scccy.downloadvideo.common.core.annotation.WebSocketApi;
 
 
-import com.scccy.downloadvideo.common.core.enums.WebSocketApiEndpoint;
+import com.scccy.downloadvideo.common.core.enums.WebSocketApiEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +11,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Aspect
@@ -23,7 +22,7 @@ public class WebSocketAspect extends BaseAspect {
     public Object around(ProceedingJoinPoint point, WebSocketApi webSocketApi) throws Throwable {
         try {
             // 获取API端点和参数
-            WebSocketApiEndpoint endpoint = webSocketApi.value();
+            WebSocketApiEnum endpoint = webSocketApi.value();
             Map<String, String> params = buildParams(
                 ((MethodSignature) point.getSignature()).getParameterNames(), 
                 point.getArgs()

@@ -1,8 +1,6 @@
 package com.scccy.downloadvideo.common.core.annotation;
 
-import com.scccy.downloadvideo.common.core.enums.DouyinApiEndpoint;
-import org.springframework.core.annotation.AliasFor;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.scccy.downloadvideo.common.core.enums.DouyinApiEnum;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.lang.annotation.*;
@@ -11,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DouyinApi {
-    DouyinApiEndpoint value();
+    DouyinApiEnum value();
     
 //    @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String path() default "";
