@@ -45,6 +45,8 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
       filters: stat,wall
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    hikari:
+      enabled: false
 
 # MyBatis Plus 配置
 mybatis-plus:
@@ -66,18 +68,9 @@ logging:
   config: classpath:log4j2-spring.xml
   log4j2:
     contextSelector: org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+  level:
+    root: debug
 
-# # 抖音相关配置
-# douyin:
-#   download-path: ./video/douyin  # 下载路径
-#   api:
-#     url: https://www.douyin.com  # 抖音API地址
-#     timeout: 5000  # 请求超时时间
-#     max-retries: 3  # 最大重试次数
-#     max-connections: 100  # 最大连接数
-#     max-tasks: 50  # 最大任务数
-
-# Feign 配置
 feign:
   okhttp:
     enabled: true

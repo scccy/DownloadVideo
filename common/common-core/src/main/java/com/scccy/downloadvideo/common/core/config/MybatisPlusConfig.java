@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableTransactionManagement
 @ConditionalOnClass(MybatisConfiguration.class)
 public class MybatisPlusConfig {
 

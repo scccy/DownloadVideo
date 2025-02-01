@@ -86,7 +86,6 @@
         <dependency>
             <groupId>com.scccy.downloadvideo</groupId>
             <artifactId>common-download</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <!-- OpenFeign -->

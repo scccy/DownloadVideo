@@ -4,6 +4,7 @@ com.scccy.downloadvideo.common.core.config.FeignConfig
 com.scccy.downloadvideo.common.core.config.Knife4jConfig
 com.scccy.downloadvideo.common.core.config.OkHttpConfig
 com.scccy.downloadvideo.common.core.config.Log4j2Config
+com.scccy.downloadvideo.common.core.config.DataSourceConfig
 
 
 com.scccy.downloadvideo.common.core.handler.GlobalExceptionHandler
