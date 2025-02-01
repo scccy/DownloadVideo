@@ -50,8 +50,8 @@ public class M3u8Downloader {
      */
     public Mono<List<M3u8Segment>> parseM3u8(String url) {
         return Mono.fromCallable(() -> {
-            ResponseEntity<String> response = downloadClient.download(url, headers);
-            String content = response.getBody();
+            Mono<ResponseEntity<String>> response = downloadClient.download(url, headers);
+            String content = response.block().getBody();
             
             List<M3u8Segment> segments = new ArrayList<>();
             String[] lines = content.split("\n");

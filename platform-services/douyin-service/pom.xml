@@ -12,10 +12,6 @@
     <artifactId>douyin-service</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-        </dependency>
         <!-- Spring Cloud -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -78,7 +74,10 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-    
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
         <!-- 项目依赖 -->
         <dependency>
             <groupId>com.scccy.downloadvideo</groupId>
@@ -87,13 +86,10 @@
         <dependency>
             <groupId>com.scccy.downloadvideo</groupId>
             <artifactId>common-download</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- OpenFeign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>

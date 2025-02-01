@@ -1,15 +1,15 @@
 package com.scccy.downloadvideo.common.core.config;
 
-import feign.Logger;
-import feign.Retryer;
+
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
-import feign.Request;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import feign.Feign;
 
-import java.util.concurrent.TimeUnit;
 
 @Configuration
+@Slf4j
 public class FeignConfig {
 
     private final OkHttpClient okHttpClient;
@@ -20,20 +20,9 @@ public class FeignConfig {
     }
 
     @Bean
-    public Request.Options options() {
-        return new Request.Options(
-                (int) TimeUnit.SECONDS.toMillis(10),  // 连接超时
-                (int) TimeUnit.SECONDS.toMillis(60)   // 读取超时
-        );
+    public Feign.Builder feignBuilder() {
+        return Feign.builder();
     }
 
-    @Bean
-    public Logger.Level feignLoggerLevel() {
-        return Logger.Level.FULL; // 开启 Feign 完整日志
-    }
-
-    @Bean
-    public Retryer feignRetryer() {
-        return new Retryer.Default(100, TimeUnit.SECONDS.toMillis(1), 3); // 重试策略
-    }
+    // 检查是否有其他 FactoryBean 相关的配置
 }

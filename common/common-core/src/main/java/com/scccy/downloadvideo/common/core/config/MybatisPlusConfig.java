@@ -10,11 +10,16 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.scccy.downloadvideo.**.mapper")
 @ConditionalOnClass(MybatisConfiguration.class)
 public class MybatisPlusConfig {
 
@@ -28,5 +33,10 @@ public class MybatisPlusConfig {
         // 防止全表更新与删除
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         return interceptor;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 } 

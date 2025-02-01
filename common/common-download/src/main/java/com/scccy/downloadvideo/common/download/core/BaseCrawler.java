@@ -78,11 +78,7 @@ public abstract class BaseCrawler {
      * 发送带Range的GET请求
      */
     protected Mono<ResponseEntity<String>> fetchWithRange(String url, String range) {
-        return Mono.fromCallable(() -> downloadClient.downloadWithRange(url, headers, range))
-                .onErrorResume(e -> {
-                    log.error("Failed to fetch with range from: {}", url, e);
-                    return Mono.error(new ServiceException("500", "Failed to fetch with range: " + e.getMessage()));
-                });
+        return downloadClient.downloadWithRange(url, headers, range);
     }
 
     /**

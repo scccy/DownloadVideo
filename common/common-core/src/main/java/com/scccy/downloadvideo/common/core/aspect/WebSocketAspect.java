@@ -37,6 +37,7 @@ public class WebSocketAspect extends BaseAspect {
             return point.proceed();
             
         } catch (Exception e) {
+            log.error("WebSocket request failed", e);
             return handleException("WebSocket request", e);
         }
     }

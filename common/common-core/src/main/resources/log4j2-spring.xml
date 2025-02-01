@@ -10,6 +10,7 @@
         <!-- 控制台输出，开发调试用 -->
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%highlight{${PATTERN_FORMAT}}{FATAL=red, ERROR=red, WARN=yellow, INFO=blue, DEBUG=green}"/>
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
         </Console>
 
         <!-- DEBUG日志 -->
@@ -51,28 +52,42 @@
         </Root>
 
         <!-- Spring Framework -->
-        <Logger name="org.springframework" level="debug" additivity="false">
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
+        </Logger>
+
+        <!-- Spring Beans Factory -->
+        <Logger name="org.springframework.beans.factory" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
+        </Logger>
+
+        <!-- Spring Context -->
+        <Logger name="org.springframework.context" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
+        </Logger>
+
+        <!-- Spring Web -->
+        <Logger name="org.springframework.web" level="info" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="AsyncDebug"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Spring Cloud OpenFeign -->
-        <Logger name="org.springframework.cloud.openfeign" level="debug" additivity="false">
+        <Logger name="org.springframework.cloud.openfeign" level="info" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="AsyncDebug"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Application -->
-        <Logger name="com.scccy.downloadvideo" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
-            <AppenderRef ref="AsyncError" level="error"/>
-        </Logger>
-
-        <!-- Factory Bean -->
-        <Logger name="org.springframework.beans.factory" level="debug" additivity="false">
+        <Logger name="com.scccy.downloadvideo" level="info" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="AsyncDebug"/>
             <AppenderRef ref="AsyncError" level="error"/>
