@@ -5,8 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Data
-@Configuration
-@ConfigurationProperties(prefix = "f2.download")
 public class DownloadConfig {
     private String path = "Download";
     private Boolean folderize = true;

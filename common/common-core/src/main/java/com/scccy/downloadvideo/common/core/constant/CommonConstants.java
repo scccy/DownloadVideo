@@ -1,3 +1,5 @@
+package com.scccy.downloadvideo.common.core.constant;
+
 public interface CommonConstants {
     String SUCCESS_CODE = "0";
     String ERROR_CODE = "1";

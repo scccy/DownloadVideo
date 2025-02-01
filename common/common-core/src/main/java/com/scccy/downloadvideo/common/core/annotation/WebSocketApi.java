@@ -1,6 +1,6 @@
 package com.scccy.downloadvideo.common.core.annotation;
 
-import com.scccy.downloadvideo.common.core.enums.WebSocketApiEndpoint;
+import com.scccy.downloadvideo.common.core.enums.WebSocketApiEnum;
 
 import java.lang.annotation.*;
 
@@ -8,6 +8,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface WebSocketApi {
-    WebSocketApiEndpoint value();
+    WebSocketApiEnum value();
     boolean needAuth() default false;
 } 

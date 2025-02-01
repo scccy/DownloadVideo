@@ -1,1 +1,7 @@
-com.scccy.downloadvideo.common.download.config.DownloadConfigBase
+#com.scccy.downloadvideo.common.download.feign.CrawlerFeignClient
+#com.scccy.downloadvideo.common.download.feign.DownloadFeignClient
+
+#com.scccy.downloadvideo.common.download.core.BaseCrawler
+#com.scccy.downloadvideo.common.download.core.BaseDownloader
+
+

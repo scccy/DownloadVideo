@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum WebSocketApiEndpoint {
+public enum WebSocketApiEnum {
     
     CONNECT("/connect", "建立连接"),
     SEND("/send", "发送消息"),

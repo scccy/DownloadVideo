@@ -1,6 +1,6 @@
 package com.scccy.downloadvideo.common.core.enums;
 
-public enum DouyinApiEndpoint {
+public enum DouyinApiEnum {
 
     // 抖音域名
     DOUYIN_DOMAIN("https://www.douyin.com"),
@@ -149,7 +149,7 @@ public enum DouyinApiEndpoint {
 
     private final String endpoint;
 
-    DouyinApiEndpoint(String endpoint) {
+    DouyinApiEnum(String endpoint) {
         this.endpoint = endpoint;
     }
 

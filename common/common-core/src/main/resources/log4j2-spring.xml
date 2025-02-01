@@ -1,92 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" xmlns:xi="http://www.w3.org/2001/XInclude"
-               xmlns="http://logging.apache.org/log4j/2.0/config">
+<Configuration status="DEBUG" packages="org.apache.logging.log4j.core,com.lmax.disruptor">
     <Properties>
         <Property name="APP_NAME">${spring:spring.application.name}</Property>
-        <Property name="LOG_PATH">logs/${APP_NAME}</Property>  <!-- 动态读取项目名 -->
-        <Property name="PATTERN_FORMAT">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</Property>
+        <Property name="LOG_PATH">logs/${APP_NAME}</Property>
+        <Property name="PATTERN_FORMAT">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} [%file:%line] - %msg%n</Property>
     </Properties>
 
     <Appenders>
+        <!-- 控制台输出，开发调试用 -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{${LOG_LEVEL_PATTERN:-%5p}} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+            <PatternLayout pattern="%highlight{${PATTERN_FORMAT}}{FATAL=red, ERROR=red, WARN=yellow, INFO=blue, DEBUG=green}"/>
         </Console>
 
-        <RollingFile name="RollingFileInfo" fileName="${LOG_PATH}/info.log"
-                     filePattern="${LOG_PATH}/info-%d{yyyy-MM-dd}-%i.log.gz">
-            <Filters>
-                <ThresholdFilter level="INFO"/>
-                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
-            </Filters>
+        <!-- DEBUG日志 -->
+        <RollingFile name="DebugFile"
+                    fileName="${LOG_PATH}/debug.log"
+                    filePattern="${LOG_PATH}/debug-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="${PATTERN_FORMAT}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="30"/>
         </RollingFile>
 
-        <RollingFile name="RollingFileWarn" fileName="${LOG_PATH}/warn.log"
-                     filePattern="${LOG_PATH}/warn-%d{yyyy-MM-dd}-%i.log.gz">
-            <Filters>
-                <ThresholdFilter level="WARN"/>
-                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
-            </Filters>
+        <!-- ERROR日志 -->
+        <RollingFile name="ErrorFile"
+                    fileName="${LOG_PATH}/error.log"
+                    filePattern="${LOG_PATH}/error-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="${PATTERN_FORMAT}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="30"/>
         </RollingFile>
 
-        <RollingFile name="RollingFileError" fileName="${LOG_PATH}/error.log"
-                     filePattern="${LOG_PATH}/error-%d{yyyy-MM-dd}-%i.log.gz">
-            <ThresholdFilter level="ERROR"/>
-            <PatternLayout pattern="${PATTERN_FORMAT}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="100 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy max="30"/>
-        </RollingFile>
-
-        <RollingFile name="RollingFileDebug" fileName="${LOG_PATH}/debug.log"
-                     filePattern="${LOG_PATH}/debug-%d{yyyy-MM-dd}-%i.log.gz">
-            <ThresholdFilter level="DEBUG"/>
-            <PatternLayout pattern="${PATTERN_FORMAT}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="100 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy max="30"/>
-        </RollingFile>
+        <!-- 异步 Appenders -->
+        <Async name="AsyncDebug" bufferSize="512">
+            <AppenderRef ref="DebugFile"/>
+        </Async>
+        <Async name="AsyncError" bufferSize="512">
+            <AppenderRef ref="ErrorFile"/>
+        </Async>
     </Appenders>
 
     <Loggers>
-        <Logger name="org.springframework" level="info" additivity="false">
+        <!-- Root Logger -->
+        <Root level="info" includeLocation="true">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="AsyncError" level="error"/>
+        </Root>
+
+        <!-- Spring Framework -->
+        <Logger name="org.springframework" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
-        <Logger name="org.mybatis" level="info" additivity="false">
+        <!-- Spring Cloud OpenFeign -->
+        <Logger name="org.springframework.cloud.openfeign" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
+        <!-- Application -->
         <Logger name="com.scccy.downloadvideo" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFileDebug"/>
-            <AppenderRef ref="RollingFileInfo"/>
-            <AppenderRef ref="RollingFileWarn"/>
-            <AppenderRef ref="RollingFileError"/>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
-        <Root level="info">
+        <!-- Factory Bean -->
+        <Logger name="org.springframework.beans.factory" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFileInfo"/>
-            <AppenderRef ref="RollingFileWarn"/>
-            <AppenderRef ref="RollingFileError"/>
-        </Root>
+            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncError" level="error"/>
+        </Logger>
     </Loggers>
-</Configuration> 
+</Configuration>
