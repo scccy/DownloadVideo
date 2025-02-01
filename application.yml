@@ -1,8 +1,19 @@
-download:
-  thread-count: 10
-  connect-timeout: 60
-  read-timeout: 60
-  write-timeout: 60
-  max-retries: 5
-  max-segment-cache: 2000
-  chunk-size: 16384 
+spring:
+  application:
+    name: douyin-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:localhost}:8848
+      config:
+        server-addr: ${NACOS_HOST:localhost}:8848
+        file-extension: yaml
+        shared-configs:
+          - data-id: douyin-service-config.yaml
+            refresh: true
+        refresh:
+          enabled: true
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml
+      - optional:nacos:douyin-service-config.yaml
