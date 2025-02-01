@@ -1,0 +1,75 @@
+# 数据库配置
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/video_platform?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:asdsc88Q12}
+    druid:
+      # 连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+# MyBatis Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.scccy.downloadvideo.platform.douyin.model.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-level: debug
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# 日志配置
+logging:
+  level:
+    root: info
+    com.scccy.downloadvideo: debug
+    org.springframework: info
+  config: classpath:log4j2-spring.xml
+
+# 自定义配置
+custom:
+  logging:
+    file:
+      info: ${logging.file.path}/info.log
+      warn: ${logging.file.path}/warn.log
+      error: ${logging.file.path}/error.log
+      debug: ${logging.file.path}/debug.log
+
+# 抖音相关配置
+douyin:
+  download-path: ${DOWNLOAD_PATH:./video/douyin}  # 下载路径
+  api:
+    url: https://www.douyin.com  # 抖音API地址
+    timeout: 5000  # 请求超时时间
+    max-retries: 3  # 最大重试次数
+    max-connections: 100  # 最大连接数
+    max-tasks: 50  # 最大任务数
+
+# Feign 配置
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full 
