@@ -78,17 +78,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
-        <!-- 项目依赖 -->
-        <dependency>
-            <groupId>com.scccy.downloadvideo</groupId>
-            <artifactId>common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.scccy.downloadvideo</groupId>
-            <artifactId>common-download</artifactId>
-        </dependency>
-
-        <!-- OpenFeign -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -99,6 +88,17 @@
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
+        <!-- 项目依赖 -->
+        <dependency>
+            <groupId>com.scccy.downloadvideo</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.scccy.downloadvideo</groupId>
+            <artifactId>common-download</artifactId>
+        </dependency>
+
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
