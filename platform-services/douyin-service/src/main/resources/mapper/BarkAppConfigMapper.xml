@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scccy.downloadvideo.platform.douyin.mapper.BarkAppConfigMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.downloadvideo.platform.douyin.model.BarkAppConfig">
+    <!--@mbg.generated-->
+    <!--@Table bark_app_config-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="key_value" jdbcType="VARCHAR" property="keyValue" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="retry" jdbcType="INTEGER" property="retry" />
+    <result column="ringtones" jdbcType="INTEGER" property="ringtones" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="volume" jdbcType="INTEGER" property="volume" />
+    <result column="call" jdbcType="BOOLEAN" property="call" />
+    <result column="is_archive" jdbcType="BOOLEAN" property="isArchive" />
+    <result column="sound" jdbcType="VARCHAR" property="sound" />
+    <result column="auto_copy" jdbcType="BOOLEAN" property="autoCopy" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="body" jdbcType="LONGVARCHAR" property="body" />
+    <result column="copy" jdbcType="LONGVARCHAR" property="copy" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="badge" jdbcType="INTEGER" property="badge" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_node" jdbcType="VARCHAR" property="createNode" />
+    <result column="update_node" jdbcType="VARCHAR" property="updateNode" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, key_value, token, `mode`, url, retry, ringtones, icon, `level`, volume, `call`, 
+    is_archive, sound, auto_copy, title, body, `copy`, group_name, badge, create_time, 
+    update_time, create_node, update_node, del_flag
+  </sql>
+</mapper>

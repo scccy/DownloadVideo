@@ -8,9 +8,6 @@ com.scccy.downloadvideo.common.core.config.DataSourceConfig
 
 
 com.scccy.downloadvideo.common.core.handler.GlobalExceptionHandler
-com.scccy.downloadvideo.common.core.handler.ControllerExceptionHandler
-com.scccy.downloadvideo.common.core.handler.MyMetaObjectHandler
-com.scccy.downloadvideo.common.core.handler.ServiceExceptionHandler
 
 com.scccy.downloadvideo.common.core.aspect.ApiOperationAspect
 com.scccy.downloadvideo.common.core.aspect.ApiResponseAspect

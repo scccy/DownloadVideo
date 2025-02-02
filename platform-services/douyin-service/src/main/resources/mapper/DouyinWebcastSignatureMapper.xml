@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.downloadvideo.platform.douyin.mapper.DouyinWebcastSignatureMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.downloadvideo.platform.douyin.model.DouyinWebcastSignature">
+    <!--@mbg.generated-->
+    <!--@Table douyin_webcast_signature-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="user_unique_id" jdbcType="VARCHAR" property="userUniqueId" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
+    <result column="used" jdbcType="BOOLEAN" property="used" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, room_id, user_unique_id, signature, create_time, expire_time, used, del_flag
+  </sql>
+</mapper>

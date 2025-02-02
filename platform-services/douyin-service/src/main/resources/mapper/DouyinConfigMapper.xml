@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.downloadvideo.platform.douyin.mapper.DouyinConfigMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.downloadvideo.platform.douyin.model.DouyinConfig">
+    <!--@mbg.generated-->
+    <!--@Table douyin_config-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="encryption" jdbcType="VARCHAR" property="encryption" />
+    <result column="base_request_model_version_code" jdbcType="VARCHAR" property="baseRequestModelVersionCode" />
+    <result column="base_request_model_version_name" jdbcType="VARCHAR" property="baseRequestModelVersionName" />
+    <result column="base_request_model_browser_language" jdbcType="VARCHAR" property="baseRequestModelBrowserLanguage" />
+    <result column="base_request_model_browser_platform" jdbcType="VARCHAR" property="baseRequestModelBrowserPlatform" />
+    <result column="base_request_model_browser_name" jdbcType="VARCHAR" property="baseRequestModelBrowserName" />
+    <result column="base_request_model_browser_version" jdbcType="VARCHAR" property="baseRequestModelBrowserVersion" />
+    <result column="base_request_model_engine_name" jdbcType="VARCHAR" property="baseRequestModelEngineName" />
+    <result column="base_request_model_engine_version" jdbcType="VARCHAR" property="baseRequestModelEngineVersion" />
+    <result column="base_request_model_os_name" jdbcType="VARCHAR" property="baseRequestModelOsName" />
+    <result column="base_request_model_os_version" jdbcType="VARCHAR" property="baseRequestModelOsVersion" />
+    <result column="headers_user_agent" jdbcType="VARCHAR" property="headersUserAgent" />
+    <result column="headers_referer" jdbcType="VARCHAR" property="headersReferer" />
+    <result column="proxies_http" jdbcType="VARCHAR" property="proxiesHttp" />
+    <result column="proxies_https" jdbcType="VARCHAR" property="proxiesHttps" />
+    <result column="wss_domain" jdbcType="VARCHAR" property="wssDomain" />
+    <result column="wss_port" jdbcType="INTEGER" property="wssPort" />
+    <result column="wss_verify" jdbcType="BOOLEAN" property="wssVerify" />
+    <result column="ms_token_url" jdbcType="VARCHAR" property="msTokenUrl" />
+    <result column="ms_token_magic" jdbcType="BIGINT" property="msTokenMagic" />
+    <result column="ms_token_version" jdbcType="INTEGER" property="msTokenVersion" />
+    <result column="ms_token_data_type" jdbcType="INTEGER" property="msTokenDataType" />
+    <result column="ms_token_str_data" jdbcType="LONGVARCHAR" property="msTokenStrData" />
+    <result column="ttwid_url" jdbcType="VARCHAR" property="ttwidUrl" />
+    <result column="ttwid_data" jdbcType="LONGVARCHAR" property="ttwidData" />
+    <result column="webid_url" jdbcType="VARCHAR" property="webidUrl" />
+    <result column="webid_app_id" jdbcType="INTEGER" property="webidAppId" />
+    <result column="webid_sdk_version" jdbcType="VARCHAR" property="webidSdkVersion" />
+    <result column="webid_device_platform" jdbcType="VARCHAR" property="webidDevicePlatform" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_node" jdbcType="VARCHAR" property="createNode" />
+    <result column="update_node" jdbcType="VARCHAR" property="updateNode" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, encryption, base_request_model_version_code, base_request_model_version_name, 
+    base_request_model_browser_language, base_request_model_browser_platform, base_request_model_browser_name, 
+    base_request_model_browser_version, base_request_model_engine_name, base_request_model_engine_version, 
+    base_request_model_os_name, base_request_model_os_version, headers_user_agent, headers_referer, 
+    proxies_http, proxies_https, wss_domain, wss_port, wss_verify, ms_token_url, ms_token_magic, 
+    ms_token_version, ms_token_data_type, ms_token_str_data, ttwid_url, ttwid_data, webid_url, 
+    webid_app_id, webid_sdk_version, webid_device_platform, create_time, update_time, 
+    create_node, update_node, del_flag
+  </sql>
+</mapper>

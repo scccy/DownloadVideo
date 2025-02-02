@@ -28,12 +28,6 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
-        <!-- Common Core -->
-        <dependency>
-            <groupId>com.scccy.downloadvideo</groupId>
-            <artifactId>common-core</artifactId>
-        </dependency>
-
         <!-- Spring Boot Actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

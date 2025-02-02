@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scccy.downloadvideo.platform.douyin.mapper.DouyinAnchorInfoMapper">
+  <resultMap id="BaseResultMap" type="com.scccy.downloadvideo.platform.douyin.model.DouyinAnchorInfo">
+    <!--@mbg.generated-->
+    <!--@Table douyin_anchor_info-->
+    <id column="sec_user_id" jdbcType="VARCHAR" property="secUserId" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="aweme_count" jdbcType="INTEGER" property="awemeCount" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="favoriting_count" jdbcType="INTEGER" property="favoritingCount" />
+    <result column="follower_count" jdbcType="INTEGER" property="followerCount" />
+    <result column="following_count" jdbcType="INTEGER" property="followingCount" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="ip_location" jdbcType="VARCHAR" property="ipLocation" />
+    <result column="is_ban" jdbcType="BOOLEAN" property="isBan" />
+    <result column="is_block" jdbcType="BOOLEAN" property="isBlock" />
+    <result column="is_blocked" jdbcType="BOOLEAN" property="isBlocked" />
+    <result column="is_star" jdbcType="BOOLEAN" property="isStar" />
+    <result column="live_status" jdbcType="INTEGER" property="liveStatus" />
+    <result column="mix_count" jdbcType="INTEGER" property="mixCount" />
+    <result column="mplatform_followers_count" jdbcType="INTEGER" property="mplatformFollowersCount" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="nickname_raw" jdbcType="VARCHAR" property="nicknameRaw" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
+    <result column="short_id" jdbcType="VARCHAR" property="shortId" />
+    <result column="signature" jdbcType="LONGVARCHAR" property="signature" />
+    <result column="signature_raw" jdbcType="LONGVARCHAR" property="signatureRaw" />
+    <result column="total_favorited" jdbcType="INTEGER" property="totalFavorited" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="unique_id" jdbcType="VARCHAR" property="uniqueId" />
+    <result column="user_age" jdbcType="INTEGER" property="userAge" />
+    <result column="last_aweme_id" jdbcType="VARCHAR" property="lastAwemeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sec_user_id, avatar_url, aweme_count, city, country, favoriting_count, follower_count, 
+    following_count, gender, ip_location, is_ban, is_block, is_blocked, is_star, live_status, 
+    mix_count, mplatform_followers_count, nickname, nickname_raw, room_id, school_name, 
+    short_id, signature, signature_raw, total_favorited, `uid`, unique_id, user_age, 
+    last_aweme_id
+  </sql>
+</mapper>

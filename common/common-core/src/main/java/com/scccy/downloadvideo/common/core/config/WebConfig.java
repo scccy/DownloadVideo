@@ -8,8 +8,6 @@ import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
-import java.util.Arrays;
-
 @Configuration
 @EnableWebFlux
 @Order(1)
@@ -34,6 +32,7 @@ public class WebConfig implements WebFluxConfigurer {
                 .allowCredentials(true)
                 .maxAge(3600);
     }
+
 }
 
 

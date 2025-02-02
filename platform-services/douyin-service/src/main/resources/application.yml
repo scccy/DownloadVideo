@@ -1,3 +1,7 @@
+server:
+  port: 9100
+  address: 0.0.0.0
+
 spring:
   application:
     name: douyin-service
@@ -20,9 +24,12 @@ spring:
     web-application-type: reactive
     allow-circular-references: true
     allow-bean-definition-overriding: true
-
-# 数据库配置
-
+  devtools:
+    restart:
+      enabled: true  # 启用热部署
+      additional-exclude: static/**  # 排除静态资源
+    livereload:
+      enabled: true  # 启用 LiveReload
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/video_platform?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true
@@ -47,6 +54,8 @@ spring:
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     hikari:
       enabled: false
+  webflux:
+    base-path: /api  # 设置应用的根路径为 /api
 
 # MyBatis Plus 配置
 mybatis-plus:
@@ -69,9 +78,12 @@ logging:
   log4j2:
     contextSelector: org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
   level:
-    root: debug
-    com.alibaba.druid: DEBUG
-    org.springframework.jdbc: DEBUG
+    root: INFO
+    com.scccy.downloadvideo: DEBUG
+    org.springframework.web: INFO
+    org.springframework.webflux: DEBUG
+    org.springframework.data: DEBUG
+    org.springdoc: DEBUG
 
 feign:
   okhttp:
@@ -85,3 +97,28 @@ feign:
 
 nodejs:
   path: /Volumes/opt/lan/nodejs/node-v22.13.0/bin/node
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+
+knife4j:
+  enable: true
+  setting:
+    language: zh-CN
+    enable-swagger-models: true
+    enable-document-manage: true
+    swagger-model-name: 实体类列表
+  openapi:
+    title: 视频下载平台接口文档
+    description: 视频下载平台 API 文档
+    email: contact@example.com
+    concat: Admin
+    url: https://doc.xiaominfo.com
+    version: v4.0
+    license: Apache 2.0
+    license-url: https://stackoverflow.com/
+    terms-of-service-url: https://stackoverflow.com/
