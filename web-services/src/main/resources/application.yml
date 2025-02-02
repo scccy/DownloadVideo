@@ -52,14 +52,14 @@ logging:
     com.scccy.downloadvideo: debug
   config: classpath:log4j2-spring.xml
 
-# 自定义日志配置
-custom:
-  logging:
-    file:
-      info: ${logging.file.path}/info.log
-      warn: ${logging.file.path}/warn.log
-      error: ${logging.file.path}/error.log
-      debug: ${logging.file.path}/debug.log
+## 自定义日志配置
+#custom:
+#  logging:
+#    file:
+#      info: ${logging.file.path}/info.log
+#      warn: ${logging.file.path}/warn.log
+#      error: ${logging.file.path}/error.log
+#      debug: ${logging.file.path}/debug.log
 
 feign:
   okhttp:

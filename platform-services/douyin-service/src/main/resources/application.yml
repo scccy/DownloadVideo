@@ -70,6 +70,8 @@ logging:
     contextSelector: org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
   level:
     root: debug
+    com.alibaba.druid: DEBUG
+    org.springframework.jdbc: DEBUG
 
 feign:
   okhttp:

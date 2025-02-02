@@ -6,8 +6,8 @@ import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 抖音直播间签名
@@ -59,8 +59,8 @@ public class DouyinWebcastSignature {
      */
     public String getRawString() {
         return String.format(
-            "live_id=1,aid=6383,version_code=180800,webcast_sdk_version=1.0.14-beta.0,room_id=%s,sub_room_id=,sub_channel_id=,did_rule=3,user_unique_id=%s,device_platform=web,device_type=,ac=,identity=audience",
-            roomId, userUniqueId
+                "live_id=1,aid=6383,version_code=180800,webcast_sdk_version=1.0.14-beta.0,room_id=%s,sub_room_id=,sub_channel_id=,did_rule=3,user_unique_id=%s,device_platform=web,device_type=,ac=,identity=audience",
+                roomId, userUniqueId
         );
     }
 
@@ -71,13 +71,13 @@ public class DouyinWebcastSignature {
     public DouyinWebcastSignature getResourcePath() {
         // 1. 生成原始字符串
         String rawString = getRawString();
-        
+
         // 2. 计算 X-MS-STUB
         this.xMsStub = calculateMD5(rawString);
-        
+
         // 3. 使用 Node.js 生成 X-Bogus
         this.xBogus = signatureUtil.getSignature(roomId, userUniqueId);
-        
+
         return this;
     }
 
@@ -88,7 +88,7 @@ public class DouyinWebcastSignature {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes(StandardCharsets.UTF_8));
-            
+
             StringBuilder hexString = new StringBuilder();
             for (byte b : messageDigest) {
                 String hex = Integer.toHexString(0xff & b);
@@ -102,4 +102,4 @@ public class DouyinWebcastSignature {
             throw new RuntimeException("计算MD5失败", e);
         }
     }
-} 
+}

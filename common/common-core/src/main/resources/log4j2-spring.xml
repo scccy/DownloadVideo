@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="DEBUG" packages="org.apache.logging.log4j.core,com.lmax.disruptor">
     <Properties>
+        <!-- 应用名称 -->
         <Property name="APP_NAME">${spring:spring.application.name}</Property>
+        <!-- 日志路径 -->
         <Property name="LOG_PATH">logs/${APP_NAME}</Property>
+        <!-- 日志格式 -->
         <Property name="PATTERN_FORMAT">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} [%file:%line] - %msg%n</Property>
     </Properties>
 
@@ -10,7 +13,7 @@
         <!-- 控制台输出，开发调试用 -->
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%highlight{${PATTERN_FORMAT}}{FATAL=red, ERROR=red, WARN=yellow, INFO=blue, DEBUG=green}"/>
-            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
         </Console>
 
         <!-- DEBUG日志 -->
@@ -23,7 +26,26 @@
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
         </RollingFile>
-
+        <!-- INFO日志 -->
+        <RollingFile name="InfoFile"
+                     fileName="${LOG_PATH}/info.log"
+                     filePattern="${LOG_PATH}/info-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN_FORMAT}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+        <!-- WARN日志 -->
+        <RollingFile name="WarnFile"
+                     fileName="${LOG_PATH}/warn.log"
+                     filePattern="${LOG_PATH}/warn-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN_FORMAT}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
         <!-- ERROR日志 -->
         <RollingFile name="ErrorFile"
                     fileName="${LOG_PATH}/error.log"
@@ -42,54 +64,75 @@
         <Async name="AsyncError" bufferSize="512">
             <AppenderRef ref="ErrorFile"/>
         </Async>
+        <Async name="AsyncInfo" bufferSize="512">
+            <AppenderRef ref="InfoFile"/>
+        </Async>
+        <Async name="AsyncWarn" bufferSize="512">
+            <AppenderRef ref="WarnFile"/>
+        </Async>
     </Appenders>
 
     <Loggers>
         <!-- Root Logger -->
         <Root level="info" includeLocation="true">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Root>
 
         <!-- Spring Framework -->
         <Logger name="org.springframework" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Spring Beans Factory -->
         <Logger name="org.springframework.beans.factory" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Spring Context -->
         <Logger name="org.springframework.context" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Spring Web -->
         <Logger name="org.springframework.web" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Spring Cloud OpenFeign -->
         <Logger name="org.springframework.cloud.openfeign" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
         <!-- Application -->
         <Logger name="com.scccy.downloadvideo" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug"/>
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
     </Loggers>
