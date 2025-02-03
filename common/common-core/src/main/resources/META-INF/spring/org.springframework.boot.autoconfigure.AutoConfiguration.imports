@@ -1,4 +1,5 @@
 com.scccy.downloadvideo.common.core.config.WebConfig
+com.scccy.downloadvideo.common.core.config.FastjsonConfig
 com.scccy.downloadvideo.common.core.config.DatabaseInitConfig
 com.scccy.downloadvideo.common.core.config.FeignConfig
 com.scccy.downloadvideo.common.core.config.OkHttpConfig

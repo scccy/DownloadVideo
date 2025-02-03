@@ -76,15 +76,15 @@
         <!-- Root Logger -->
         <Root level="info" includeLocation="true">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug" level="debug"/>
-            <AppenderRef ref="AsyncInfo" level="info"/>
-            <AppenderRef ref="AsyncWarn" level="warn"/>
-            <AppenderRef ref="AsyncError" level="error"/>
+<!--            <AppenderRef ref="AsyncDebug" level="debug"/>-->
+<!--            <AppenderRef ref="AsyncInfo" level="info"/>-->
+<!--            <AppenderRef ref="AsyncWarn" level="warn"/>-->
+<!--            <AppenderRef ref="AsyncError" level="error"/>-->
         </Root>
 
         <!-- Spring Framework -->
         <Logger name="org.springframework" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="Console"/>-->
             <AppenderRef ref="AsyncDebug" level="debug"/>
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
@@ -93,7 +93,7 @@
 
         <!-- Spring Beans Factory -->
         <Logger name="org.springframework.beans.factory" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="Console"/>-->
             <AppenderRef ref="AsyncDebug" level="debug"/>
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
@@ -102,7 +102,7 @@
 
         <!-- Spring Context -->
         <Logger name="org.springframework.context" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="Console"/>-->
             <AppenderRef ref="AsyncDebug" level="debug"/>
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
@@ -111,7 +111,7 @@
 
         <!-- Spring Cloud OpenFeign -->
         <Logger name="org.springframework.cloud.openfeign" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="Console"/>-->
             <AppenderRef ref="AsyncDebug" level="debug"/>
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
@@ -119,12 +119,15 @@
         </Logger>
 
         <Logger name="com.alibaba.nacos"  level="debug">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFile"/>
+<!--            <AppenderRef ref="Console"/>-->
+            <AppenderRef ref="AsyncDebug" level="debug"/>
+            <AppenderRef ref="AsyncInfo" level="info"/>
+            <AppenderRef ref="AsyncWarn" level="warn"/>
+            <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
         <!-- Application -->
         <Logger name="com.scccy.downloadvideo" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="Console"/>-->
             <AppenderRef ref="AsyncDebug" level="debug"/>
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>

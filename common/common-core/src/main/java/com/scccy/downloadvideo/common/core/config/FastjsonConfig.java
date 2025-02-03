@@ -5,6 +5,8 @@ import com.alibaba.fastjson2.JSONReader;
 import com.alibaba.fastjson2.JSONWriter;
 import feign.codec.EncodeException;
 import org.reactivestreams.Publisher;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.codec.AbstractDecoder;
 import org.springframework.core.codec.AbstractEncoder;
@@ -19,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
 import java.lang.reflect.Type;
-
+@Configuration
 public class FastjsonConfig {
     public static class CustomDecoder extends AbstractDecoder<Object> implements feign.codec.Decoder {
         public CustomDecoder() {

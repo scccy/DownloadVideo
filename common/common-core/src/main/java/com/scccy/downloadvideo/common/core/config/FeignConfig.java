@@ -1,28 +1,33 @@
 package com.scccy.downloadvideo.common.core.config;
 
 
-import lombok.extern.slf4j.Slf4j;
+import feign.Feign;
+import feign.RequestInterceptor;
+import feign.RequestTemplate;
+import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import feign.Feign;
+import org.springframework.context.annotation.Primary;
 
+import java.util.concurrent.TimeUnit;
 
 @Configuration
-@Slf4j
 public class FeignConfig {
 
-    private final OkHttpClient okHttpClient;
-
-    // 通过构造方法注入 OkHttpClient，复用 OkHttpConfig 里的 Bean
-    public FeignConfig(OkHttpClient okHttpClient) {
-        this.okHttpClient = okHttpClient;
-    }
-
+    // 创建 OkHttpClient 并配置代理
     @Bean
-    public Feign.Builder feignBuilder() {
-        return Feign.builder();
+    @Primary
+    public OkHttpClient okHttpClient() {
+        return new okhttp3.OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)  // 失败时自动重试
+                .connectionPool(new ConnectionPool(10, 5L, TimeUnit.MINUTES))  // 连接池
+                .connectTimeout(10, TimeUnit.SECONDS)  // 连接超时
+                .readTimeout(10, TimeUnit.SECONDS)  // 读超时
+                .writeTimeout(10, TimeUnit.SECONDS)  // 写超时
+                .build();
     }
 
-    // 检查是否有其他 FactoryBean 相关的配置
+
 }

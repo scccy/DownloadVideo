@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Untils {
+public class Utils {
 
     private static final Random random = new SecureRandom();
     private static final String BASE_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-";
@@ -28,16 +28,12 @@ public class Untils {
     // 根据单位获取当前时间戳（毫秒、秒、分钟）
     public static long getTimestamp(String unit) {
         Instant now = Instant.now();
-        switch (unit) {
-            case "milli":
-                return now.toEpochMilli();
-            case "sec":
-                return now.getEpochSecond();
-            case "min":
-                return now.truncatedTo(ChronoUnit.MINUTES).getEpochSecond() / 60;
-            default:
-                throw new IllegalArgumentException("不支持的时间单位");
-        }
+        return switch (unit) {
+            case "milli" -> now.toEpochMilli();
+            case "sec" -> now.getEpochSecond();
+            case "min" -> now.truncatedTo(ChronoUnit.MINUTES).getEpochSecond() / 60;
+            default -> throw new IllegalArgumentException("不支持的时间单位");
+        };
     }
 
     // 将时间戳转换为格式化字符串
@@ -153,28 +149,29 @@ public class Untils {
      * @return 提取出的有效URL或URL列表 (Extracted valid URL or list of URLs)
      */
     // 重载方法，用于处理单个字符串输入
-    public static String extractValidUrl(String input) {
-        if (input == null || input.isEmpty()) {
-            return null;
-        }
-        Matcher matcher = URL_PATTERN.matcher(input);
-        return matcher.find() ? matcher.group() : null;
-    }
-
-    // 重载方法，用于处理字符串列表输入
-    public static List<String> extractValidUrls(List<String> inputs) {
-        if (inputs == null || inputs.isEmpty()) {
+    public static List<String> extractValidUrls(Object input) {
+        if (input == null) {
             return new ArrayList<>();
         }
 
-        List<String> validUrls = new ArrayList<>();
-        for (String input : inputs) {
-            Matcher matcher = URL_PATTERN.matcher(input);
+        List<String> result = new ArrayList<>();
+
+        if (input instanceof String) {
+            Matcher matcher = URL_PATTERN.matcher((String) input);
             while (matcher.find()) {
-                validUrls.add(matcher.group());
+                result.add(matcher.group());
+            }
+        } else if (input instanceof List<?>) {
+            for (Object item : (List<?>) input) {
+                if (item instanceof String) {
+                    Matcher matcher = URL_PATTERN.matcher((String) item);
+                    while (matcher.find()) {
+                        result.add(matcher.group());
+                    }
+                }
             }
         }
-        return validUrls;
+        return result;
     }
 
 //  提取代理url和端口

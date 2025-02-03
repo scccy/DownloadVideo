@@ -14,10 +14,9 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-<!--        <module>douyin-service_bck</module>-->
         <module>gateway-service</module>
         <module>douyin-service</module>
-        <module>knife4j-openapi3-spring-boot3-webflux-demo</module>
+<!--        <module>knife4j-openapi3-spring-boot3-webflux-demo</module>-->
     </modules>
 
     <dependencies>
@@ -27,16 +26,7 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.scccy.downloadvideo</groupId>
-            <artifactId>common-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.scccy.downloadvideo</groupId>
-            <artifactId>common-download</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
         
         <!-- Spring Cloud -->
         <dependency>
@@ -89,24 +79,6 @@
             <artifactId>knife4j-openapi3-ui</artifactId>
             <version>${knife4j-openapi3}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.webjars</groupId>-->
-<!--            <artifactId>webjars-locator-core</artifactId>-->
-<!--            <version>${webjars-locator-core.version}</version>-->
-<!--        </dependency>-->
-        <!-- Swagger 2 依赖 -->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger2</artifactId>-->
-<!--            <version>${swagger2.version}</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; Swagger UI 依赖 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger-ui</artifactId>-->
-<!--            <version>${swagger2.version}</version>-->
-<!--        </dependency>-->
         <!-- Nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

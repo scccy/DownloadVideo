@@ -1,4 +1,4 @@
-package com.github.xiaoymin.knife4j.config;
+package com.scccy.downloadvideo.platform.douyin.config;
 
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;
@@ -16,10 +16,10 @@ public class WebFluxKnife4jConfig {
 
     @Bean
     public GroupedOpenApi tweetsOpenApi(@Value("${springdoc.version}") String appVersion) {
-        String[] paths = { "/tweets/**" };
+        String[] paths = { "/douyin/**" };
         return GroupedOpenApi.builder().
-                group("tweets")
-                .addOpenApiCustomizer(openApi -> openApi.info(new Info().title("Tweets Api").version(appVersion)))
+                group("douyin")
+                .addOpenApiCustomizer(openApi -> openApi.info(new Info().title("Douyin Api").version(appVersion)))
                 .pathsToMatch(paths)
                 .build();
     }

@@ -19,14 +19,14 @@ import java.util.List;
 public class WebConfig implements WebFluxConfigurer {
 
 
-    @Override
-    public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
-        configurer.registerDefaults(false);
-        //反序列化
-        configurer.customCodecs().register(new FastjsonConfig.CustomDecoder());
-        //序列化
-        configurer.customCodecs().register(new FastjsonConfig.CustomEncoder());
-    }
+//    @Override
+//    public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
+//        configurer.registerDefaults(false);
+//        //反序列化
+//        configurer.customCodecs().register(new FastjsonConfig.CustomDecoder());
+//        //序列化
+//        configurer.customCodecs().register(new FastjsonConfig.CustomEncoder());
+//    }
 
 
     @Override
