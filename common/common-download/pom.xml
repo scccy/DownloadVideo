@@ -16,10 +16,12 @@
     <name>common-download</name>
     <description>Download library</description>
 
+
     <dependencies>
         <dependency>
             <groupId>com.scccy.downloadvideo</groupId>
             <artifactId>common-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

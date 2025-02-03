@@ -14,18 +14,28 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-        <module>douyin-service</module>
+<!--        <module>douyin-service_bck</module>-->
         <module>gateway-service</module>
+        <module>douyin-service</module>
+        <module>knife4j-openapi3-spring-boot3-webflux-demo</module>
     </modules>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.scccy.downloadvideo</groupId>
             <artifactId>common-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.scccy.downloadvideo</groupId>
             <artifactId>common-download</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         <!-- Spring Cloud -->
@@ -51,11 +61,6 @@
             <version>${druid.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>${mysql.version}</version>
@@ -63,22 +68,45 @@
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
+            <version>${disruptor.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
-            <version>3.2.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!-- API 文档 -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.8.3</version>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi3-ui</artifactId>
-            <version>4.5.0</version>
+            <version>${knife4j-openapi3}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.webjars</groupId>-->
+<!--            <artifactId>webjars-locator-core</artifactId>-->
+<!--            <version>${webjars-locator-core.version}</version>-->
+<!--        </dependency>-->
+        <!-- Swagger 2 依赖 -->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--            <version>${swagger2.version}</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Swagger UI 依赖 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger-ui</artifactId>-->
+<!--            <version>${swagger2.version}</version>-->
+<!--        </dependency>-->
         <!-- Nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

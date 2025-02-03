@@ -1,6 +1,6 @@
 package com.scccy.downloadvideo.common.core.aspect;
 
-import com.scccy.downloadvideo.common.core.annotation.ApiOperation;
+import com.scccy.downloadvideo.common.core.annotation.ApiOperationDouyin;
 import com.scccy.downloadvideo.common.core.utils.manager.XBogusManager;
 import com.scccy.downloadvideo.common.core.context.ApiContext;
 import com.scccy.downloadvideo.common.core.exception.ServiceException;
@@ -20,8 +20,8 @@ import java.util.Map;
 @Component
 public class ApiOperationAspect {
 
-    @Around("@annotation(apiOperation)")
-    public Object around(ProceedingJoinPoint point, ApiOperation apiOperation) throws Throwable {
+    @Around("@annotation(apiOperationDouyin)")
+    public Object around(ProceedingJoinPoint point, ApiOperationDouyin apiOperationDouyin) throws Throwable {
         Method method = ((MethodSignature) point.getSignature()).getMethod();
         String methodName = method.getName();
         
@@ -37,12 +37,12 @@ public class ApiOperationAspect {
             Map<String, String> headers = (Map<String, String>) target.getClass().getDeclaredField("headers").get(target);
             
             // 构建endpoint
-            String endpoint = baseUrl + apiOperation.endpoint();
-            if (apiOperation.needXBogus()) {
+            String endpoint = baseUrl + apiOperationDouyin.endpoint();
+            if (apiOperationDouyin.needXBogus()) {
                 endpoint = bogusManager.generateEndpoint(endpoint, params, headers.get("User-Agent"));
             }
             
-            log.debug("{} 接口地址: {}", apiOperation.value(), endpoint);
+            log.debug("{} 接口地址: {}", apiOperationDouyin.value(), endpoint);
             
             // 设置endpoint到上下文
             ApiContext.setCurrentEndpoint(endpoint);

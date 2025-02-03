@@ -1,8 +1,136 @@
+server:
+  port: 9100
+#  address: 0.0.0.0
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  http2:
+    enabled: true
+  servlet:
+    context-path: /
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/video_platform?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/video_platform?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: asdsc88Q12
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
-douyin:
-  download-path: ./video/douyin
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 2c9b817c-d289-4b76-8cc7-9ecb2e1a1a9c  # 添加默认命名空间
+        group: DEFAULT_GROUP
+        enabled: true                           # 确保开启服务发现
+        register-enabled: true                  # 确保允许注册
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        namespace: 2c9b817c-d289-4b76-8cc7-9ecb2e1a1a9c
+        group: DEFAULT_GROUP
+        import: "optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}"
+        #        extension-configs:
+        #          - data-id: douyin-service
+        #            group: DEFAULT_GROUP
+        import-check:
+          enabled: false
+        refresh-enabled: true
+
+    loadbalancer:
+      enabled: true
+      cache:
+        enabled: true
+        caffeine:
+          spec: initialCapacity=500,expireAfterWrite=5s
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+    openfeign:
+      http2client:
+        enabled: true
+
+  main:
+    web-application-type: reactive
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  webflux:
+    base-path: /
+    format:
+      date: yyyy/MM/dd
+      time: HH:mm:ss
+      date-time: yyyy/MM/dd HH:mm:ss
+
+# API文档配置
+springdoc:
+  version: '@springdoc.version@'
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    enabled: true
+    use-root-path: true
+
+swagger:
+  enabled: true
+
+
+# MyBatis Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.scccy.downloadvideo.platform.douyin.model.*
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-level: debug
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# Node.js路径配置
+nodejs:
+  path: /Volumes/opt/lan/nodejs/node-v22.13.0/bin/node
+
+# 日志配置
+logging:
+  config: classpath:log4j2-spring.xml
+  #  log4j2:
+  #    config:
+  #      override:
+  #    contextSelector: org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+  level:
+    root: INFO
+    #    com.scccy.downloadvideo: DEBUG
+    #    org.springframework.web: DEBUG
+    #    org.springframework.data: DEBUG
+    #    org.springdoc: DEBUG
+    #    com.github.xiaoymin: DEBUG
+    #    springdoc.swagger-ui: DEBUG  # 对 Swagger UI 的调试
+    #    springdoc.api-docs: DEBUG    # 对 API 文档的调试
+    com.alibaba.nacos: DEBUG    # 添加 Nacos 日志
+    com.alibaba.cloud: DEBUG

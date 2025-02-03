@@ -86,9 +86,9 @@ public class GlobalExceptionHandler {
     }
 
     // 处理所有未被特定异常处理器捕获的异常
-    @ExceptionHandler(Exception.class)
-    public Mono<ResultData> handleGlobalException(Exception ex, ServerWebExchange exchange) {
-        log.error(ex.getMessage(), ex);
-        return Mono.just(ResultData.fail().setMsg("An unexpected error occurred, please contact support.").setData(ex.getMessage()));
-    }
+//    @ExceptionHandler(Exception.class)
+//    public Mono<ResultData> handleGlobalException(Exception ex, ServerWebExchange exchange) {
+//        log.error(ex.getMessage(), ex);
+//        return Mono.just(ResultData.fail().setMsg("未知错误").setData(ex.getMessage()));
+//    }
 }

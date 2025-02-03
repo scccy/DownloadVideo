@@ -15,7 +15,6 @@ import java.util.Map;
 
 
 @FeignClient(name = "crawler-client", url = "www.baidu.com", configuration = FeignConfig.class)
-@RequestMapping("/api/v1")
 public interface CrawlerFeignClient {
 
     /**
@@ -55,7 +54,7 @@ public interface CrawlerFeignClient {
     /**
      * 自定义请求方法
      */
-    @RequestMapping(value = "/request", method = RequestMethod.GET)
+    @PostMapping(value = "/request")
     ResponseEntity<String> request(@RequestParam("url") String url,
                                  @RequestParam("method") String method,
                                  @RequestHeader Map<String, String> headers,

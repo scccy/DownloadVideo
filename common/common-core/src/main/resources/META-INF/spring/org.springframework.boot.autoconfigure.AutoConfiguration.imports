@@ -1,7 +1,6 @@
 com.scccy.downloadvideo.common.core.config.WebConfig
 com.scccy.downloadvideo.common.core.config.DatabaseInitConfig
 com.scccy.downloadvideo.common.core.config.FeignConfig
-com.scccy.downloadvideo.common.core.config.Knife4jConfig
 com.scccy.downloadvideo.common.core.config.OkHttpConfig
 com.scccy.downloadvideo.common.core.config.Log4j2Config
 com.scccy.downloadvideo.common.core.config.DataSourceConfig

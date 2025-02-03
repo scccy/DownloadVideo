@@ -6,12 +6,18 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.EnableWebFlux;
+import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.springframework.http.CacheControl;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebFlux
 @Order(1)
 public class WebConfig implements WebFluxConfigurer {
+
 
     @Override
     public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
@@ -29,10 +35,8 @@ public class WebConfig implements WebFluxConfigurer {
                 .allowedOriginPatterns("*")
                 .allowedMethods("*")
                 .allowedHeaders("*")
-                .allowCredentials(true)
-                .maxAge(3600);
+                .allowCredentials(true);
     }
-
 }
 
 

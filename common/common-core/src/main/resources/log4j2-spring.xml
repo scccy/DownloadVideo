@@ -109,15 +109,6 @@
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
-        <!-- Spring Web -->
-        <Logger name="org.springframework.web" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncDebug" level="debug"/>
-            <AppenderRef ref="AsyncInfo" level="info"/>
-            <AppenderRef ref="AsyncWarn" level="warn"/>
-            <AppenderRef ref="AsyncError" level="error"/>
-        </Logger>
-
         <!-- Spring Cloud OpenFeign -->
         <Logger name="org.springframework.cloud.openfeign" level="info" additivity="false">
             <AppenderRef ref="Console"/>
@@ -127,6 +118,10 @@
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
+        <Logger name="com.alibaba.nacos"  level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
         <!-- Application -->
         <Logger name="com.scccy.downloadvideo" level="info" additivity="false">
             <AppenderRef ref="Console"/>

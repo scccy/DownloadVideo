@@ -1,4 +1,4 @@
-//package com.scccy.downloadvideo.platform.douyin.service;
+package com.scccy.downloadvideo.platform.douyin.service;//package com.scccy.downloadvideo.platform.douyin.service;
 //
 //import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 //import com.scccy.downloadvideo.platform.douyin.mapper.DouyinDownloadConfigMapper;

@@ -3,79 +3,45 @@ server:
 
 spring:
   application:
-    name: gateway
+    name: gateway-service
   config:
     import: "optional:nacos:gateway-config.yaml"
   cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-        namespace: public
-      config:
-        server-addr: localhost:8848
-        file-extension: yaml
-        namespace: public
-        group: DEFAULT_GROUP
-        refresh:
-          enabled: true
     gateway:
       discovery:
         locator:
           enabled: true
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods: "*"
-            allowedHeaders: "*"
-            allowCredentials: true
+          lower-case-service-id: true
       routes:
-        - id: douyin-service
+        - id: douyin_swagger
           uri: lb://douyin-service
           predicates:
-            - Path=/api/douyin/**
-          filters:
-            - StripPrefix=2
-        - id: douyin-service-swagger
-          uri: lb://douyin-service
-          predicates:
-            - Path=/swagger-ui.html
-            - Path=/v3/api-docs/**
-          filters:
-            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-  main:
-    web-application-type: reactive
-    datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/video_platform?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true
-      username: root
-      password: asdsc88Q12
-      type: com.alibaba.druid.pool.DruidDataSource
-      druid:
-        # 连接池配置
-        initial-size: 5
-        min-idle: 5
-        max-active: 20
-        max-wait: 60000
-        time-between-eviction-runs-millis: 60000
-        min-evictable-idle-time-millis: 300000
-        validation-query: SELECT 1
-        test-while-idle: true
-        test-on-borrow: false
-        test-on-return: false
-        pool-prepared-statements: true
-        max-pool-prepared-statement-per-connection-size: 20
-        filters: stat,wall
-        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      hikari:
-        enabled: false
+            - Path=/v3/api-docs/douyin-service/**,/webjars/**,/doc.html,/swagger-resources/**,/v3/api-docs/**
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: ${NACOS_NAMESPACE:public}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        enabled: true
+        register-enabled: true
+      config:
+        server-addr: ${NACOS_HOST:localhost}:8848
+        file-extension: yaml
+        namespace: ${NACOS_NAMESPACE:public}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        refresh:
+          enabled: true
+    loadbalancer:
+      retry:
+        enabled: true
+
 # 日志配置
 logging:
   config: classpath:log4j2-spring.xml
   level:
     com.scccy.downloadvideo: debug
-    org.springframework.cloud.gateway: info
-    reactor.netty.http.client: info
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
 
 # 监控端点
 management:
@@ -84,5 +50,31 @@ management:
       exposure:
         include: '*'
   endpoint:
+    gateway:
+      enabled: true
     health:
       show-details: always
+  health:
+    db:
+      enabled: false  # 禁用数据源健康检查
+
+# API文档配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    urls:
+      - name: 抖音下载
+        url: /v3/api-docs
+
+main:
+  web-application-type: reactive
+  allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/your_database?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: your_password
+    driver-class-name: com.mysql.cj.jdbc.Driver 

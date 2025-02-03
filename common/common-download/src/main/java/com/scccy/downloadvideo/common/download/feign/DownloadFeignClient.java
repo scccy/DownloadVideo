@@ -10,10 +10,9 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @FeignClient(
-    name = "download-client", 
+    name = "douyin-download-client",
     url = "www.baidu.com",
-        configuration = FeignConfig.class
-)
+        configuration = FeignConfig.class)
 public interface DownloadFeignClient {
     
     @GetMapping("/download")
