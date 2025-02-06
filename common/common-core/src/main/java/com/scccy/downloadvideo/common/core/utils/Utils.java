@@ -149,47 +149,46 @@ public class Utils {
      * @return 提取出的有效URL或URL列表 (Extracted valid URL or list of URLs)
      */
     // 重载方法，用于处理单个字符串输入
-    public static List<String> extractValidUrls(Object input) {
-        if (input == null) {
+    public static String extractValidUrl(String input) {
+        if (input == null || input.isEmpty()) {
+            return null;
+        }
+        Matcher matcher = URL_PATTERN.matcher(input);
+        return matcher.find() ? matcher.group() : null;
+    }
+
+    // 重载方法，用于处理字符串列表输入
+    public static List<String> extractValidUrl(List<String> inputs) {
+        if (inputs == null || inputs.isEmpty()) {
             return new ArrayList<>();
         }
 
-        List<String> result = new ArrayList<>();
-
-        if (input instanceof String) {
-            Matcher matcher = URL_PATTERN.matcher((String) input);
+        List<String> validUrls = new ArrayList<>();
+        for (String input : inputs) {
+            Matcher matcher = URL_PATTERN.matcher(input);
             while (matcher.find()) {
-                result.add(matcher.group());
-            }
-        } else if (input instanceof List<?>) {
-            for (Object item : (List<?>) input) {
-                if (item instanceof String) {
-                    Matcher matcher = URL_PATTERN.matcher((String) item);
-                    while (matcher.find()) {
-                        result.add(matcher.group());
-                    }
-                }
+                validUrls.add(matcher.group());
             }
         }
-        return result;
+        return validUrls;
     }
 
 //  提取代理url和端口
-public static Map<String, String> getProxyUrlAndPort(String url) {
-    Map<String, String> result = new HashMap<>();
-    String regex = "http[s]?://([^:/]+):?(\\d*)";
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(url);
+    public static Map<String, String> getProxyUrlAndPort(String url) {
+        Map<String, String> result = new HashMap<>();
+        String regex = "http[s]?://([^:/]+):?(\\d*)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(url);
 
-    if (matcher.find()) {
-        String ip = matcher.group(1);
-        String port = matcher.group(2);
+        if (matcher.find()) {
+            String ip = matcher.group(1);
+            String port = matcher.group(2);
 
-        result.put("ip", ip);
-        result.put("port", port.isEmpty() ? "8080" : port);
-    } else {
-        result.put("error", "URL格式不正确");
-    }
+            result.put("ip", ip);
+            result.put("port", port.isEmpty() ? "8080" : port);
+        } else {
+            result.put("error", "URL格式不正确");
+        }
 
     return result;
 }

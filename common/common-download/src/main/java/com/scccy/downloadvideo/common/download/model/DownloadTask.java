@@ -1,10 +1,14 @@
 package com.scccy.downloadvideo.common.download.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DownloadTask {
     private String id;
     private String url;
@@ -15,29 +19,6 @@ public class DownloadTask {
     private TaskStatus status;
     private String error;
 
-    public DownloadTask(String id, String url, String savePath, String fileName, Long contentLength, Long downloadedSize, TaskStatus status) {
-        this.id = id;
-        this.url = url;
-        this.savePath = savePath;
-        this.fileName = fileName;
-        this.contentLength = contentLength;
-        this.downloadedSize = downloadedSize;
-        this.status = status;
-    }
 
-    public DownloadTask(String taskId, String url, String savePath, String fileName, TaskStatus taskStatus) {
-    }
-
-    // 添加新的构造器
-    public DownloadTask(String id, String url, String savePath, String fileName, Long contentLength, Long downloadedSize, TaskStatus status, String error) {
-        this.id = id;
-        this.url = url;
-        this.savePath = savePath;
-        this.fileName = fileName;
-        this.contentLength = contentLength;
-        this.downloadedSize = downloadedSize;
-        this.status = status;
-        this.error = error;
-    }
 }
 

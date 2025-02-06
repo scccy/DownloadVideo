@@ -1,18 +1,14 @@
 package com.scccy.downloadvideo.common.download.m3u8;
 
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
-import com.scccy.downloadvideo.common.download.listener.DownLoadProgressListener;
-import com.scccy.downloadvideo.common.download.model.TaskStatus;
+import com.scccy.downloadvideo.common.download.listener.DownLoadProgressListenerImpl;
 import com.scccy.downloadvideo.common.download.model.DownloadTask;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,10 +18,7 @@ import java.util.Map;
 import reactor.core.publisher.Mono;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
+
 import reactor.core.publisher.Flux;
 
 @Slf4j
@@ -38,7 +31,7 @@ public class M3u8Downloader {
     private final ConcurrentHashMap<String, Boolean> downloadedSegments = new ConcurrentHashMap<>();
     private final AtomicInteger segmentCount = new AtomicInteger(0);
     private final ConcurrentHashMap<String, DownloadTask> downloadTasks = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, DownLoadProgressListener> listeners = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, DownLoadProgressListenerImpl> listeners = new ConcurrentHashMap<>();
 
     public M3u8Downloader(DownloadFeignClient downloadClient, Map<String, String> headers) {
         this.downloadClient = downloadClient;
@@ -85,7 +78,7 @@ public class M3u8Downloader {
     /**
      * 添加下载进度监听器
      */
-    public void addListener(String taskId, DownLoadProgressListener listener) {
+    public void addListener(String taskId, DownLoadProgressListenerImpl listener) {
         listeners.put(taskId, listener);
     }
 

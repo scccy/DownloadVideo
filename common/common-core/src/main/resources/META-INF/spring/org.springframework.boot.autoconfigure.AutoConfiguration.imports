@@ -9,8 +9,4 @@ com.scccy.downloadvideo.common.core.config.DataSourceConfig
 
 com.scccy.downloadvideo.common.core.handler.GlobalExceptionHandler
 
-com.scccy.downloadvideo.common.core.aspect.ApiOperationAspect
-com.scccy.downloadvideo.common.core.aspect.ApiResponseAspect
-com.scccy.downloadvideo.common.core.aspect.DouyinCrawlerAspect
-com.scccy.downloadvideo.common.core.aspect.WebSocketAspect
 com.scccy.downloadvideo.common.core.aspect.XBogusAspect

@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ResultData {
+public class ResultData extends Throwable {
     private Integer code;
     private String msg;
     private Object data;

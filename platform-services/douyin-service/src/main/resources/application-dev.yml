@@ -38,14 +38,14 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: 2c9b817c-d289-4b76-8cc7-9ecb2e1a1a9c  # 添加默认命名空间
+        namespace: 6014dbd1-6cf2-4bbf-96eb-982cce3bfb66  # 添加默认命名空间
         group: DEFAULT_GROUP
         enabled: true                           # 确保开启服务发现
         register-enabled: true                  # 确保允许注册
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
-        namespace: 2c9b817c-d289-4b76-8cc7-9ecb2e1a1a9c
+        namespace: 6014dbd1-6cf2-4bbf-96eb-982cce3bfb66
         group: DEFAULT_GROUP
         import: "optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}"
         #        extension-configs:

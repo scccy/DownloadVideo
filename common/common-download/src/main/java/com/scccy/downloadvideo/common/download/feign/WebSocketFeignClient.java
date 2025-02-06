@@ -1,4 +1,4 @@
-//package com.scccy.downloadvideo.common.download.feign;
+package com.scccy.downloadvideo.common.download.feign;//package com.scccy.downloadvideo.common.download.feign;
 //
 //import com.scccy.downloadvideo.common.core.config.FeignConfig;
 //import org.springframework.cloud.openfeign.FeignClient;

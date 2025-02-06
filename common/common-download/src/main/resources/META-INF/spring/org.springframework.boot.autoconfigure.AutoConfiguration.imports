@@ -3,5 +3,5 @@
 
 #com.scccy.downloadvideo.common.download.core.BaseCrawler
 #com.scccy.downloadvideo.common.download.core.BaseDownloader
-
+com.scccy.downloadvideo.common.download.downloader.BaseHttpClientImpl
 

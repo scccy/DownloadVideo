@@ -1,8 +1,8 @@
 package com.scccy.downloadvideo.common.download.core;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.scccy.downloadvideo.common.core.exception.ServiceException;
-import com.scccy.downloadvideo.common.core.model.ApiResponse;
+
+import com.google.protobuf.ServiceException;
 import com.scccy.downloadvideo.common.download.feign.CrawlerFeignClient;
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
 import lombok.extern.slf4j.Slf4j;
@@ -34,19 +34,19 @@ public abstract class BaseCrawler {
     /**
      * GET请求并解析响应
      */
-    protected <T> Mono<T> fetchGet(String url, Class<T> clazz) {
-        return Mono.fromCallable(() -> crawlerClient.get(url, headers, proxies))
-                .map(response -> ApiResponse.parseData(response.getBody(), clazz));
-    }
-
-    /**
-     * POST请求并解析响应
-     */
-    protected <T> Mono<T> fetchPost(String url, Object body, Class<T> clazz) {
-        return Mono.fromCallable(() -> 
-            crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies))
-                .map(response -> ApiResponse.parseData(response.getBody(), clazz));
-    }
+//    protected <T> Mono<T> fetchGet(String url, Class<T> clazz) {
+//        return Mono.fromCallable(() -> crawlerClient.get(url, headers, proxies))
+//                .map(response -> ApiResponse.parseData(response.getBody(), clazz));
+//    }
+//
+//    /**
+//     * POST请求并解析响应
+//     */
+//    protected <T> Mono<T> fetchPost(String url, Object body, Class<T> clazz) {
+//        return Mono.fromCallable(() ->
+//            crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies))
+//                .map(response -> ApiResponse.parseData(response.getBody(), clazz));
+//    }
 
     /**
      * 获取原始响应
@@ -66,13 +66,13 @@ public abstract class BaseCrawler {
     /**
      * 发送GET请求并获取二进制响应
      */
-    protected Mono<ResponseEntity<byte[]>> fetchBytes(String url) {
-        return Mono.fromCallable(() -> downloadClient.download2Byte(url, headers))
-                .onErrorResume(e -> {
-                    log.error("Failed to fetch bytes from: {}", url, e);
-                    return Mono.error(new ServiceException("500", "Failed to fetch bytes: " + e.getMessage()));
-                });
-    }
+//    protected Mono<ResponseEntity<byte[]>> fetchBytes(String url) {
+//        return Mono.fromCallable(() -> downloadClient.download2Byte(url, headers))
+//                .onErrorResume(e -> {
+//                    log.error("Failed to fetch bytes from: {}", url, e);
+//                    return Mono.error(new ServiceException("500", "Failed to fetch bytes: " + e.getMessage()));
+//                });
+//    }
 
     /**
      * 发送带Range的GET请求

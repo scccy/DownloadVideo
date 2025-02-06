@@ -1,6 +1,5 @@
 package com.scccy.downloadvideo.common.download.feign;
 
-import com.alibaba.fastjson2.JSONObject;
 import com.scccy.downloadvideo.common.core.config.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +9,10 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @FeignClient(
-    name = "douyin-download-client",
+    name = "download-client", 
     url = "www.baidu.com",
-        configuration = FeignConfig.class)
+        configuration = FeignConfig.class
+)
 public interface DownloadFeignClient {
     
     @GetMapping("/download")
