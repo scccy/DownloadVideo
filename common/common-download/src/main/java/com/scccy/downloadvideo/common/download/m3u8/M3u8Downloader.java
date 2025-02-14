@@ -2,10 +2,12 @@ package com.scccy.downloadvideo.common.download.m3u8;
 
 import com.scccy.downloadvideo.common.download.feign.DownloadFeignClient;
 import com.scccy.downloadvideo.common.download.listener.DownLoadProgressListenerImpl;
-import com.scccy.downloadvideo.common.download.model.DownloadTask;
+
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.scccy.downloadvideo.common.download.model.DownloadTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
@@ -30,7 +32,6 @@ public class M3u8Downloader {
     
     private final ConcurrentHashMap<String, Boolean> downloadedSegments = new ConcurrentHashMap<>();
     private final AtomicInteger segmentCount = new AtomicInteger(0);
-    private final ConcurrentHashMap<String, DownloadTask> downloadTasks = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, DownLoadProgressListenerImpl> listeners = new ConcurrentHashMap<>();
 
     public M3u8Downloader(DownloadFeignClient downloadClient, Map<String, String> headers) {

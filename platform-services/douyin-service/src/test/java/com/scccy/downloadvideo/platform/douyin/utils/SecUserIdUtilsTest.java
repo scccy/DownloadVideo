@@ -21,7 +21,6 @@ public class SecUserIdUtilsTest {
     @DisplayName("测试获取单个用户ID")
     public void testGetSecUserId() {
         String url = "https://v.douyin.com/abc123/";
-        
         StepVerifier.create(SecUserIdUtils.getSecUserId(url))
                 .expectNextMatches(id -> id != null && !id.isEmpty())
                 .expectComplete()

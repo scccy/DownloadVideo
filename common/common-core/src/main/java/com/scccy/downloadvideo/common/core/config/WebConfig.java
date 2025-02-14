@@ -15,7 +15,6 @@ import java.util.List;
 
 @Configuration
 @EnableWebFlux
-@Order(1)
 public class WebConfig implements WebFluxConfigurer {
 
 

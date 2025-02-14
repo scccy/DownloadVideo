@@ -13,6 +13,10 @@ public class CustomExceptions {
             this.code = errorCode.getCode();
         }
 
+        public CustomException(String  ErrorMsg) {
+            this.code = ErrorMsg;
+        }
+
         public String getCode() {
             return code;
         }

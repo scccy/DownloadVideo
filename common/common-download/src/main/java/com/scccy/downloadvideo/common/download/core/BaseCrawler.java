@@ -12,6 +12,9 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
+import com.scccy.downloadvideo.common.core.model.dy.BaseRequestModel;
+import com.scccy.downloadvideo.common.core.utils.MonoUtils;
+
 @Component
 @Slf4j
 public abstract class BaseCrawler {
@@ -52,14 +55,14 @@ public abstract class BaseCrawler {
      * 获取原始响应
      */
     protected Mono<ResponseEntity<String>> fetchResponse(String url) {
-        return Mono.fromCallable(() -> crawlerClient.get(url, headers, proxies));
+        return MonoUtils.fromBlocking(() -> crawlerClient.get(url, headers, proxies));
     }
 
     /**
      * POST获取原始响应
      */
     protected Mono<ResponseEntity<String>> fetchPostResponse(String url, Object body) {
-        return Mono.fromCallable(() ->
+        return MonoUtils.fromBlocking(() ->
             crawlerClient.post(url, JSONObject.toJSONString(body), headers, proxies));
     }
 
@@ -77,9 +80,10 @@ public abstract class BaseCrawler {
     /**
      * 发送带Range的GET请求
      */
-    protected Mono<ResponseEntity<String>> fetchWithRange(String url, String range) {
-        return downloadClient.downloadWithRange(url, headers, range);
-    }
+//    protected Mono<ResponseEntity<String>> fetchWithRange(String url, String range) {
+//        return MonoUtils.fromBlocking(() ->
+//            downloadClient.downloadWithRange(url, headers, range));
+//    }
 
     /**
      * 发送GET请求并获取JSON响应

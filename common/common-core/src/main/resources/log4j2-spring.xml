@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG" packages="org.apache.logging.log4j.core,com.lmax.disruptor">
+<Configuration status="WARN">
     <Properties>
         <!-- 应用名称 -->
         <Property name="APP_NAME">${spring:spring.application.name}</Property>
@@ -85,7 +85,7 @@
         <!-- Spring Framework -->
         <Logger name="org.springframework" level="info" additivity="false">
 <!--            <AppenderRef ref="Console"/>-->
-            <AppenderRef ref="AsyncDebug" level="debug"/>
+<!--            <AppenderRef ref="AsyncDebug" level="debug"/>-->
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
@@ -94,7 +94,7 @@
         <!-- Spring Beans Factory -->
         <Logger name="org.springframework.beans.factory" level="info" additivity="false">
 <!--            <AppenderRef ref="Console"/>-->
-            <AppenderRef ref="AsyncDebug" level="debug"/>
+<!--            <AppenderRef ref="AsyncDebug" level="debug"/>-->
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
@@ -103,7 +103,7 @@
         <!-- Spring Context -->
         <Logger name="org.springframework.context" level="info" additivity="false">
 <!--            <AppenderRef ref="Console"/>-->
-            <AppenderRef ref="AsyncDebug" level="debug"/>
+<!--            <AppenderRef ref="AsyncDebug" level="debug"/>-->
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
@@ -112,23 +112,17 @@
         <!-- Spring Cloud OpenFeign -->
         <Logger name="org.springframework.cloud.openfeign" level="info" additivity="false">
 <!--            <AppenderRef ref="Console"/>-->
-            <AppenderRef ref="AsyncDebug" level="debug"/>
+<!--            <AppenderRef ref="AsyncDebug" level="debug"/>-->
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>
         </Logger>
 
-        <Logger name="com.alibaba.nacos"  level="debug">
-<!--            <AppenderRef ref="Console"/>-->
-            <AppenderRef ref="AsyncDebug" level="debug"/>
-            <AppenderRef ref="AsyncInfo" level="info"/>
-            <AppenderRef ref="AsyncWarn" level="warn"/>
-            <AppenderRef ref="AsyncError" level="error"/>
-        </Logger>
+
         <!-- Application -->
         <Logger name="com.scccy.downloadvideo" level="info" additivity="false">
 <!--            <AppenderRef ref="Console"/>-->
-            <AppenderRef ref="AsyncDebug" level="debug"/>
+<!--            <AppenderRef ref="AsyncDebug" level="debug"/>-->
             <AppenderRef ref="AsyncInfo" level="info"/>
             <AppenderRef ref="AsyncWarn" level="warn"/>
             <AppenderRef ref="AsyncError" level="error"/>

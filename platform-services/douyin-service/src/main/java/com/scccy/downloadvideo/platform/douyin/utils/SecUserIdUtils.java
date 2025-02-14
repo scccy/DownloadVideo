@@ -1,8 +1,9 @@
 package com.scccy.downloadvideo.platform.douyin.utils;
 
-import com.scccy.downloadvideo.common.core.enums.BaseHttpClientEnum;
+import com.scccy.downloadvideo.common.core.enums.DouyinDownloadEnum;
 import com.scccy.downloadvideo.common.core.utils.Utils;
-import com.scccy.downloadvideo.common.download.downloader.BaseHttpClientImpl;
+import com.scccy.downloadvideo.common.download.core.BaseHttpClient;
+
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
 
 @Slf4j
 public class SecUserIdUtils {
-    static BaseHttpClientImpl baseHttpClientImpl = new BaseHttpClientImpl();
+    static BaseHttpClient baseHttpClient = new BaseHttpClient();
 
     private static final Pattern REDIRECT_URL_PATTERN = Pattern.compile("sec_uid=([^&]+)");
     private static final Pattern DOUYIN_URL_PATTERN = Pattern.compile("user/([^/?]+)");
@@ -30,10 +31,10 @@ public class SecUserIdUtils {
         }
 
         Map<String, String> headers = new HashMap<>();
-        headers.put("User-Agent", BaseHttpClientEnum.USER_AGENT.getValue());
+        headers.put("User-Agent", DouyinDownloadEnum.USER_AGENT.getValue());
 
-        return baseHttpClientImpl.get(Utils.extractValidUrl(url), headers, host, port)
-                .mapNotNull(result -> result.getData())
+        return baseHttpClient.getAsync(Utils.extractValidUrl(url), headers, host, port)
+//                .mapNotNull(result -> result.getData())
                 .map(Object::toString)
                 .map(SecUserIdUtils::extractId)
                 .filter(id -> id != null);

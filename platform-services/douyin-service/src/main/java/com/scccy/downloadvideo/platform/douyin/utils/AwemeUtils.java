@@ -1,9 +1,9 @@
 package com.scccy.downloadvideo.platform.douyin.utils;
 
-import com.scccy.downloadvideo.common.core.enums.BaseHttpClientEnum;
-import com.scccy.downloadvideo.common.core.exception.CustomExceptions.APIResponseError;
+import com.scccy.downloadvideo.common.core.enums.DouyinDownloadEnum;
 import com.scccy.downloadvideo.common.core.utils.Utils;
-import com.scccy.downloadvideo.common.download.downloader.BaseHttpClientImpl;
+import com.scccy.downloadvideo.common.download.core.BaseHttpClient;
+
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 @Slf4j
 public class AwemeUtils {
-    private static final BaseHttpClientImpl baseHttpClientImpl = new BaseHttpClientImpl();
+    private static final BaseHttpClient baseHttpClientImpl = new BaseHttpClient();
 
     private static final Pattern[] ID_PATTERNS = {
             Pattern.compile("video/(\\d+)"),
@@ -26,7 +26,7 @@ public class AwemeUtils {
 
     private static final Map<String, String> DEFAULT_HEADERS = new HashMap<>();
     static {
-        DEFAULT_HEADERS.put("User-Agent", BaseHttpClientEnum.USER_AGENT.getValue());
+        DEFAULT_HEADERS.put("User-Agent", DouyinDownloadEnum.USER_AGENT.getValue());
     }
 
     /**
@@ -44,8 +44,7 @@ public class AwemeUtils {
             return Mono.empty();
         }
 
-        return baseHttpClientImpl.get(Utils.extractValidUrl(url), DEFAULT_HEADERS, host, port)
-                .mapNotNull(result -> result.getData())
+        return baseHttpClientImpl.getAsync(Utils.extractValidUrl(url), DEFAULT_HEADERS, host, port)
                 .map(Object::toString)
                 .map(AwemeUtils::extractId)
                 .filter(id -> id != null);

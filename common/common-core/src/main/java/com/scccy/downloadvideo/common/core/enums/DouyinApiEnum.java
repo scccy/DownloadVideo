@@ -1,5 +1,10 @@
 package com.scccy.downloadvideo.common.core.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum DouyinApiEnum {
 
     // 抖音域名
@@ -147,13 +152,7 @@ public enum DouyinApiEnum {
     SSO_LOGIN_QRCODE("/sso/login/qrcode"),
     LIVE_ROOM_ID("/live/room/id"); // 添加 LIVE_ROOM_ID 枚举值
 
-    private final String endpoint;
+    private final String value;
 
-    DouyinApiEnum(String endpoint) {
-        this.endpoint = endpoint;
-    }
 
-    public String getEndpoint() {
-        return endpoint;
-    }
 }

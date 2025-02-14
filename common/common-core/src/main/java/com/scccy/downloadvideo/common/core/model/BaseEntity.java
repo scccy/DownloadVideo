@@ -1,14 +1,19 @@
-package com.scccy.downloadvideo.common.core.model; 
+package com.scccy.downloadvideo.common.core.model;
 
-import lombok.Data;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class BaseEntity implements Serializable {
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
+public abstract class BaseEntity implements Serializable {
     
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
